@@ -3,6 +3,10 @@
  * GET home page.
  */
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+exports.guiding = function(app){
+
+  app.get("/index", function(req, res){
+    res.render('login', { title: 'Express' });
+  });
+
 };
