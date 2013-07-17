@@ -19,10 +19,10 @@ exports.execute = function(err, callback) {
 }
 
 /**
- * 生成管理员帐号的Filter
+ * 生成系统管理员帐号的Filter
  */
 function create_admin_filter() {
-	user.find({uid: userid}, function(err, result){
+	user.find({type: 1}, function(err, result){
 		if(result && result != "")
 			return;
 
@@ -32,7 +32,7 @@ function create_admin_filter() {
 }
 
 /**
- * 生成管理员帐号
+ * 生成系统管理员帐号
  */
 function create_admin() {
 	var email = "";
@@ -41,6 +41,7 @@ function create_admin() {
 	var info = {"uid": userid
 	, "name": {"name_zh": userid}
 	, "password": auth.sha256(password)
+	, "type": 1                         // 系统管理员
 	, "email": {
 	  "email1": email
 	}
