@@ -1,0 +1,127 @@
+    <input type="hidden" id="_csrf" name="_csrf" value="<%= csrftoken %>" />
+    <input type="hidden" id="bright" name="bright" value="<%= bright %>" />
+    <input type="hidden" id="userid" name="userid" value="<%= user._id %>" />
+    <input type="hidden" id="timezone" name="timezone" value="<%= user.timezone %>" />
+
+
+    <style type="text/css">
+      .dl-horizontal dt { width: 32px; }
+      .dl-horizontal dd { margin-left: 40px; }
+    </style>
+
+    <script type='text/javascript'>
+      var i18n = "<%= i18n %>";
+      i18n = i18n.replace(/'/g,"\"");
+      i18n = JSON.parse(i18n);
+    </script>
+
+
+    <header>
+      <strong>AppStore</strong>
+      <div id="_userbox">
+        <div>
+          <a href="/user" id="_userpic"><img src="<%= user.photo ? '/picture/' + user.photo.big : '/images/user.png' %>"></a>
+          <a href="/user" id="_username"><%= user.name.name_zh %></a> 
+        </div>
+        <ul>
+          <li><a href="/usereditor" id="_user"><i class="icon-wrench"></i></a></li>
+          <li><a href="/simplelogout" id="_logout"><i class="icon-signout"></i></a></li>
+        </ul>
+      </div>
+    </header>
+    <div id="_navbar">
+      <nav>
+        <ul id="_group1" rel="sam">
+          <li>
+            <a id="home" href="/home" style="font-size: 16px;">
+              <i class="icon-home icon-large"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav id="_search">
+        <input id="search" value="" x-webkit-speech /><div></div>
+      </nav>
+      <nav>
+        <ul id="_group2" rel="sam">
+          <li><a id="message" href="/message"><%= 'APP上传' %></a></li>
+          <li><a id="group" href="/group"><%= '　设定　' %></a></li>
+          <li>
+            <a id="apps" href="#"><%= '　应用　' %></a>
+            <ul id="subapps">
+              <li><a id="user" href="/task"><i class="icon-tasks icon-large"></i><%= i('navbar.menu.task')%></a></li>
+              <li><a id="category" href="/category"><i class="icon-tags icon-large"></i><%= i('navbar.menu.category')%></a></li>
+              <li><a id="meeting" href="/meeting"><i class="icon-signin icon-large"></i><%= i('navbar.menu.conference')%></a></li>
+              <li><a id="topic" href="/topic"><i class="icon-comments-alt icon-large"></i><%= i('navbar.menu.topic')%></a></li>
+              <li><a id="process" href="/process"><i class="icon-retweet icon-large"></i><%= i('navbar.menu.process')%></a></li>
+              <li><a id="calendar" href="/calendar"><i class="icon-calendar icon-large"></i><%= i('navbar.menu.calendar')%></a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div id="_searchresult" class="bucketed">
+      <ul class="search">
+        <li class="bottom"><i class="icon-search"></i><%= i('navbar.search.moreResult')%></li>
+      </ul>
+    </div>
+
+    <div id="_findresult" style="z-index: 100000000000000000000000; ">
+      <ul class="search">
+        <li class="bottom"><i class="icon-search"></i><%= i('navbar.search.moreResult')%></li>
+      </ul>
+    </div>
+
+    <!-- 全文检索框 -->
+    <script type="text/template" id="_searchresult-user-template">
+    <li class="user">
+      <div class="left">
+        <a href="/user/{{ id }}">
+          <img src="{{ photo }}" />
+          <span>{{ name }}</span>
+          <span class="addition">{{ addition }}</span>
+        </a>
+      </div>
+      <div class="right">
+        <a uid="{{ id }}" class="operation btn btn-small btn-info" href="#"><%= i('shortmail.option.privateMsg')%></a>
+      </div>
+    </li>
+    </script>
+    <script type="text/template" id="_searchresult-group-template">
+    <li class="user">
+      <div class="left">
+        <a href="/group/{{ id }}">
+          <img src="{{ photo }}" />
+          <span>{{ name }}</span>
+          <span class="addition">{{ addition }}</span>
+        </a>
+      </div>
+      <div class="right hidden">
+        <a gid="{{ id }}" class="operation btn btn-small btn-info" href="#"><%= i('group.grouplist.button.join')%></a>
+      </div>
+    </li>
+    </script>
+    <script type="text/template" id="_searchresult-file-template">
+    <li class="user">
+      <div class="left">
+        <a href="/file/{{ id }}">
+          <img src="{{ photo }}" />
+          <span>{{ name }}</span>
+          <span class="addition">{{ addition }}</span>
+        </a>
+      </div>
+      <div class="right hidden">
+        <a fid="{{ id }}" class="operation btn btn-small btn-info" href="#"><%= i('file.option.follow')%></a>
+      </div>
+    </li>
+    </script>
+    <script type="text/template" id="_searchresult-header-template">
+    <li class="header">{{ type }}</li>
+    </script>
+    <script type="text/template" id="_searchresult-bottom-template">
+    <li class="bottom">
+      <a href="/fulltextsearch/result?keywords={{ keywords }}"><i class="icon-search"></i><%= i('navbar.search.moreResult')%></a>
+    </li>
+    </script>
+

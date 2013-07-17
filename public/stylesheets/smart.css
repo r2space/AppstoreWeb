@@ -40,8 +40,8 @@ footer p {
   -moz-transition-duration: 700ms;
 }
 .active-background {
-  background: -webkit-gradient(radial, 50% 100%, 10, 50% 50%, 90, from(#b561de), to(#000000));
-  background: -moz-radial-gradient(center 80px 45deg, circle cover, #b561de 0%, #000000 100%);
+  background: -webkit-gradient(radial, 50% 100%, 10, 50% 50%, 90, from(#1a84fb), to(#000000));
+  background: -moz-radial-gradient(center 80px 45deg, circle cover, #1a84fb 0%, #000000 100%);
 }
 #_navbar {
   position: fixed;
@@ -72,8 +72,8 @@ footer p {
   height: 37px;
   text-align: center;
   list-style: none;
-  background: -webkit-gradient(radial, 50% 100%, 10, 50% 50%, 90, from(#b561de), to(#000000));
-  background: -moz-radial-gradient(center 80px 45deg, circle cover, #b561de 0%, #000000 100%);
+  background: -webkit-gradient(radial, 50% 100%, 10, 50% 50%, 90, from(#1a84fb), to(#000000));
+  background: -moz-radial-gradient(center 80px 45deg, circle cover, #1a84fb 0%, #000000 100%);
 }
 #_navbar ul li a {
   padding-left: 10px;
@@ -105,8 +105,8 @@ footer p {
   color: #FFF;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
   font-weight: bold;
-  background: -webkit-gradient(radial, 50% 100%, 10, 50% 50%, 90, from(#b561de), to(#000000));
-  background: -moz-radial-gradient(center 80px 45deg, circle cover, #b561de 0%, #000000 100%);
+  background: -webkit-gradient(radial, 50% 100%, 10, 50% 50%, 90, from(#1a84fb), to(#000000));
+  background: -moz-radial-gradient(center 80px 45deg, circle cover, #1a84fb 0%, #000000 100%);
   -webkit-transition-property: background;
   -webkit-transition-duration: 700ms;
   -moz-transition-property: background;
@@ -251,11 +251,11 @@ footer p {
   line-height: 38px;
 }
 .bucketed ul.search li.user:hover {
-  background-color: #b561de;
+  background-color: #1a84fb;
   color: #fff;
 }
 .bucketed ul.search .selected {
-  background-color: #b561de;
+  background-color: #1a84fb;
   color: #fff;
   /*border-color: #3b5998;*/
 
@@ -320,7 +320,7 @@ footer p {
   line-height: 15px;
 }
 #_findresult ul.search li.user:hover {
-  background-color: #b561de;
+  background-color: #1a84fb;
   color: #fff;
 }
 #_findresult ul.search .bottom {
@@ -350,9 +350,9 @@ footer p {
 #_userbox div img {
   width: 25px;
   height: 25px;
-  -webkit-border-radius: 10px !important;
-  -moz-border-radius: 10px !important;
-  border-radius: 10px !important;
+  -webkit-border-radius: 15px !important;
+  -moz-border-radius: 15px !important;
+  border-radius: 15px !important;
 }
 #_userbox ul {
   /*background: #F1F1F1;*/
