@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+
+    <% include common/required.html %>
+
+    <script type='text/javascript' src='/javascripts/menu.model.js'></script>
+    <script type='text/javascript' src='/javascripts/menu.view.js'></script>
+    <script type='text/javascript' src='/javascripts/searcher.model.js'></script>
+    <script type='text/javascript' src='/javascripts/searcher.view.js'></script>
+    <script type='text/javascript' src='/javascripts/finder.model.js'></script>
+    <script type='text/javascript' src='/javascripts/finder.view.js'></script>
+
+    <script type="text/javascript" src="/vendor/lightbox/lightbox.js"></script>
+    
+    <link href="/vendor/lightbox/lightbox.css" rel="stylesheet">
+    <link href="/stylesheets/star.css" rel="stylesheet">
+
+    <style type="text/css">
+
+
+  </head>
+  <body>
+
+    <% include common/navbar.html %>
+
+    <div class="main">
+
+      <div class="sidebar">
+        <div style="float: left;">
+          <h3>Cross</h3>
+          <hr />
+          <img src="/images/cross.png">
+          <hr />
+          <i class="icon-star"></i>
+          <i class="icon-star"></i>
+          <i class="icon-star"></i>
+          <i class="icon-star-half-empty"></i>
+          <i class="icon-star-empty"></i>
+          <span>
+          （<i class="icon-user"></i>30）
+          </span>
+          <br />
+          <button class="btn btn-small btn-success" type="button">　安 装　</button>
+          <button class="btn btn-small btn-success" type="button">　分 享　</button>
+        </div>
+      </div>
+
+      <section id="thumbnails">
+        <div class="detail">
+          <ul class="nav nav-tabs" style="height: 37px;">
+            <li class="active"><a href="#">简介</a></li>
+            <li><a href="#">Release Notes</a></li>
+          </ul>
+
+          <div class="textarea">
+            adfadfasdf<br />
+            adfadfasdf<br />
+            adfadfasdf<br />
+            adfadfasdf<br />
+            adfadfasdf<br />
+            adfadfasdf<br />
+          </div>
+
+          <img src="/images/cross1.png"></img>
+          <img src="/images/cross2.png"></img>
+          <img src="/images/cross3.png"></img>
+          <img src="/images/cross1.png"></img>
+
+        </div>
+
+        <div class="comment">
+          <span><i class="icon-pencil"></i>&nbsp;写评价</span>
+          <textarea></textarea>
+          <div id="operationarea">
+            <i class="icon-star-empty icon-large"></i>
+            <i class="icon-star-empty icon-large"></i>
+            <i class="icon-star-empty icon-large"></i>
+            <i class="icon-star-empty icon-large"></i>
+            <i class="icon-star-empty icon-large"></i>
+            &nbsp;
+            <button class="btn btn-small btn-success" type="button">　提交评价　</button>
+          </div>
+
+          <ul>
+            <li>
+              <img class="portrait" src="/images/user.png">
+              <span>稻盛和夫</span>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star-empty"></i>
+              <i class="icon-star-empty"></i>
+              <span style="color: #ccc">2013/07/17</span>
+              <div>没有核心的东西，不知道能给使用的人带来什么价值。希望下一期能加入文件共享功能。</div>
+              <div>没有核心的东西，不知道能给使用的人带来什么价值。希望下一期能加入文件共享功能。</div>
+            </li>
+            <li>
+              <img class="portrait" src="/images/user.png">
+              <span>稻盛和夫</span>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star-empty"></i>
+              <i class="icon-star-empty"></i>
+              <span style="color: #ccc">2013/07/17</span>
+              <div>没有核心的东西，不知道能给使用的人带来什么价值。希望下一期能加入文件共享功能。</div>
+            </li>
+          </ul>
+        </div>
+
+
+      </section>
+
+    </div>
+
+    <footer>
+      <p>Copyright © 2012, Cross Corporation. All Rights Reserved.</p>
+    </footer>
+    
+  </body>
+</html>

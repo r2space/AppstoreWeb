@@ -79,28 +79,8 @@
       }
 
       var id = src.attr("id");
-      if (id === "files") {
-        window.location = "/files";
-      }
-
       if (id === "home") {
-        window.location = "/message";
-      }
-
-      if (id === "message") {
-        window.location = "/message";
-      }
-
-      if (id === "user") {
-        window.location = "/userlist";
-      }
-
-      if (id === "group") {
-        window.location = "/grouplist";
-      }
-
-      if (id === "topic") {
-        window.location = "/topiclist";
+        window.location = "/starwall";
       }
 
       if (id === "shortmail") {

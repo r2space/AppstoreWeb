@@ -47,6 +47,14 @@ exports.guiding = function(app){
     });
   });
 
+  // APP画面
+  app.get('/star', function(req, res){
+    res.render("star", {
+        title: "star"
+      , bright: "home"
+      , user: req.session.user
+    });
+  });
 
 
 
