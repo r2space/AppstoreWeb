@@ -1,9 +1,9 @@
-
 var mongo = require('mongoose')
   , schema = mongo.Schema;
 
-var App = new schema({
-    name: {type: String, required: true}  //名称
+var AppHistory = new schema({
+    appId: {type: String, required: true} //appId
+  , name: {type: String, required: true}  //名称
   , description: {type: String}           //详细介绍
   , memo: {type: String}                  //简介
   , release_note: {type: String}           //
@@ -38,10 +38,10 @@ var App = new schema({
 });
 
 function model() {
-  return conn().model('App', App);
+  return conn().model('AppHistory', AppHistory);
 }
 
-exports.create = function(app_, callback_) {
+exports.addHistory = function(app_, callback_) {
   var app = model();
   new app(app_).save(function(err, result){
     callback_(err, result);
