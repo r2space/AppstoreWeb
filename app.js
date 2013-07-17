@@ -26,6 +26,7 @@ var express     = require("express")
   , confapp     = require("config").app
   , confcookie  = require("config").cookie
   , routes      = require("./routes")
+  , startupfilter= require("./core/startupfilter")
   , middleware  = require('./core/middleware');
 
 
@@ -132,6 +133,11 @@ app.configure("development", function(){
  * route
  */
 routes.guiding( app );
+
+/**
+ * 执行启动Filter
+ */
+startupfilter.execute();
 
 /**
  * 启动服务
