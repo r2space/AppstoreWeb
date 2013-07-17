@@ -7,6 +7,7 @@
 @magnifier: "PHN2ZyB2ZXJzaW9uPSIxLjEiIGJhc2VQcm9maWxlPSJmdWxsIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWxuczpldj0iaHR0cDovL3d3dy53My5vcmcvMjAwMS94bWwtZXZlbnRzIj4KPGc%2BCgk8cG9seWdvbiBmaWxsPSIjNjY2IiBwb2ludHM9IjkuMjA3LDYuMTI2IDcuNzkzLDcuNTQxIDExLjc5MywxMS41NDEgMTMuMjA3LDEwLjEyNiIgLz4KCTxwYXRoIGZpbGw9IiM2NjYiIGQ9Ik01LjkxNywyYzEuNjA4LDAsMi45MTcsMS4zMDgsMi45MTcsMi45MTdTNy41MjUsNy44MzMsNS45MTcsNy44MzNTMyw2LjUyNSwzLDQuOTE3UzQuMzA4LDIsNS45MTcsMgoJCSBNNS45MTcsMEMzLjIwMSwwLDEsMi4yMDEsMSw0LjkxN3MyLjIwMSw0LjkxNyw0LjkxNyw0LjkxN3M0LjkxNy0yLjIwMSw0LjkxNy00LjkxN0MxMC44MzMsMi4yMDEsOC42MzIsMCw1LjkxNywwTDUuOTE3LDB6IiAvPgo8L2c%2BCjwvc3ZnPgo%3D";
 @min-width: 1040px;
 @nav-height: 37px;
+@main-color: #1A84FB;
 
 body {
   padding-left: 50px;
@@ -50,8 +51,8 @@ footer {
 }
 
 .active-background {
-  background: -webkit-gradient(radial, 50% 100%, 10, 50% 50%, 90, from(rgba(181, 97, 222, 1)), to(rgba(0, 0, 0, 1)));
-  background: -moz-radial-gradient(center 80px 45deg, circle cover, rgba(181, 97, 222, 1) 0%, rgba(0, 0, 0, 1) 100%);
+  background: -webkit-gradient(radial, 50% 100%, 10, 50% 50%, 90, from(rgba(26, 132, 251, 1)), to(rgba(0, 0, 0, 1)));
+  background: -moz-radial-gradient(center 80px 45deg, circle cover, rgba(26, 132, 251, 1) 0%, rgba(0, 0, 0, 1) 100%);
 }
 
 #_navbar {
@@ -281,7 +282,7 @@ footer {
     }
 
     li.user:hover {
-      background-color: #b561de;
+      background-color: @main-color;
       color: #fff;
     }
 
@@ -292,7 +293,7 @@ footer {
     }*/
 
     .selected {
-      background-color: #b561de;
+      background-color: @main-color;
       color: #fff;
       /*border-color: #3b5998;*/
     }
@@ -367,7 +368,7 @@ footer {
       line-height: 15px;
     }
     li.user:hover {
-      background-color: #b561de;
+      background-color: @main-color;
       color: #fff;
     }
 
@@ -402,9 +403,9 @@ footer {
     img {
       width: 25px;
       height: 25px;
-      -webkit-border-radius: 10px !important;
-      -moz-border-radius: 10px !important;
-      border-radius: 10px !important;
+      -webkit-border-radius: 15px !important;
+      -moz-border-radius: 15px !important;
+      border-radius: 15px !important;
     }
   }
 

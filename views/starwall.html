@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+
+    <% include common/required.html %>
+
+    <script type='text/javascript' src='/javascripts/menu.model.js'></script>
+    <script type='text/javascript' src='/javascripts/menu.view.js'></script>
+    <script type='text/javascript' src='/javascripts/searcher.model.js'></script>
+    <script type='text/javascript' src='/javascripts/searcher.view.js'></script>
+    <script type='text/javascript' src='/javascripts/finder.model.js'></script>
+    <script type='text/javascript' src='/javascripts/finder.view.js'></script>
+
+    <script type="text/javascript" src="/vendor/lightbox/lightbox.js"></script>
+    
+    <link href="/vendor/lightbox/lightbox.css" rel="stylesheet">
+    <link href="/stylesheets/message.css" rel="stylesheet">
+
+    <style type="text/css">
+    .sidebar {
+      margin-top: 10px;
+      margin-left: 20px;
+    }
+    .sidebar ul {
+      border-top: 1px solid #EEE;
+      width: 200px;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar ul li {
+      list-style-type: none;
+    }
+    .sidebar ul li a {
+      display: block;
+      padding: 10px;
+      border-bottom: 1px solid #EEE;
+      text-transform: uppercase;
+    }
+    .sidebar ul li a:hover {
+      background-color: #EEE;
+      text-decoration: none;
+    }
+    .sidebar ul li ul {
+      background-color: #F6F6F6;
+      box-shadow: inset 0 1px 10px #E0E0E0;
+    }
+
+    .main {
+      margin: 0 auto;
+      width: 1200px;
+      padding-right: 100px;
+    }
+
+    .filter {
+      background-color: #eee;
+      width: 995px;
+      height: 40px;
+      line-height: 40px;
+      margin-left: 150px;
+      margin-bottom: 10px;
+      padding-left: 5px;
+      padding-top: 5px;
+
+      -webkit-border-radius: 2px;
+    }
+    </style>
+
+  </head>
+  <body>
+
+    <% include common/navbar.html %>
+
+    <div class="main">
+
+      <div class="sidebar">
+        <ul class="col-nav span3">
+          <li>
+            <a href="#bookmarks" data-toggle="collapse" class="accordion-toggle">
+              <span class="label label-inverse pull-right">3 </span>Bookmarks
+            </a>
+          </li>
+          <li id="bookmarks" class="collapse">
+            <ul>
+              <li>
+                <a href="#"> <i class="pull-right icon-plane"></i>Flights</a>
+                <a href="#"> <i class="pull-right icon-fire"></i>Fires</a>
+                <a href="#"> <i class="pull-right icon-comment"></i>Comments</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#metrics" data-toggle="collapse" class="accordion-toggle">
+              <span class="label label-inverse pull-right">2</span>Metrics
+            </a>
+          </li>
+          <li id="metrics" class="collapse">
+            <ul>
+              <li>
+                <a href="#"> <i class="pull-right icon-signal"></i>Stats</a>
+                <a href="#"> <i class="pull-right icon-fire"></i>Fires</a>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#"> <i class="pull-right icon-cog"></i>Settings</a></li>
+          <li><a href="#"> <i class="pull-right icon-star"></i>Extra</a></li>
+          <li><a href="/profile.html"><i class="pull-right icon-user"></i>Profile</a></li>
+        </ul>
+      </div>
+
+      <section id="thumbnails">
+        <div class="filter">
+          <div class="btn-group">
+            <button class="btn">综合&nbsp;&nbsp;<i class="icon-arrow-down"></i></button>
+            <button class="btn">人气</button>
+            <button class="btn">销量</button>
+            <button class="btn">最新</button>
+          </div>
+        </div>
+
+        <div class="row-fluid" style="padding-left: 150px;">
+          <ul class="thumbnails">
+            <li class="span3">
+              <div class="thumbnail">
+                <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="/images/4.png">
+                <div class="caption">
+                  <h4>Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="/images/3.png">
+                <div class="caption">
+                  <h4>Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="/images/3.png">
+                <div class="caption">
+                  <h4>Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="/images/3.png">
+                <div class="caption">
+                  <h4>Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        
+          <ul class="thumbnails">
+
+            <li class="span3">
+              <div class="thumbnail">
+                <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="/images/4.png">
+                <div class="caption">
+                  <h4>Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="/images/3.png">
+                <div class="caption">
+                  <h4>Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="/images/3.png">
+                <div class="caption">
+                  <h4>Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="/images/3.png">
+                <div class="caption">
+                  <h4>Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </section>
+
+    </div>
+
+    <footer>
+      <p>Copyright © 2012, Cross Corporation. All Rights Reserved.</p>
+    </footer>
+    
+  </body>
+</html>
