@@ -34,7 +34,8 @@ var App = new schema({
     , device: {type: String}              //设备要求
     , server: {type: String}              //服务器要求
   }
-  , size: {type:int}                      //大小
+  , size: {type:Number}                      //大小
+  , status: {type:Number}                 // 状态：-1、无效app 0、未公开 1、社内公开 2、社外限定公开 3、社外任意公开
 });
 
 function model() {
