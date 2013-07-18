@@ -57,6 +57,14 @@ exports.guiding = function(app){
   });
 
 
+  app.get('/app/addview',function(req,res){
+    res.render("app_add", {
+        title: "star"
+      , bright: "home"
+      , user: req.session.user
+    });
+  });
+
 
 
 };
