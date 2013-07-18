@@ -1,10 +1,15 @@
 var app = require("../controllers/ctrl_app.js")
-  , util = require("../core/util");
+  , util = lib.core.util
+  , json = lib.core.json;
 
 exports.createApp = function(req_, res_){
   var creator = req_.session.user._id;
   var data =  util.checkObject(req_.body);
   app.create(data, function(err, result){
-    return res_.send(result);
+    if (err) {
+      return res_.send(json.errorSchema(err.code, err.message));
+    } else {
+      return res_.send(json.dataSchema(result));
+    }
   });
 };

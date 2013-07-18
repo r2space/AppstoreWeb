@@ -1,11 +1,14 @@
 
 var user = lib.api.user;
+var appapi = require('./api_app');
 
 /*
  * GET home page.
  */
 
 exports.guiding = function(app){
+
+  appapi.guiding(app);
 
   app.get('/', function(req, res){
     res.render("login", {"title": "login"});
