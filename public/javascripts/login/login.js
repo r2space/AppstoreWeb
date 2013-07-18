@@ -41,7 +41,7 @@ function login() {
         if (jqXHR.status != 200) {
           alert(data);
         } else {
-          window.location = "/starwall";
+          window.location = data.home || "message";
         }
       }
       , error: function(jqXHR, textStatus, errorThrown) {

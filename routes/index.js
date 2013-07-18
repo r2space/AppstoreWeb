@@ -20,22 +20,11 @@ exports.guiding = function(app){
   // ----------------------------------
   // 登陆（/login与登陆画面的URL重叠，所以API使用/simplelogin）
   app.get('/simplelogin', function(req, res){
-    user.login(req, res, function(err, result){
-      if (err) return false; // 错误处理还使用api中的
-
-      if (util.isBrowser(req)) {
-        var url;
-        if(req.session.user.type == 1) // 管理员画面
-          url = "/starwall";
-        else
-          url = "/starwall";
-
-        console.log("######### " + req.session.user);
-        res.redirect(url);
-        return true;
-      }
-      return false;
-    });
+    var logined = function(result){
+        if(req.session.user.type == 1) // 重新设定管理员画面
+          req.query.home = "/admin";
+    };
+    user.login(req, res, logined);
   });
 
   // 注销
@@ -51,6 +40,15 @@ exports.guiding = function(app){
   // 确认注册
   app.post("/register/confirm", function(req, res){
     user.registerConfirm(req, res);
+  });
+
+  // Admin画面
+  app.get('/admin', function(req, res){
+    res.render("admin", {
+        title: "admin"
+      , bright: "home"
+      , user: req.session.user
+    });
   });
 
   // ----------------------------------
