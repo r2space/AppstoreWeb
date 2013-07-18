@@ -1,6 +1,7 @@
 
 var user = lib.api.user
   , util = lib.core.util
+  , commentapi = require('./api_comment')
   , appapi = require('./api_app');
 
 /*
@@ -10,6 +11,8 @@ var user = lib.api.user
 exports.guiding = function(app){
 
   appapi.guiding(app);
+  commentapi.guiding(app);
+
 
   app.get('/', function(req, res){
     res.render("login", {"title": "login"});

@@ -50,3 +50,10 @@ exports.create = function(app_, callback_) {
     callback_(err, result);
   });
 };
+
+exports.updateRank = function(appId, rank, callback_) {
+  var app = model();
+  app.findByIdAndUpdate(appId, { rank: rank }, function(err, result){
+    callback_(err, result);
+  });
+};

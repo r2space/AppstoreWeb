@@ -1,12 +1,12 @@
-var app = require("../controllers/ctrl_app.js")
+var comment = require("../controllers/ctrl_comment")
   , util = lib.core.util
   , json = lib.core.json;
 
-exports.createApp = function(req_, res_){
+exports.create = function(req_, res_){
   var creator = req_.session.user._id;
   var data =  util.checkObject(req_.body);
   data.create_user = creator;
-  app.create(data, function(err, result){
+  comment.create(data, function(err, result){
     if (err) {
       return res_.send(json.errorSchema(err.code, err.message));
     } else {
