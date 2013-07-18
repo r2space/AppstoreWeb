@@ -39,3 +39,16 @@ exports.getRankAvg = function(appId_, callback_){
     callback_(err, rank);
   });
 };
+
+exports.list = function(condition_, options_, callback_){
+  var comment = model();
+  comment.find(condition_)
+    .skip(options_.start || 0)
+    .limit(options_.limit)
+    .sort({update_date: -1})
+    .exec(function(err, result){
+      comment.count(condition_).exec(function(err, count){
+        callback_(err,{total:count,items:result});
+      });
+    });
+};

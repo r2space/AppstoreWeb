@@ -58,3 +58,17 @@ exports.create = function (comment_, callback_){
     return callback_(err, result.comment);
   });
 };
+
+exports.list = function(appId_, version_, start_, count_, callback_){
+  var condition = {
+      appId: appId_
+    , version: version_
+  };
+  var options = {
+      start: start_
+    , limit: count_
+  };
+  comment.list(condition, options, function(err, result){
+    callback_(err, result);
+  });
+};

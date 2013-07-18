@@ -14,3 +14,15 @@ exports.create = function(req_, res_){
     }
   });
 };
+
+exports.list = function(req_, res_){
+  var start = Number(util.checkString(req_.query.start));
+  var count = Number(util.checkString(req_.query.count));
+  comment.list(req_.query.appId, req_.query.version, start, count, function(err, result){
+    if (err) {
+      return res_.send(json.errorSchema(err.code, err.message));
+    } else {
+      return res_.send(json.dataSchema(result));
+    }
+  });
+};
