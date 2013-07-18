@@ -1,5 +1,6 @@
 
 var mongo = require('mongoose')
+  , conn    = require('./connection')
   , schema = mongo.Schema;
 
 var App = new schema({
@@ -36,6 +37,7 @@ var App = new schema({
   }
   , size: {type:Number}                      //大小
   , status: {type:Number}                 // 状态：-1、无效app 0、未公开 1、社内公开 2、社外限定公开 3、社外任意公开
+  , rank: {type:Number}
 });
 
 function model() {

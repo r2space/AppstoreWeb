@@ -1,4 +1,4 @@
-var app = require("../modules/app.js");
+var app = require("../modules/mod_app.js");
 
 exports.create = function (data_, callback_){
   var date = new Date();
@@ -7,10 +7,7 @@ exports.create = function (data_, callback_){
   app_.update_date = date;
 
   app.create(app_, function(err, result){
-    if (err) {
-      return res_.send(json.errorSchema(err.code, err.message));
-    } else {
-      return res_.send(json.dataSchema({items: result}));
-    }
+    err = err ? new error.InternalServer(err) : null;
+    return callback_(err, result);
   });
 };
