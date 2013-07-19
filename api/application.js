@@ -5,6 +5,7 @@ var app = require("../controllers/ctrl_app.js")
 exports.createApp = function(req_, res_){
   var creator = req_.session.user._id;
   var data =  util.checkObject(req_.body);
+  data.create_user = creator;
   app.create(data, function(err, result){
     if (err) {
       return res_.send(json.errorSchema(err.code, err.message));
