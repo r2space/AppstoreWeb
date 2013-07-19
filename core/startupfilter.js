@@ -45,6 +45,7 @@ function create_admin() {
 	, "email": {
 	  "email1": email
 	}
+	, lang : "zh"
 	, createat: date
 	, createby: userid
 	, updateat: date

@@ -24,7 +24,10 @@ exports.lang = function(req, res, next) {
       res.locals.i18n = local;
       req.session.localJS = local;
     }
+  }else{
+    res.locals.i18n = "";
   }
+
   
   res.locals.i = function() {
     return i18n.__.apply(req, arguments);

@@ -1,6 +1,7 @@
 
 var user = lib.api.user
   , util = lib.core.util
+  , admin = require('./admin')
   , appapi = require('./api_app');
 
 /*
@@ -9,6 +10,7 @@ var user = lib.api.user
 
 exports.guiding = function(app){
 
+  admin.guiding(app);
   appapi.guiding(app);
 
   app.get('/', function(req, res){
