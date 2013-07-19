@@ -21,7 +21,6 @@ var $Comment = {
     });
 
     $('#comment_context').bind('keyup', function(){
-      console.log(111);
       self.toggleBtn();
     });
 
@@ -91,6 +90,10 @@ var $Comment = {
 
     var url = '/app/comment/create.json';
     smart.dopost(url, data, function(err, result){
+      $('#comment_context').attr('value','');
+      $('#comment_rank').attr('value',0);
+      self.renderRank(0);
+      self.toggleBtn();
       self.getComments(0, 20);
     });
   },
