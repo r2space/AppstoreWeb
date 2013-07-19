@@ -24,11 +24,11 @@ var App = new schema({
   , category: [String]                    //分类
   , version: {type: String}               //版本
   , downloadId: {type: String}            //下载Id
-  , open_date: {type: String}             //公开日期
-  , expire_date: {type: String}           //过期
-  , create_date: {type: String}           //创建日期
+  , open_date: {type: Date}             //公开日期
+  , expire_date: {type: Date}           //过期
+  , create_date: {type: Date}           //创建日期
   , create_user: {type: String}           //创建者
-  , update_date: {type: String}           //更新日期
+  , update_date: {type: Date}           //更新日期
   , update_user: {type: String}           //更新者
   , require: {
       os: {type: String}                  //系统要求

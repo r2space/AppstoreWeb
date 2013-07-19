@@ -1,7 +1,7 @@
 var app = require("../modules/mod_app.js");
 
 exports.create = function (data_, callback_){
-  var date = new Date();
+  var date = Date.now();
   var app_ = data_;
   app_.create_date = date;
   app_.update_date = date;

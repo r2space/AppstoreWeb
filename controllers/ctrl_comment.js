@@ -1,9 +1,10 @@
 var comment = require("../modules/mod_comment")
   , mod_app = require("../modules/mod_app")
+  , user = lib.mod.user
   , async = require("async");
 
 exports.create = function (comment_, callback_){
-  var date = new Date();
+  var date = Date.now();
   var appId = comment_.appId;
   comment_.create_date = date;
   comment_.update_date = date;
@@ -60,15 +61,35 @@ exports.create = function (comment_, callback_){
 };
 
 exports.list = function(appId_, version_, start_, count_, callback_){
-  var condition = {
-      appId: appId_
-    , version: version_
+  var tasks = [];
+  var task_getComments = function(cb){
+    var condition = {
+        appId: appId_
+      , version: version_
+    };
+    var options = {
+        start: start_
+      , limit: count_
+    };
+    comment.list(condition, options, function(err, result){
+      cb(err, result);
+    });
   };
-  var options = {
-      start: start_
-    , limit: count_
+  tasks.push(task_getComments);
+
+  var task_getUsers = function(result, cb){
+    async.forEach(result.items, function(cmt, cb_){
+      user.at(cmt.create_user, function(err, user){
+        cmt._doc.user = user;
+        cb_(err);
+      });
+    }, function(err){
+      cb(err, result);
+    });
   };
-  comment.list(condition, options, function(err, result){
-    callback_(err, result);
+  tasks.push(task_getUsers);
+
+  async.waterfall(tasks,function(err,result){
+    return callback_(err, result);
   });
 };

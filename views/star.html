@@ -14,11 +14,17 @@
 
     <script type="text/javascript" src="/vendor/lightbox/lightbox.js"></script>
     
+    <script src="/javascripts/dac/dac.comment.js"></script>
+
+
     <link href="/vendor/lightbox/lightbox.css" rel="stylesheet">
     <link href="/stylesheets/star.css" rel="stylesheet">
 
-    <style type="text/css">
-
+    <script type="text/javascript">
+        $(function () {
+            $Comment.initialize();
+        });
+    </script>
 
   </head>
   <body>
@@ -72,41 +78,19 @@
 
         <div class="comment">
           <span><i class="icon-pencil"></i>&nbsp;写评价</span>
-          <textarea></textarea>
+          <textarea id="comment_context"></textarea>
           <div id="operationarea">
-            <i class="icon-star-empty icon-large"></i>
-            <i class="icon-star-empty icon-large"></i>
-            <i class="icon-star-empty icon-large"></i>
-            <i class="icon-star-empty icon-large"></i>
-            <i class="icon-star-empty icon-large"></i>
+            <i class="icon-star-empty icon-large" rank="1"></i>
+            <i class="icon-star-empty icon-large" rank="2"></i>
+            <i class="icon-star-empty icon-large" rank="3"></i>
+            <i class="icon-star-empty icon-large" rank="4"></i>
+            <i class="icon-star-empty icon-large" rank="5"></i>
             &nbsp;
-            <button class="btn btn-small btn-success" type="button">　提交评价　</button>
+            <input type="hidden" id="comment_rank" value="0">
+            <button class="btn btn-small btn-success" type="button" id="comment_commit" disabled="true">　提交评价　</button>
           </div>
 
-          <ul>
-            <li>
-              <img class="portrait" src="/images/user.png">
-              <span>稻盛和夫</span>
-              <i class="icon-star"></i>
-              <i class="icon-star"></i>
-              <i class="icon-star"></i>
-              <i class="icon-star-empty"></i>
-              <i class="icon-star-empty"></i>
-              <span style="color: #ccc">2013/07/17</span>
-              <div>没有核心的东西，不知道能给使用的人带来什么价值。希望下一期能加入文件共享功能。</div>
-              <div>没有核心的东西，不知道能给使用的人带来什么价值。希望下一期能加入文件共享功能。</div>
-            </li>
-            <li>
-              <img class="portrait" src="/images/user.png">
-              <span>稻盛和夫</span>
-              <i class="icon-star"></i>
-              <i class="icon-star"></i>
-              <i class="icon-star"></i>
-              <i class="icon-star-empty"></i>
-              <i class="icon-star-empty"></i>
-              <span style="color: #ccc">2013/07/17</span>
-              <div>没有核心的东西，不知道能给使用的人带来什么价值。希望下一期能加入文件共享功能。</div>
-            </li>
+          <ul id="comment_list">
           </ul>
         </div>
 
@@ -114,6 +98,16 @@
       </section>
 
     </div>
+
+    <script type="text/template" id="comment-template">
+      <li>
+        <img class="portrait" src="/images/user.png">
+        <span>{{createby}}</span>
+        <span>{{rank}}</span>
+        <span style="color: #ccc">{{createat}}</span>
+        <div>{{comment}}</div>
+      </li>
+    </script>
 
     <footer>
       <p>Copyright © 2012, Cross Corporation. All Rights Reserved.</p>
