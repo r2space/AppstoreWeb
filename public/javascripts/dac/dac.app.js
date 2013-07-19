@@ -4,9 +4,16 @@ var $APP = {
     },
     createDate:function(data){
         var sendData = {};
+        var crsf = $("#_csrf").val();
         for(var i in data){
             sendData[data[i].name] = data[i].value;
+            if(data[i].name=="screenshot"){
+
+                sendData[data[i].name] = data[i].value.split(',');
+            }
+            console.log(data[i]);
         }
+        sendData["_csrf"] = crsf;
         return sendData;
     },
     initialize: function () {
@@ -77,26 +84,37 @@ var $APP = {
     didUploadSmallFile: function (status, input, fid) {
         console.log(input);
         var fid = fid.data.items[0]._id;
+        $("#icon_small_file_hid").val(fid);
         $("#icon_small_img").css("display", "block");
         $("#icon_small_btn").css("display", "none");
         $("#icon_small_span").css("display", "none");
-        $("#icon_small_img").attr("src", "/picture/" + fid)
+        $("#icon_small_img").attr("src", "/picture/" + fid);
+
     },
     didUploadBigFile: function (status, input, fid) {
         console.log(input);
         var fid = fid.data.items[0]._id;
+        $("#icon_big_file_hid").val(fid);
         $("#icon_big_img").css("display", "block");
         $("#icon_big_btn").css("display", "none");
         $("#icon_big_span").css("display", "none");
-        $("#icon_big_img").attr("src", "/picture/" + fid)
+        $("#icon_big_img").attr("src", "/picture/" + fid);
+
     },
     didUploadImageFile: function (status, input, fid) {
         console.log(input);
-        var fid = fid.data.items[0]._id;
-        $("#image_big_img").css("display", "block");
+//        var fid = fid.data.items[0]._id;
+        var fids = [];
+        for(var i = 0 ;i<fid.data.items.length;i++){
+            console.log(fid.data.items[i]);
+            fids.push(fid.data.items[i]._id);
+            $("#image_big_img").after("<img class='image_big_show' src='/picture/"+fid.data.items[i]._id+"' />");
+        }
+
+        $("#image_big_file_hid").val(fids);
         $("#image_big_btn").css("display", "none");
         $("#image_big_span").css("display", "none");
-        $("#image_big_img").attr("src", "/picture/" + fid)
+
     },
 
     didSendAppInfo: function (msg) {

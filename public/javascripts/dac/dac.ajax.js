@@ -75,7 +75,7 @@ function ajaxTodoCallback(btn, opt, callback, confirmMsg) {
     return false;
 };
 
-function validateCallback(form, callback, fn) {
+function validateCallback(form, callback, fn,confirmMsg) {
     // console.log('validateCallback : %s',$form.valid());
     // return false;
     console.log('validateCallback');
@@ -87,14 +87,16 @@ function validateCallback(form, callback, fn) {
     var f = fn($form.serializeArray());
     var csrftoken = $('#_csrf').val();
     console.log(f);
+    var data =  (fn?fn($form.serializeArray()):{
+        "_csrf": csrftoken,
+        "form": $form.serializeArray()
+    })||{"_csrf":csrftoken};
+    console.log(data);
     var _submitFn = function () {
         $.ajax({
             type: form.method || 'POST',
             url: $form.attr("action"),
-            data: {
-                _csrf: csrftoken,
-                form: $form.serializeArray()
-            },
+            data: data,
             dataType: "json",
             cache: false,
             success: callback || $DAC.ajaxDone,
@@ -102,8 +104,8 @@ function validateCallback(form, callback, fn) {
         });
     }
 
-    if (fn) {
-        // $alertMsg.confirm(confirmMsg, {okCall: _submitFn});
+    if (confirmMsg) {
+        $alertMsg.confirm(confirmMsg||"确认提交吗？", {okCall: _submitFn});
     } else {
         _submitFn();
     }

@@ -104,6 +104,9 @@ var $DAC = {
         /**
          * @param {Object} op: {type:GET/POST, url:ajax请求地址, data:ajax请求参数列表, callback:回调函数 }
          */
+        ajaxGet : function(){
+
+        },
         ajaxUrl: function (op) {
             var $this = $(this);
 
@@ -134,7 +137,14 @@ var $DAC = {
             });
         },
         loadUrl: function (url, data, callback) {
-            $(this).ajaxUrl({url: url, data: data, callback: callback});
+            console.log("loadUrl");
+            var $this = $(this);
+            $this.each(function(i,self){
+
+                console.log(self);
+                console.log(i);
+            });
+
         },
         initUI: function () {
             return this.each(function () {

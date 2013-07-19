@@ -62,6 +62,7 @@ function initUI(_box) {
             }
         });
     });
+    if ($.fn.loadUrl) $("[target=loadUrl]", $p).loadUrl();
 
 }
 

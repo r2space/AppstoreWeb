@@ -16,21 +16,19 @@ var $alertMsg = {
     _open: function (type, msg, buttons) {
         if (this._types.error == type) {
             Alertify.log.error(msg);
-        } else {
+        } else if(this._types.confirm == type){
+
+            if(confirm("确定要清空数据吗？")){
+
+                eval("buttons[0].call();");
+            }else{
+
+            }
+        }else{
             Alertify.log.error(msg);
         }
 
-        var jDoc = $(document);
-        if (buttons)
-            for (var i = 0; i < buttons.length; i++) {
-                if (buttons[i].call) jCallButs.eq(i).click(buttons[i].call);
-                if (buttons[i].keyCode == $DAC.keyCode.ENTER) {
-                    jDoc.bind("keydown", {target: jButs.eq(i)}, this._keydownOk);
-                }
-                if (buttons[i].keyCode == $DAC.keyCode.ESC) {
-                    jDoc.bind("keydown", {target: jButs.eq(i)}, this._keydownEsc);
-                }
-            }
+
     },
     /**
      *
@@ -38,11 +36,11 @@ var $alertMsg = {
      * @param {Object} options {okName, okCal, cancelName, cancelCall}
      */
     confirm: function (msg, options) {
-        var op = {okName: $.regional.alertMsg.butMsg.ok, okCall: null, cancelName: $.regional.alertMsg.butMsg.cancel, cancelCall: null};
+        var op = {okName: "ok", okCall: null, cancelName:"quxiao ", cancelCall: null};
         $.extend(op, options);
         var buttons = [
-            {name: op.okName, call: op.okCall, keyCode: DWZ.keyCode.ENTER},
-            {name: op.cancelName, call: op.cancelCall, keyCode: DWZ.keyCode.ESC}
+            {name: op.okName, call: op.okCall, keyCode: $DAC.keyCode.ENTER},
+            {name: op.cancelName, call: op.cancelCall, keyCode: $DAC.keyCode.ESC}
         ];
         this._open(this._types.confirm, msg, buttons);
     },
