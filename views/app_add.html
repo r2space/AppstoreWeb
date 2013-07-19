@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+
+    <% include common/required.html %>
+
+    <script type='text/javascript' src='/javascripts/menu.model.js'></script>
+    <script type='text/javascript' src='/javascripts/menu.view.js'></script>
+
+
+    <script src="/vendor/jquery.validate.js"></script>
+    <script src="/javascripts/dac/dac.core.js"></script>
+    <script src="/javascripts/dac/dac.ui.js"></script>
+    <script src="/javascripts/dac/dac.ajax.js"></script>
+
+
+    <script src="/javascripts/dac/dac.alertMsg.js"></script>
+    <link href="/vendor/lightbox/lightbox.css" rel="stylesheet">
+    <link href="/stylesheets/default.css" rel="stylesheet">
+    <script src="/javascripts/dac/dac.app.js"></script>
+    <style type="text/css">
+        textarea {
+            resize: none;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $DAC.init("/javascripts/dac/env.xml", { //【可选】
+                debug: true,  // 调试模式 【true|false】
+                callback: function () {
+                    initEnv();
+                }
+            });
+            $APP.initialize();
+        });
+    </script>
+
+</head>
+<body>
+
+<% include common/navbar.html %>
+
+<div class="main">
+
+<div class="sidebar">
+    <ul class="col-nav span3">
+
+        <li><a href="#">iOS应用</a></li>
+        <li><a href="#">Android应用</a></li>
+        <li><a href="#">WP应用</a></li>
+    </ul>
+</div>
+
+<div class="container-fluid">
+<form class="required-validate form-horizontal" action="/app/create.json" method="post"
+      onsubmit="return validateCallback(this,$APP.didSendAppInfo,$APP.createDate)">
+<div class="container-fluid">
+
+<div class="row-fluid">
+<div class="span12">
+<div class="widget-box">
+    <div class="widget-title"><span class="icon"> <i class="icon-info-sign"></i> </span>
+        <h5>基本信息</h5>
+    </div>
+    <div class="widget-content nopadding">
+
+        <div class="control-group">
+            <label class="control-label">应用名称</label>
+
+            <div class="controls">
+                <input class="required" type="text" name="name" id="name">
+                <span for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">简介</label>
+
+            <div class="controls">
+                <input class="required" type="text" name="memo" id="memo">
+                <span for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">详细介绍</label>
+
+            <div class="controls">
+                <textarea class="required" name="description" id="description" style="resize: none;"></textarea>
+                <span for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">类型</label>
+
+            <div class="controls">
+                <input class="required" type="text" name="category" id="category">
+                <span for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">管理员</label>
+
+            <div class="controls">
+                <input type="text" name="admin" id="admin">
+                <span id="setUserList" action="/user/list.json" data="{ }" for="required" generated="true" class="help-inline" href="#document-selector" data-toggle="modal">设定</span>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="widget-box">
+    <div class="widget-title"><span class="icon"> <i class="icon-info-sign"></i> </span>
+        <h5>上传素材</h5>
+    </div>
+    <div class="widget-content nopadding">
+
+        <div class="control-group">
+            <label class="control-label">图标小图</label>
+
+            <div class="controls">
+                <img id="icon_small_img" style="display:none;width:50px;height:50px;" src=""/>
+                <input type="file" id="icon_small_file" style="display: none" accept="image/*">
+                <button id="icon_small_btn" class="btn" onclick="return false;">上传</button>
+                <span id="icon_small_span" for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">图标大图</label>
+
+            <div class="controls">
+                <img id="icon_big_img" style="display:none;width:50px;height:50px;" src=""/>
+                <input type="file" id="icon_big_file" style="display: none" accept="image/*">
+                <button id="icon_big_btn" class="btn" onclick="return false;">上传</button>
+                <span id="icon_big_span" for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">上传图片</label>
+
+            <div class="controls">
+                <img id="image_big_img" style="display:none;width:50px;height:50px;" src=""/>
+                <input type="file" id="image_big_file" style="display: none" accept="image/*">
+                <button id="image_big_btn" class="btn" onclick="return false;">上传</button>
+                <span id="image_big_span" for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">上传视频</label>
+
+            <div class="controls">
+                <img id="video_big_img" style="display:none;width:50px;height:50px;" src=""/>
+                <input type="file" id="video_big_file" style="display: none" accept="image/*">
+                <button id="video_big_btn" class="btn" onclick="return false;">上传</button>
+                <span id="video_big_span" for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="widget-box">
+    <div class="widget-title"><span class="icon"> <i class="icon-info-sign"></i> </span>
+        <h5>版本信息</h5>
+    </div>
+    <div class="widget-content nopadding">
+
+        <div class="control-group">
+            <label class="control-label">版本</label>
+
+            <div class="controls">
+                <input type="text" name="version" id="version"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">大小</label>
+
+            <div class="controls">
+                <input type="text" name="size" id="size"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">更新介绍</label>
+
+            <div class="controls">
+                <input type="text" name="release_note" id="release_note"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">应用要求</label>
+
+            <div class="controls">
+                <textarea name="require" id="require"></textarea>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="widget-box">
+    <div class="widget-title"><span class="icon"> <i class="icon-info-sign"></i> </span>
+        <h5>权限管理</h5>
+    </div>
+    <div class="widget-content nopadding">
+
+        <div class="control-group">
+            <label class="control-label">编辑者</label>
+
+            <div class="controls">
+                <input type="text" name="admin" id="admin">
+                <span id="setUserList" action="/user/list.json" data="{ }" for="required" generated="true" class="help-inline" href="#document-selector" data-toggle="modal">设定</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">阅览者</label>
+
+            <div class="controls">
+                <input type="text" name="admin" id="admin">
+                <span id="setUserList" action="/user/list.json" data="{ }" for="required" generated="true" class="help-inline" href="#document-selector" data-toggle="modal">设定</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">下载者</label>
+
+            <div class="controls">
+                <input type="text" name="admin" id="admin">
+                <span id="setUserList" action="/user/list.json" data="{ }" for="required" generated="true" class="help-inline" href="#document-selector" data-toggle="modal">设定</span>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="widget-box">
+    <div class="widget-title"><span class="icon"> <i class="icon-info-sign"></i> </span>
+        <h5>选择用户</h5>
+    </div>
+    <div class="widget-content nopadding">
+
+        <div class="control-group">
+            <label class="control-label">用户</label>
+
+            <div class="controls">
+                <input type="text" name="admin" id="admin">
+                <span id="setUserList" action="/user/list.json" data="{ }" for="required" generated="true" class="help-inline setUserList" href="#document-selector" data-toggle="modal">设定</span>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="widget-box">
+    <div class="widget-title"><span class="icon"> <i class="icon-info-sign"></i> </span>
+        <h5>公开APP</h5>
+    </div>
+    <div class="widget-content nopadding">
+
+        <div class="control-group">
+            <label class="control-label">上传APP</label>
+
+            <div class="controls">
+                <input type="text" name="pwd2" id="pwd2"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">公开</label>
+
+            <div class="controls">
+                <input type="text" name="pwd2" id="pwd2"/>
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label"></label>
+
+            <div class="controls">
+                <button class="btn btn-small btn-success" type="submit">登录</button>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+
+</div>
+
+
+</div>
+
+
+</form>
+</div>
+
+</div>
+
+<footer>
+    <p>Copyright © 2012, Cross Corporation. All Rights Reserved.</p>
+</footer>
+<div class="modal" id="document-selector" role="dialog" aria-hidden="true" style="display:none;height:400px">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>选择用户</h3>
+    </div>
+    <div class="modal-body" style="overflow: scroll" >
+        <fieldset style="height:300px;overflow: scroll;">
+            <table class="table table-hover" style="height:300px;overflow: scroll;">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>姓名</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="setuserlist" style="height:300px;overflow: scroll;">
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true"><%= i('message.list.button.cancel') %></button>
+        <button class="btn btn-primary" id="setDocument"><%= i('message.list.button.select') %></button>
+    </div>
+</div>
+
+</body>
+</html>
