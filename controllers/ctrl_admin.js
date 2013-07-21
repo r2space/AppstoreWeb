@@ -1,5 +1,7 @@
 var admin = require("../modules/mod_admin.js")
-  , csv = require('csv');
+  , csv = require('csv')
+  , confapp = require("config").app
+  , json = lib.core.json;
 
 /**
  * 下载模板
@@ -11,7 +13,7 @@ exports.download_template = function (req_, res_){
 
   	csv()
   	.from.array(data)
-  	.to.stream(res_);
+  	.to.stream(res_, {rowDelimiter: '\r\n'});
   })
 };
 
@@ -20,27 +22,44 @@ exports.download_template = function (req_, res_){
  */
 exports.csvimport_user = function(req_, res_){
 	var user = req_.session.user;
-	console.log("####### " + req_.files.csvfile.path);
-
+    var records = [];
+    var error_import;
 	csv()
 	.from.path(req_.files.csvfile.path)
-	.to.path(__dirname+'/sample.out')
-	.transform( function(row){
-	  row.unshift(row.pop());
-	  return row;
-	})
 	.on('record', function(row,index){
-	  	console.log('#'+index+' '+JSON.stringify(row));
-	  	admin.csvImportRow(req_.session.user, row);
+        if(index > 0) { // 跳过Head
+            records.push(row);
+        }
 	})
-	.on('close', function(count){
+	.on('end', function(count){
+        if(error_import) {
+            error_import.message = "第" + (index + 1) + "行: " + error_import.message;
+            json.send(res_, { code: 400, message: error_import.message, line_num: index});
+        } else {
+            for(var index=0;  index < records.length; index++) {
+                var row = records[index];
+                console.log('#'+index+' '+JSON.stringify(row));
+                admin.csvImportRow(req_.session.user, row, function(err, result){
+                    if(err) { error_import = err; }
+                });
 
-	  console.log('Number of lines: '+count);
-	  res_.send("close");
+                if(error_import) {
+                    error_import.message = "第" + (index + 1) + "行: " + error_import.message;
+                    json.send(res_, { code: 400, message: error_import.message, line_num: index});
+                    break;
+                } else if(index == records.length -1) {
+                    json.send(res_, null, { message: "导入成功" + records.length + "条数据" });
+                }
+            };
+        }
+
 	})
 	.on('error', function(error){
-
-	  console.log(error.message);
-	  res_.send("error");
+      var error_message = "解析csv文件出错。";
+      error_import = {
+          code: 400
+          ,message: error_message
+      };
+	  console.log(error_message + '\n' + error.message);
 	});
 };
