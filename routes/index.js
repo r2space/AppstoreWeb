@@ -1,7 +1,6 @@
 var user = lib.api.user
     , util = lib.core.util
     , admin = require('./admin')
-    , util = lib.core.util
     , fileapi = require('./api_file')
     , commentapi = require('./api_comment')
     , appapi = require('./api_app');
@@ -43,6 +42,7 @@ exports.guiding = function (app) {
     // 注册
     app.post("/register", function (req, res) {
         user.register(req, res);
+    });
 
     // 确认注册
     app.post("/register/confirm", function (req, res) {
