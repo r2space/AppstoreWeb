@@ -17,6 +17,8 @@
     <link href="/vendor/lightbox/lightbox.css" rel="stylesheet">
     <link href="/stylesheets/starwall.css" rel="stylesheet">
 
+    <script type='text/javascript' src='/javascripts/admin/admin.js'></script>
+      <script type='text/javascript' src='/javascripts/admin/admin.importuser.js'></script>
   </head>
   <body>
 
@@ -32,22 +34,23 @@
 
       <section id="content">
         <div class="row-fluid">
-          <form method="get" action="/admin/download/template">
+          <form id="formCsvDownloadTemplate" method="get" action="/admin/download/template">
             <input type="hidden" id="_csrf" name="_csrf" value="<%= csrftoken %>" />
             <input type="submit" value="下载模板"> 通过下载的模板输入用户数据。
           </form>
         </div>
         <div class="row-fluid">
           选择导入的文件:
-          <form method="post" enctype="multipart/form-data" action="/admin/csvimport/user">
+          <form id="formCsvImportUser" method="post" enctype="multipart/form-data" action="/admin/csvimport/user" >
             <input type="hidden" id="_csrf" name="_csrf" value="<%= csrftoken %>" />
             <input type="hidden" name="_method" value="post" />
-            <input type="file" id="csvfile" name="csvfile" multiple="multiple" />
+            <input type="file" id="csvfile" name="files" multiple="multiple" />
             <input type="submit" value="导入">
           </form>
+          <div id="message" style="color:red;display:none"></div>
         </div>
-      </section>
 
+      </section>
     </div>
 
     <footer>

@@ -21,6 +21,12 @@ exports.download_template = function (req_, res_){
  * CSV导入用户
  */
 exports.csvimport_user = function(req_, res_){
+
+    if(!req_.files.csvfile || !req_.files.csvfile.path) {
+        json.send(res_, { code: 400, message: "Can't find import file!"});
+        return;
+    }
+
 	var user = req_.session.user;
     var records = [];
     var error_import;
