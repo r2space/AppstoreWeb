@@ -1,5 +1,6 @@
 var user = lib.api.user
     , util = lib.core.util
+    , admin = require('./admin')
     , fileapi = require('./api_file')
     , commentapi = require('./api_comment')
     , appapi = require('./api_app')
@@ -10,7 +11,7 @@ var user = lib.api.user
  */
 
 exports.guiding = function (app) {
-
+    admin.guiding(app);
     appapi.guiding(app);
     commentapi.guiding(app);
     fileapi.guiding(app);
@@ -50,13 +51,6 @@ exports.guiding = function (app) {
         user.registerConfirm(req, res);
     });
 
-    // Admin画面
-    app.get('/admin', function (req, res) {
-        res.render("admin", {
-            title: "admin", bright: "home", user: req.session.user
-        });
-    });
-
     // ----------------------------------
     // 主页面
     app.get('/starwall', function (req, res) {
@@ -71,7 +65,6 @@ exports.guiding = function (app) {
             title: "star", bright: "home", user: req.session.user
         });
     });
-
 
     app.get('/app/addview', function (req, res) {
         res.render("app_add", {

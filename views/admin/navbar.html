@@ -1,0 +1,42 @@
+    <input type="hidden" id="_csrf" name="_csrf" value="<%= csrftoken %>" />
+    <input type="hidden" id="bright" name="bright" value="<%= bright %>" />
+    <input type="hidden" id="userid" name="userid" value="<%= user._id %>" />
+    <input type="hidden" id="timezone" name="timezone" value="<%= user.timezone %>" />
+
+
+    <style type="text/css">
+      .dl-horizontal dt { width: 32px; }
+      .dl-horizontal dd { margin-left: 40px; }
+    </style>
+
+    <script type='text/javascript'>
+      var i18n = "<%= i18n %>";
+      i18n = i18n.replace(/'/g,"\"");
+      i18n = JSON.parse(i18n);
+    </script>
+
+
+    <header>
+      <strong>AppStore</strong>
+      <div id="_userbox">
+        <div>
+          <a href="/user" id="_userpic"><img src="<%= user.photo ? '/picture/' + user.photo.big : '/images/user.png' %>"></a>
+          <a href="/user" id="_username"><%= user.name.name_zh %></a> 
+        </div>
+        <ul>
+          <li><a href="/usereditor" id="_user"><i class="icon-wrench"></i></a></li>
+          <li><a href="/simplelogout" id="_logout"><i class="icon-signout"></i></a></li>
+        </ul>
+      </div>
+    </header>
+    <div id="_navbar">
+      <nav>
+        <ul id="_group1" rel="sam">
+          <li><a id="manageuser" href="/starwall"><%= '用户管理' %></a></li>
+          <li><a id="group" href="/group"><%= '　设定　' %></a></li>
+        </ul>
+      </nav>
+    </div>
+
+ 
+
