@@ -2,7 +2,8 @@ var user = lib.api.user
     , util = lib.core.util
     , fileapi = require('./api_file')
     , commentapi = require('./api_comment')
-    , appapi = require('./api_app');
+    , appapi = require('./api_app')
+    , userapi = require('./api_user');
 
 /*
  * GET home page.
@@ -13,6 +14,7 @@ exports.guiding = function (app) {
     appapi.guiding(app);
     commentapi.guiding(app);
     fileapi.guiding(app);
+    userapi.guiding(app);
 
     app.get('/', function (req, res) {
         res.render("login", {"title": "login"});

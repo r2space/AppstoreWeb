@@ -63,7 +63,7 @@ function initUI(_box) {
         });
     });
     if ($.fn.loadUrl) $("[target=loadUrl]", $p).loadUrl();
-
+    if ($.fn.ajaxGet) $("[target=ajaxGet]", $p).ajaxGet();
 }
 
 

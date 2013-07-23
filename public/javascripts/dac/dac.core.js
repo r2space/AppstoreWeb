@@ -17,6 +17,15 @@ var $DAC = {
         debug: true
     },
     statusCode: {ok: 200, error: 300, timeout: 301},
+    jsonEval: function (data) {
+        try {
+            if ($.type(data) == 'string')
+                return eval('(' + data + ')');
+            else return data;
+        } catch (e) {
+            return {};
+        }
+    },
     msg: function (key, args) {
         var _format = function (str, args) {
             args = args || [];
@@ -104,8 +113,26 @@ var $DAC = {
         /**
          * @param {Object} op: {type:GET/POST, url:ajax请求地址, data:ajax请求参数列表, callback:回调函数 }
          */
-        ajaxGet : function(){
+        ajaxGet: function () {
+            console.log('init ajax get');
+            var $this = $(this);
+            var callback = eval($this.attr("callback"));
+            var url = $this.attr("action");
 
+            $.ajax({
+                type: 'GET',
+                url: url,
+//                data: op.data,
+                cache: false,
+                success: function (response) {
+                    var json = $DAC.jsonEval(response);
+                    callback(json);
+
+                },
+                error: function () {
+                    cosole.log('error');
+                }
+            });
         },
         ajaxUrl: function (op) {
             var $this = $(this);
@@ -139,7 +166,7 @@ var $DAC = {
         loadUrl: function (url, data, callback) {
             console.log("loadUrl");
             var $this = $(this);
-            $this.each(function(i,self){
+            $this.each(function (i, self) {
 
                 console.log(self);
                 console.log(i);
@@ -165,6 +192,32 @@ var $DAC = {
                 if (console) console.log("%s: %o", msg, this);
             });
         }
+    });
+    $.extend(Array.prototype, {
+        _remove: function (dx) {
+            if (isNaN(dx) || dx > this.length) {
+                return false;
+            }
+            for (var i = 0, n = 0; i < this.length; i++) {
+                if (this[i] != this[dx]) {
+                    this[n++] = this[i]
+                }
+            }
+            this.length -= 1;
+        },
+        _removeValue: function (v) {
+            if (v > this.length) {
+                return false;
+            }
+            for (var i = 0, n = 0; i < this.length; i++) {
+                if (this[i] != v) {
+                    this[n++] = this[i]
+                }
+            }
+            this.length -= 1;
+            return this;
+        }
+
     });
 
     /**
@@ -252,5 +305,6 @@ var $DAC = {
             return this.isUrl() && this.indexOf("://" + document.domain) == -1;
         }
     });
-})(jQuery);
+})
+    (jQuery);
 

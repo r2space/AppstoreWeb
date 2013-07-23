@@ -16,7 +16,6 @@
     <script src="/javascripts/dac/dac.ajax.js"></script>
 
 
-
     <link href="/vendor/lightbox/lightbox.css" rel="stylesheet">
     <link href="/stylesheets/default.css" rel="stylesheet">
     <script src="/javascripts/dac/dac.app.js"></script>
@@ -24,7 +23,8 @@
         textarea {
             resize: none;
         }
-        .image_big_show{
+
+        .image_big_show {
             width: 100px;
             height: 100px;
         }
@@ -210,19 +210,38 @@
     <div class="widget-content nopadding">
 
         <div class="control-group">
-            <label class="control-label">管理之</label>
+            <label class="control-label">管理者</label>
 
             <div class="controls">
-                <input type="text" name="permission.admin" id="permission.admin">
-                <span id="setUserList" action="/user/list.json" data="{ }" for="required" generated="true" class="help-inline setUserList" href="#document-selector" data-toggle="modal">设定</span>
+                <input type="hidden" name="permission.admin" id="permission_admin_input"/>
+                <div class="user_select_print">
+                    <ul id="admin_user_selected">
+                        <li>请设定管理者</li>
+                    </ul>
+                </div>
+
+
+                <span style="margin-left: 15px" id="admin_set_btn" action="/user/list.json" data="{ }" for="required"
+                      generated="true"
+                      class="help-inline setUserList" href="#document-selector" data-toggle="modal">设定</span>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">编辑者</label>
 
             <div class="controls">
-                <input type="text" name="permission.edit" id="permission.edit">
-                <span id="setUserList" action="/user/list.json" data="{ }" for="required" generated="true" class="help-inline" href="#document-selector" data-toggle="modal">设定</span>
+                <input type="hidden" name="permission.edit" id="permission_edit_input"/>
+                <div class="user_select_print">
+                    <ul id="edit_user_selected">
+                        <li>请设定编辑者</li>
+                    </ul>
+                </div>
+
+
+                <span style="margin-left: 15px" id="edit_set_btn" action="/user/list.json" data="{ }" for="required"
+                      generated="true"
+                      class="help-inline setUserList" data="{sds:323,dfdf:343}" href="#document-selector"
+                      data-toggle="modal">设定</span>
             </div>
         </div>
 
@@ -230,16 +249,42 @@
             <label class="control-label">阅览者</label>
 
             <div class="controls">
-                <input type="text" name="permission.view" id="permission.view">
-                <span id="setUserList" action="/user/list.json" data="{ }" for="required" generated="true" class="help-inline" href="#document-selector" data-toggle="modal">设定</span>
+                <input type="hidden" name="permission.view" id="permission_view_input"/>
+                <div class="user_select_print">
+                    <ul id="view_user_selected">
+                        <li>请设定阅览者</li>
+                    </ul>
+                </div>
+
+
+                <span style="margin-left: 15px"
+                      id="view_set_btn"
+                      taget="dialogAjax"
+                      action="/user/list.json"
+                      render="$APP.didAdminSelectRender"
+                      callback="$APP.didAdminSelectCallback"
+                      for="required"
+                      generated="true"
+                      class="help-inline setUserList"
+                      href="#document-selector"
+                      data-toggle="modal">设定</span>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">下载者</label>
 
             <div class="controls">
-                <input type="text" name="permission.download" id="permission.download">
-                <span id="setUserList" action="/user/list.json" data="{ }" for="required" generated="true" class="help-inline" href="#document-selector" data-toggle="modal">设定</span>
+                <input type="hidden" name="permission.download" id="permission_download_input"/>
+                <div class="user_select_print">
+                    <ul id="download_user_selected">
+                        <li>下载者</li>
+                    </ul>
+                </div>
+
+
+                <span style="margin-left: 15px" id="download_set_btn" action="/user/list.json" data="{ }" for="required"
+                      generated="true"
+                      class="help-inline setUserList" href="#document-selector" data-toggle="modal">设定</span>
             </div>
         </div>
 
@@ -304,7 +349,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3>选择用户</h3>
     </div>
-    <div class="modal-body" style="overflow: scroll" >
+    <div class="modal-body" style="overflow: scroll">
         <fieldset style="height:300px;overflow: scroll;">
             <table class="table table-hover" style="height:300px;overflow: scroll;">
                 <thead>
@@ -314,14 +359,15 @@
                     <th>操作</th>
                 </tr>
                 </thead>
-                <tbody id="setuserlist" target="loadUrl" action="/user/list.json" render="" style="height:300px;overflow: scroll;">
+                <tbody id="setuserlist" target="ajaxGet" action="/user/list.json" callback="$APP.didUserListRender"
+                       render="" style="height:300px;overflow: scroll;">
                 </tbody>
             </table>
         </fieldset>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true"><%= i('message.list.button.cancel') %></button>
-        <button class="btn btn-primary" id="setDocument"><%= i('message.list.button.select') %></button>
+        <button class="btn btn-primary" id="setUser"><%= i('message.list.button.select') %></button>
     </div>
 </div>
 
