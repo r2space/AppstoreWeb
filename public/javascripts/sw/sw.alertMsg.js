@@ -39,8 +39,8 @@ var $alertMsg = {
         var op = {okName: "ok", okCall: null, cancelName:"quxiao ", cancelCall: null};
         $.extend(op, options);
         var buttons = [
-            {name: op.okName, call: op.okCall, keyCode: $DAC.keyCode.ENTER},
-            {name: op.cancelName, call: op.cancelCall, keyCode: $DAC.keyCode.ESC}
+            {name: op.okName, call: op.okCall, keyCode: $sw.keyCode.ENTER},
+            {name: op.cancelName, call: op.cancelCall, keyCode: $sw.keyCode.ESC}
         ];
         this._open(this._types.confirm, msg, buttons);
     },

@@ -10,15 +10,15 @@
 
 
     <script src="/vendor/jquery.validate.js"></script>
-    <script src="/javascripts/dac/dac.core.js"></script>
-    <script src="/javascripts/dac/dac.alertMsg.js"></script>
-    <script src="/javascripts/dac/dac.ui.js"></script>
-    <script src="/javascripts/dac/dac.ajax.js"></script>
+    <script src="/javascripts/sw/sw.core.js"></script>
+    <script src="/javascripts/sw/sw.alertMsg.js"></script>
+    <script src="/javascripts/sw/sw.ui.js"></script>
+    <script src="/javascripts/sw/sw.ajax.js"></script>
 
 
     <link href="/vendor/lightbox/lightbox.css" rel="stylesheet">
     <link href="/stylesheets/default.css" rel="stylesheet">
-    <script src="/javascripts/dac/dac.app.js"></script>
+    <script src="/javascripts/sw/sw.app.js"></script>
     <style type="text/css">
         textarea {
             resize: none;
@@ -31,13 +31,13 @@
     </style>
     <script type="text/javascript">
         $(function () {
-            $DAC.init("/javascripts/dac/env.xml", { //【可选】
+            $sw.init("/javascripts/sw/env.xml", { //【可选】
                 debug: true,  // 调试模式 【true|false】
                 callback: function () {
                     initEnv();
                 }
             });
-            $APP.initialize();
+            $app.initialize();
         });
     </script>
 
@@ -59,7 +59,7 @@
 
 <div class="container-fluid">
 <form class="required-validate form-horizontal" action="/app/create.json" method="post"
-      onsubmit="return validateCallback(this,$APP.didSendAppInfo,$APP.createDate,'确认提交吗？')">
+      onsubmit="return validateCallback(this,$app.didSendAppInfo,$app.createDate,'确认提交吗？')">
 <div class="container-fluid">
 
 <div class="row-fluid">
@@ -261,8 +261,8 @@
                       id="view_set_btn"
                       taget="dialogAjax"
                       action="/user/list.json"
-                      render="$APP.didAdminSelectRender"
-                      callback="$APP.didAdminSelectCallback"
+                      render="$app.didAdminSelectRender"
+                      callback="$app.didAdminSelectCallback"
                       for="required"
                       generated="true"
                       class="help-inline setUserList"
@@ -359,7 +359,7 @@
                     <th>操作</th>
                 </tr>
                 </thead>
-                <tbody id="setuserlist" target="ajaxGet" action="/user/list.json" callback="$APP.didUserListRender"
+                <tbody id="setuserlist" target="ajaxGet" action="/user/list.json" callback="$app.didUserListRender"
                        render="" style="height:300px;overflow: scroll;">
                 </tbody>
             </table>

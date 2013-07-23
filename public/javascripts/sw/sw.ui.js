@@ -50,7 +50,7 @@ function initUI(_box) {
             invalidHandler: function (form, validator) {
                 var errors = validator.numberOfInvalids();
                 if (errors) {
-                    var message = $DAC.msg("validateFormError", [errors]);
+                    var message = $sw.msg("validateFormError", [errors]);
                     $alertMsg.error(message);
                 }
             },

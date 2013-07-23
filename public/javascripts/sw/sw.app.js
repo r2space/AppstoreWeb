@@ -1,4 +1,4 @@
-var $APP = {
+var $app = {
     events: {
 
     },
@@ -139,7 +139,7 @@ var $APP = {
                 });
                 $(this).click(function () {
                     var data = $(this).attr("data");
-                    var new_chk_value_id = chk_value_id._removeValue(data);
+                    var new_chk_value_id = _.without(chk_value_id,data);
                     $("#permission_admin_input").val(new_chk_value_id);
                     $(this).remove();
                 });
@@ -193,7 +193,7 @@ var $APP = {
                 });
                 $(this).click(function () {
                     var data = $(this).attr("data");
-                    var new_chk_value_id = chk_value_id._removeValue(data);
+                    var new_chk_value_id = _.without(chk_value_id,data);
                     $("#permission_edit_input").val(new_chk_value_id);
                     $(this).remove();
                 });
@@ -248,7 +248,7 @@ var $APP = {
                 });
                 $(this).click(function () {
                     var data = $(this).attr("data");
-                    var new_chk_value_id = chk_value_id._removeValue(data);
+                    var new_chk_value_id = _.without(chk_value_id,data);
                     $("#permission_view_input").val(new_chk_value_id);
                     $(this).remove();
                 });
@@ -305,7 +305,7 @@ var $APP = {
                     console.log(data);
                     console.log(chk_value_id);
                     console.log(chk_value_id);
-                    var new_chk_value_id = chk_value_id._removeValue(data);
+                    var new_chk_value_id = _.without(chk_value_id,data);
                     console.log(new_chk_value_id);
                     console.log();
                     $("#permission_download_input").val(new_chk_value_id);

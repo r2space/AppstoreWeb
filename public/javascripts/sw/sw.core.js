@@ -1,4 +1,4 @@
-var $DAC = {
+var $sw = {
     keyCode: {
         ENTER: 13, ESC: 27, END: 35, HOME: 36,
         SHIFT: 16, TAB: 9,
@@ -66,8 +66,8 @@ var $DAC = {
         this._set.loginUrl = op.loginUrl;
         this._set.loginTitle = op.loginTitle;
         this._set.debug = op.debug;
-        $.extend($DAC.statusCode, op.statusCode);
-        $.extend($DAC.pageInfo, op.pageInfo);
+        $.extend($sw.statusCode, op.statusCode);
+        $.extend($sw.pageInfo, op.pageInfo);
 
         jQuery.ajax({
             type: 'GET',
@@ -81,12 +81,12 @@ var $DAC = {
             success: function (xml) {
                 $(xml).find("_PAGE_").each(function () {
                     var pageId = $(this).attr("id");
-                    if (pageId) $DAC.frag[pageId] = $(this).text();
+                    if (pageId) $sw.frag[pageId] = $(this).text();
                 });
 
                 $(xml).find("_MSG_").each(function () {
                     var id = $(this).attr("id");
-                    if (id) $DAC._msg[id] = $(this).text();
+                    if (id) $sw._msg[id] = $(this).text();
                 });
 
                 if (jQuery.isFunction(op.callback)) op.callback();
@@ -94,8 +94,8 @@ var $DAC = {
         });
 
         var _doc = $(document);
-        if (!_doc.isBind($DAC.eventType.pageClear)) {
-            _doc.bind($DAC.eventType.pageClear, function (event) {
+        if (!_doc.isBind($sw.eventType.pageClear)) {
+            _doc.bind($sw.eventType.pageClear, function (event) {
                 var box = event.target;
                 if ($.fn.xheditor) {
                     $("textarea.editor", box).xheditor(false);
@@ -125,7 +125,7 @@ var $DAC = {
 //                data: op.data,
                 cache: false,
                 success: function (response) {
-                    var json = $DAC.jsonEval(response);
+                    var json = $sw.jsonEval(response);
                     callback(json);
 
                 },
@@ -193,32 +193,7 @@ var $DAC = {
             });
         }
     });
-    $.extend(Array.prototype, {
-        _remove: function (dx) {
-            if (isNaN(dx) || dx > this.length) {
-                return false;
-            }
-            for (var i = 0, n = 0; i < this.length; i++) {
-                if (this[i] != this[dx]) {
-                    this[n++] = this[i]
-                }
-            }
-            this.length -= 1;
-        },
-        _removeValue: function (v) {
-            if (v > this.length) {
-                return false;
-            }
-            for (var i = 0, n = 0; i < this.length; i++) {
-                if (this[i] != v) {
-                    this[n++] = this[i]
-                }
-            }
-            this.length -= 1;
-            return this;
-        }
 
-    });
 
     /**
      * 扩展String方法

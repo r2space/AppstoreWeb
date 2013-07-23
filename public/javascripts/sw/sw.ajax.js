@@ -44,8 +44,8 @@ function ajaxGetCallback(btn,opt,callback){
             data: opt.data || $(btn).attr("data"),
             dataType: "json",
             cache: false,
-            success: callback || $DAC.ajaxDone,
-            error: $DAC.ajaxError
+            success: callback || $sw.ajaxDone,
+            error: $sw.ajaxError
         });
     };
     _getFn();
@@ -63,8 +63,8 @@ function ajaxTodoCallback(btn, opt, callback, confirmMsg) {
             data: opt.data || $btn.attr("data"),
             dataType: "json",
             cache: false,
-            success: callback || $DAC.ajaxDone,
-            error: DAC.ajaxError
+            success: callback || $sw.ajaxDone,
+            error: $sw.ajaxError
         });
     };
     if (confirmMsg) {
@@ -99,8 +99,8 @@ function validateCallback(form, callback, fn,confirmMsg) {
             data: data,
             dataType: "json",
             cache: false,
-            success: callback || $DAC.ajaxDone,
-            error: $DAC.ajaxError
+            success: callback || $sw.ajaxDone,
+            error: $sw.ajaxError
         });
     }
 
