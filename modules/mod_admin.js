@@ -74,6 +74,10 @@ exports.csvImportRow = function(exe_user, row, callback) {
     // Check password
 	if(!u.password) {// 如果没输入用默认的uid做密码，如果是邮件取"@"前做密码
 		/^(.*)@.*$/.test(u.uid);
+        if(!RegExp.$1) {
+            callback(new Error("密码不能为空"));
+            return;
+        }
 		u.password = auth.sha256(RegExp.$1);
 	}
 

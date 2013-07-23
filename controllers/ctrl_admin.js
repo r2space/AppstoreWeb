@@ -40,7 +40,7 @@ exports.csvimport_user = function(req_, res_){
 	.on('end', function(count){
         if(error_import) {
             error_import.message = "第" + (index + 1) + "行: " + error_import.message;
-            json.send(res_, { code: 400, message: error_import.message, line_num: index});
+            json.send(res_, { code: 200, message: error_import.message, line_num: index});
         } else {
             for(var index=0;  index < records.length; index++) {
                 var row = records[index];
@@ -51,7 +51,7 @@ exports.csvimport_user = function(req_, res_){
 
                 if(error_import) {
                     error_import.message = "第" + (index + 1) + "行: " + error_import.message;
-                    json.send(res_, { code: 400, message: error_import.message, line_num: index});
+                    json.send(res_, { code: 200, message: error_import.message, line_num: index});
                     break;
                 } else if(index == records.length -1) {
                     json.send(res_, null, { message: "导入成功" + records.length + "条数据" });
@@ -63,7 +63,7 @@ exports.csvimport_user = function(req_, res_){
 	.on('error', function(error){
       var error_message = "解析csv文件出错。";
       error_import = {
-          code: 400
+          code: 200
           ,message: error_message
       };
 	  console.log(error_message + '\n' + error.message);

@@ -42,7 +42,7 @@ $admin.CsvImportUser = {
             processData: false,
             success: function (result) {
                 if (result.error) {
-                    $admin.CsvImportUser.showMessage(result.error);
+                    $admin.CsvImportUser.showMessage(result.error.message);
                 } else {
                     $admin.CsvImportUser.showMessage(result.data.message);
                 }
