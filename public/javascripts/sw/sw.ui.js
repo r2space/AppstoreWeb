@@ -32,7 +32,15 @@ function initEnv() {
 function initLayout() {
     var iContentW = $(window).width();
     var iContentH = $(window).height();
-    console.log("initLayout  width : %s  , height : %s", iContentW, iContentH);
+
+    var width = $("#_navbar").css("width");
+
+    var left = parseFloat(iContentW)/2 -parseFloat(width)/2;
+
+    if(left < 0){
+        left = 0;
+    }
+    $("#_navbar").css("margin-left",left/2);
 }
 
 function initUI(_box) {
