@@ -3,19 +3,6 @@
     <input type="hidden" id="userid" name="userid" value="<%= user._id %>" />
     <input type="hidden" id="timezone" name="timezone" value="<%= user.timezone %>" />
 
-
-    <style type="text/css">
-      .dl-horizontal dt { width: 32px; }
-      .dl-horizontal dd { margin-left: 40px; }
-    </style>
-
-    <script type='text/javascript'>
-      var i18n = "<%= i18n %>";
-      i18n = i18n.replace(/'/g,"\"");
-      i18n = JSON.parse(i18n);
-    </script>
-
-
     <header>
       <strong>AppStore</strong>
       <div id="_userbox">

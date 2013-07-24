@@ -36,3 +36,32 @@
 <!-- jcrop -->
 <script type='text/javascript' src="/vendor/jcrop/js/jquery.Jcrop.min.js"></script>
 <link rel="stylesheet" href="/vendor/jcrop/css/jquery.Jcrop.css">
+
+<!-- lightbox -->
+<script type="text/javascript" src="/vendor/lightbox/lightbox.js"></script>
+<link href="/vendor/lightbox/lightbox.css" rel="stylesheet">
+
+<script type='text/javascript' src='/javascripts/menu.model.js'></script>
+<script type='text/javascript' src='/javascripts/menu.view.js'></script>
+<script src="/vendor/jquery.validate.js"></script>
+
+<!-- StartWall -->
+<script src="/javascripts/sw/sw.core.js"></script>
+<script src="/javascripts/sw/sw.alertMsg.js"></script>
+<script src="/javascripts/sw/sw.ui.js"></script>
+<script src="/javascripts/sw/sw.regional.zh.js"></script>
+<script src="/javascripts/sw/sw.ajax.js"></script>
+
+<!-- 初始化框架页面处理 -->
+<script type="text/javascript">
+$(function () {
+    $sw.init("/javascripts/sw/env.xml", { //【可选】
+        debug: true,  // 调试模式 【true|false】
+        callback: function () {
+            initEnv();
+        }
+    });
+});
+
+</script>
+

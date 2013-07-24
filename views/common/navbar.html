@@ -1,31 +1,10 @@
+    <script type='text/javascript' src='/javascripts/searcher.model.js'></script>
+    <script type='text/javascript' src='/javascripts/searcher.view.js'></script>
+
     <input type="hidden" id="_csrf" name="_csrf" value="<%= csrftoken %>" />
     <input type="hidden" id="bright" name="bright" value="<%= bright %>" />
     <input type="hidden" id="userid" name="userid" value="<%= user._id %>" />
     <input type="hidden" id="timezone" name="timezone" value="<%= user.timezone %>" />
-
-
-
-    <style type="text/css">
-      .dl-horizontal dt { width: 32px; }
-      .dl-horizontal dd { margin-left: 40px; }
-
-    </style>
-
-    <script type='text/javascript'>
-      var i18n = "<%= i18n %>";
-      i18n = i18n.replace(/'/g,"\"");
-      i18n = JSON.parse(i18n);
-      $(function () {
-          $sw.init("/javascripts/sw/env.xml", { //【可选】
-              debug: true,  // 调试模式 【true|false】
-              callback: function () {
-                  initEnv();
-              }
-          });
-      });
-
-    </script>
-
 
     <header>
       <strong>AppStore</strong>
@@ -40,24 +19,48 @@
       </div>
     </header>
     <div id="_navbar">
-      <nav>
-        <ul id="_group1" rel="sam">
-          <li>
-            <a id="home" href="/starwall" style="font-size: 16px;">
-              <i class="icon-home icon-large"></i>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <nav id="_search">
-        <input id="search" value="" x-webkit-speech /><div></div>
-      </nav>
-      <nav>
-        <ul id="_group2" rel="sam">
-          <li><a id="upload" href="/app/addview"><%= 'APP上传' %></a></li>
-          </li>
-        </ul>
-      </nav>
+        <nav>
+            <ul id="_group1" rel="sam">
+                <li>
+                    <a id="home" href="/starwall" style="font-size: 16px;">
+                        <i class="icon-home icon-large"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav id="_search">
+            <input id="search" value="" x-webkit-speech /><div></div>
+        </nav>
+        <nav>
+            <ul id="_group2" rel="sam">
+                <li><a id="" href="/starwall"><%= '首页' %></a></li>
+                </li>
+            </ul>
+        </nav>
+        <nav>
+            <ul id="" rel="sam">
+                <li><a id="upload" href="/app/addview"><%= 'APP登陆' %></a></li>
+                </li>
+            </ul>
+        </nav>
+        <nav>
+            <ul id="" rel="sam">
+                <li><a id="" href="#"><%= '我管理的APP' %></a></li>
+                </li>
+            </ul>
+        </nav>
+        <nav>
+            <ul id="" rel="sam">
+                <li><a id="" href="#"><%= '我维护的APP' %></a></li>
+                </li>
+            </ul>
+        </nav>
+        <nav>
+            <ul id="" rel="sam">
+                <li><a id="" href="#"><%= '更新通知' %></a></li>
+                </li>
+            </ul>
+        </nav>
     </div>
 
     <div id="_searchresult" class="bucketed">
