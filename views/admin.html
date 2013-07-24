@@ -44,7 +44,7 @@
           <form id="formCsvImportUser" method="post" enctype="multipart/form-data" action="/admin/csvimport/user" >
             <input type="hidden" id="_csrf" name="_csrf" value="<%= csrftoken %>" />
             <input type="hidden" name="_method" value="post" />
-            <input type="file" id="csvfile" name="files" multiple="multiple" />
+            <input type="file" id="csvfile" name="files" accept="text/csv"/>
             <input type="submit" value="导入">
           </form>
           <div id="message" style="color:red;display:none"></div>
