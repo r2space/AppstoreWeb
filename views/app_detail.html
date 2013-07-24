@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+
+    <% include common/required.html %>
+
+    <script type='text/javascript' src='/javascripts/menu.model.js'></script>
+    <script type='text/javascript' src='/javascripts/menu.view.js'></script>
+    <script type='text/javascript' src='/javascripts/searcher.model.js'></script>
+    <script type='text/javascript' src='/javascripts/searcher.view.js'></script>
+    <script type='text/javascript' src='/javascripts/finder.model.js'></script>
+    <script type='text/javascript' src='/javascripts/finder.view.js'></script>
+
+    <script type="text/javascript" src="/vendor/lightbox/lightbox.js"></script>
+    <script src="/vendor/jquery.validate.js"></script>
+    <script src="/javascripts/sw/sw.core.js"></script>
+    <script src="/javascripts/sw/sw.alertMsg.js"></script>
+    <script src="/javascripts/sw/sw.ui.js"></script>
+    <script src="/javascripts/sw/sw.regional.zh.js"></script>
+    <script src="/javascripts/sw/sw.ajax.js"></script>
+    <script src="/javascripts/sw/sw.comment.js"></script>
+    <script src="/javascripts/sw/sw.app.js"></script>
+
+
+    <link href="/vendor/lightbox/lightbox.css" rel="stylesheet">
+    <link href="/stylesheets/star.css" rel="stylesheet">
+
+    <script type="text/javascript">
+
+        var app_id = '<%=app_id%>';
+        $(function () {
+            $app.initialize();
+            $Comment.initialize();
+        });
+    </script>
+
+</head>
+<body>
+
+<% include common/navbar.html %>
+
+<div class="main">
+
+    <div class="sidebar">
+        <div style="float: left;">
+            <h3 id="app_name">Cross</h3>
+            <hr/>
+            <img id="info_icon_big" src="/images/cross.png">
+            <hr/>
+            <i class="icon-star"></i>
+            <i class="icon-star"></i>
+            <i class="icon-star"></i>
+            <i class="icon-star-half-empty"></i>
+            <i class="icon-star-empty"></i>
+          <span>
+          （<i class="icon-user"></i>30）
+          </span>
+            <br/>
+            <button class="btn btn-small btn-success" type="button">　安 装　</button>
+            <button class="btn btn-small btn-success" type="button">　分 享　</button>
+        </div>
+    </div>
+
+    <section id="thumbnails">
+        <div class="detail">
+            <ul class="nav nav-tabs" style="height: 37px;">
+                <li class="active"><a href="#">简介</a></li>
+                <li><a href="#">Release Notes</a></li>
+            </ul>
+
+            <div class="textarea" id="info_description">
+
+            </div>
+            <div id="info_screenshot">
+                <img src="/images/cross1.png"></img>
+                <img src="/images/cross2.png"></img>
+                <img src="/images/cross3.png"></img>
+                <img src="/images/cross1.png"></img>
+
+            </div>
+
+        </div>
+
+        <div class="comment">
+            <span><i class="icon-pencil"></i>&nbsp;写评价</span>
+            <textarea id="comment_context"></textarea>
+
+            <div id="operationarea">
+                <i class="icon-star-empty icon-large" rank="1"></i>
+                <i class="icon-star-empty icon-large" rank="2"></i>
+                <i class="icon-star-empty icon-large" rank="3"></i>
+                <i class="icon-star-empty icon-large" rank="4"></i>
+                <i class="icon-star-empty icon-large" rank="5"></i>
+                &nbsp;
+                <input type="hidden" id="comment_rank" value="0">
+                <button class="btn btn-small btn-success" type="button" id="comment_commit" disabled="true">　提交评价　
+                </button>
+            </div>
+
+            <ul id="comment_list">
+            </ul>
+        </div>
+
+
+    </section>
+
+</div>
+
+<script type="text/template" id="comment-template">
+    <li>
+        <img class="portrait" src="/images/user.png">
+        <span>{{createby}}</span>
+        <span>{{rank}}</span>
+        <span style="color: #ccc">{{createat}}</span>
+
+        <div>{{comment}}</div>
+    </li>
+</script>
+
+<footer>
+    <p>Copyright © 2012, Cross Corporation. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

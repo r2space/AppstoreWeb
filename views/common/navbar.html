@@ -4,15 +4,25 @@
     <input type="hidden" id="timezone" name="timezone" value="<%= user.timezone %>" />
 
 
+
     <style type="text/css">
       .dl-horizontal dt { width: 32px; }
       .dl-horizontal dd { margin-left: 40px; }
+
     </style>
 
     <script type='text/javascript'>
       var i18n = "<%= i18n %>";
       i18n = i18n.replace(/'/g,"\"");
       i18n = JSON.parse(i18n);
+      $(function () {
+          $sw.init("/javascripts/sw/env.xml", { //【可选】
+              debug: true,  // 调试模式 【true|false】
+              callback: function () {
+                  initEnv();
+              }
+          });
+      });
 
     </script>
 
@@ -25,7 +35,6 @@
           <a href="/user" id="_username"><%= user.name.name_zh %></a> 
         </div>
         <ul>
-          <li><a href="/usereditor" id="_user"><i class="icon-wrench"></i></a></li>
           <li><a href="/simplelogout" id="_logout"><i class="icon-signout"></i></a></li>
         </ul>
       </div>
@@ -46,17 +55,6 @@
       <nav>
         <ul id="_group2" rel="sam">
           <li><a id="upload" href="/app/addview"><%= 'APP上传' %></a></li>
-          <li><a id="group" href="/group"><%= '　设定　' %></a></li>
-          <li>
-            <a id="apps" href="#"><%= '　应用　' %></a>
-            <ul id="subapps">
-              <li><a id="user" href="/task"><i class="icon-tasks icon-large"></i><%= i('navbar.menu.task')%></a></li>
-              <li><a id="category" href="/category"><i class="icon-tags icon-large"></i><%= i('navbar.menu.category')%></a></li>
-              <li><a id="meeting" href="/meeting"><i class="icon-signin icon-large"></i><%= i('navbar.menu.conference')%></a></li>
-              <li><a id="topic" href="/topic"><i class="icon-comments-alt icon-large"></i><%= i('navbar.menu.topic')%></a></li>
-              <li><a id="process" href="/process"><i class="icon-retweet icon-large"></i><%= i('navbar.menu.process')%></a></li>
-              <li><a id="calendar" href="/calendar"><i class="icon-calendar icon-large"></i><%= i('navbar.menu.calendar')%></a></li>
-            </ul>
           </li>
         </ul>
       </nav>

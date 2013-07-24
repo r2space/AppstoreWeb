@@ -5,5 +5,9 @@ exports.guiding = function(app){
     application.createApp(req, res);
   });
 
+  app.get('/app/info.json',function(req,res){
+    application.getAppInfo(req,res);
+  })
+
   
 };

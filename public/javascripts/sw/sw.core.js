@@ -126,7 +126,7 @@ var $sw = {
                 cache: false,
                 success: function (response) {
                     var json = $sw.jsonEval(response);
-                    callback(json);
+                    if ($.isFunction(callback)) callback(json);
 
                 },
                 error: function () {

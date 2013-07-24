@@ -11,3 +11,7 @@ exports.create = function (data_, callback_){
     return callback_(err, result);
   });
 };
+
+exports.getAppInfoById = function(app_id_,callback_){
+    app.find(app_id_,callback_);
+};

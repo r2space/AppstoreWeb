@@ -1,4 +1,5 @@
 var $app = {
+    app_id: ' ',
     events: {
 
     },
@@ -11,16 +12,16 @@ var $app = {
 
                 sendData[data[i].name] = data[i].value.split(',');
             }
-            if(data[i].name == "permission.admin"){
+            if (data[i].name == "permission.admin") {
                 sendData[data[i].name] = data[i].value.split(',');
             }
-            if(data[i].name == "permission.edit"){
+            if (data[i].name == "permission.edit") {
                 sendData[data[i].name] = data[i].value.split(',');
             }
-            if(data[i].name == "permission.view"){
+            if (data[i].name == "permission.view") {
                 sendData[data[i].name] = data[i].value.split(',');
             }
-            if(data[i].name == "permission.download"){
+            if (data[i].name == "permission.download") {
                 sendData[data[i].name] = data[i].value.split(',');
             }
             console.log(data[i]);
@@ -31,6 +32,30 @@ var $app = {
     initialize: function () {
         var that = this;
         that.viewDidload();
+        if (app_id) {
+            console.log("app_id  ==  %s", app_id);
+            that.app_id = app_id;
+
+            ajaxGetCallback(null, {
+                url: "/app/info.json",
+                data: {
+                    app_id: app_id
+                }
+
+            }, that.renderAppDetailById);
+        }
+    },
+    renderAppDetailById: function (msg) {
+        console.log(msg);
+        var info = eval(msg.data);
+        console.log(info);
+        $("#app_name").html(info.name);
+        $("#info_description").html(info.description);
+        $("#info_icon_big").attr("src", "/picture/" + info.icon.big);
+        $("#info_screenshot").html("");
+        for (var i = 0; i < info.screenshot.length; i++)
+            $("#info_screenshot").append("<img src=\"/picture/" + info.screenshot[i] + "\"></img>")
+
     },
     viewDidload: function () {
         var that = this;
@@ -126,8 +151,8 @@ var $app = {
             $("#permission_admin_input").val(chk_value_id);
             console.log(chk_value.length == 0 ? '你还没有选择任何内容！' : chk_value);
             $("#admin_user_selected").html('');
-            for (var i = 0;i<chk_value.length;i++) {
-                $("#admin_user_selected").append("<li class=\"user_has_selected\" data=\""+ chk_value[i]._id  +"\"><div ><div style='float: left'><i class='icon-user'/>" + chk_value[i].name + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+            for (var i = 0; i < chk_value.length; i++) {
+                $("#admin_user_selected").append("<li class=\"user_has_selected\" data=\"" + chk_value[i]._id + "\"><div ><div style='float: left'><i class='icon-user'/>" + chk_value[i].name + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
             }
 
             $(".user_has_selected").each(function (i, li) {
@@ -139,7 +164,7 @@ var $app = {
                 });
                 $(this).click(function () {
                     var data = $(this).attr("data");
-                    var new_chk_value_id = _.without(chk_value_id,data);
+                    var new_chk_value_id = _.without(chk_value_id, data);
                     $("#permission_admin_input").val(new_chk_value_id);
                     $(this).remove();
                 });
@@ -169,7 +194,7 @@ var $app = {
 
             $("#document-selector").modal('hide');
             var chk_value = [];
-            var chk_value_id =[];
+            var chk_value_id = [];
 
             $("#setuserlist").find('input[name="user_id"]:checked').each(function () {
                 var dataJson = eval("(" + $(this).val() + ")");
@@ -180,8 +205,8 @@ var $app = {
             $("#permission_edit_input").val(chk_value_id);
             console.log(chk_value.length == 0 ? '你还没有选择任何内容！' : chk_value);
             $("#edit_user_selected").html('');
-            for (var i = 0;i<chk_value.length;i++) {
-                $("#edit_user_selected").append("<li class=\"user_has_selected\" data=\""+ chk_value[i]._id  +"\"><div ><div style='float: left'><i class='icon-user'/>" + chk_value[i].name + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+            for (var i = 0; i < chk_value.length; i++) {
+                $("#edit_user_selected").append("<li class=\"user_has_selected\" data=\"" + chk_value[i]._id + "\"><div ><div style='float: left'><i class='icon-user'/>" + chk_value[i].name + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
             }
 
             $(".user_has_selected").each(function (i, li) {
@@ -193,7 +218,7 @@ var $app = {
                 });
                 $(this).click(function () {
                     var data = $(this).attr("data");
-                    var new_chk_value_id = _.without(chk_value_id,data);
+                    var new_chk_value_id = _.without(chk_value_id, data);
                     $("#permission_edit_input").val(new_chk_value_id);
                     $(this).remove();
                 });
@@ -235,8 +260,8 @@ var $app = {
             $("#permission_view_input").val(chk_value_id);
             console.log(chk_value.length == 0 ? '你还没有选择任何内容！' : chk_value);
             $("#view_user_selected").html('');
-            for (var i = 0;i<chk_value.length;i++) {
-                $("#view_user_selected").append("<li class=\"user_has_selected\" data=\""+ chk_value[i]._id  +"\"><div ><div style='float: left'><i class='icon-user'/>" + chk_value[i].name + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+            for (var i = 0; i < chk_value.length; i++) {
+                $("#view_user_selected").append("<li class=\"user_has_selected\" data=\"" + chk_value[i]._id + "\"><div ><div style='float: left'><i class='icon-user'/>" + chk_value[i].name + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
             }
 
             $(".user_has_selected").each(function (i, li) {
@@ -248,7 +273,7 @@ var $app = {
                 });
                 $(this).click(function () {
                     var data = $(this).attr("data");
-                    var new_chk_value_id = _.without(chk_value_id,data);
+                    var new_chk_value_id = _.without(chk_value_id, data);
                     $("#permission_view_input").val(new_chk_value_id);
                     $(this).remove();
                 });
@@ -290,8 +315,8 @@ var $app = {
             $("#permission_download_input").val(chk_value_id);
             console.log(chk_value.length == 0 ? '你还没有选择任何内容！' : chk_value);
             $("#download_user_selected").html('');
-            for (var i = 0;i<chk_value.length;i++) {
-                $("#download_user_selected").append("<li class=\"user_has_selected\" data=\""+ chk_value[i]._id  +"\"><div ><div style='float: left'><i class='icon-user'/>" + chk_value[i].name + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+            for (var i = 0; i < chk_value.length; i++) {
+                $("#download_user_selected").append("<li class=\"user_has_selected\" data=\"" + chk_value[i]._id + "\"><div ><div style='float: left'><i class='icon-user'/>" + chk_value[i].name + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
             }
             $(".user_has_selected").each(function (i, li) {
                 $(this).mouseover(function () {
@@ -305,7 +330,7 @@ var $app = {
                     console.log(data);
                     console.log(chk_value_id);
                     console.log(chk_value_id);
-                    var new_chk_value_id = _.without(chk_value_id,data);
+                    var new_chk_value_id = _.without(chk_value_id, data);
                     console.log(new_chk_value_id);
                     console.log();
                     $("#permission_download_input").val(new_chk_value_id);
