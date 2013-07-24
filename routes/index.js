@@ -66,12 +66,25 @@ exports.guiding = function (app) {
         });
     });
 
+
     app.get('/app/addview', function (req, res) {
         res.render("app_add", {
             title: "star", bright: "home", user: req.session.user
         });
     });
 
+
+    app.get('/app/:app_id', function (req, res) {
+        var app_id = req.params.app_id;
+
+        console.log("app_id =  %s",app_id);
+
+
+        res.render("app_detail", {
+            app_id : app_id,
+            title: "star", bright: "home", user: req.session.user
+        });
+    });
 
 };
 

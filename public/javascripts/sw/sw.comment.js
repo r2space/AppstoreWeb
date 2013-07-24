@@ -34,7 +34,7 @@ var $Comment = {
   getComments: function(start,count){
     var self = this;
     // TODO 换成实际的appId和version
-    var appId = '51e64dac165d2b852d000011';
+    var appId = app_id;
     var version = '1.0';
     smart.doget('/app/comment/list.json?appId='+appId+'&version='+version+'&start='+start+'&count='+count,function(err,data){
       self.renderComments(err,data);
@@ -79,7 +79,7 @@ var $Comment = {
   postComment: function(){
     var self = this;
     // TODO 换成实际的appId和version
-    var appId = '51e64dac165d2b852d000011';
+    var appId = app_id;
     var version = '1.0';
     var data = {
       appId: appId
