@@ -19,7 +19,7 @@
         }
     </style>
     <script type="text/javascript">
-
+        var app_id = null;
         $(function () {
             $app.initialize();
         });
@@ -286,7 +286,9 @@
             <label class="control-label">上传APP</label>
 
             <div class="controls">
-                <input type="text" name="downloadId" id="downloadId"/>
+                <input type="file" id="app_file" name="appfile" style="display: none" value=""/>
+                <button id="app_file_btn" class="btn" onclick="return false;">上传</button>
+                <input type="hidden" name="downloadId" id="app_file_hid"/>
             </div>
         </div>
 

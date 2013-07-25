@@ -100,6 +100,17 @@ var $app = {
             src.attr("multiple", "multiple");
             src.trigger('click');
         });
+        $("#app_file_btn").bind("click",function(){
+            console.log("app_file_btn");
+            $("#app_file").bind("change", function (e) {
+                uploadFiles('didUploadAppFile', e.target.files, that.didUploadAppFile);
+                $("#app_file").unbind("change");
+            });
+            var src = $("#app_file");
+            src.attr("accept", "");
+            src.attr("multiple", "multiple");
+            src.trigger('click');
+        });
         $("#image_big_btn").bind("click", function () {
             $("#image_big_file").bind("change", function (e) {
                 uploadFiles('didUploadSmallFile', e.target.files, that.didUploadImageFile);
@@ -393,6 +404,15 @@ var $app = {
     didUserSelect: function (msg) {
         console.log(msg);
     },
+
+    didUploadAppFile: function (status, input, fid) {
+        console.log(fid);
+        var fid = fid.data.items[0]._id;
+        $("#app_file_hid").val(fid);
+        $("#app_file_hid").attr("readonly","readonly");
+        $("#app_file_btn").after(fid);
+
+    },
     didUploadSmallFile: function (status, input, fid) {
         console.log(input);
         var fid = fid.data.items[0]._id;
@@ -432,6 +452,7 @@ var $app = {
     didSendAppInfo: function (msg) {
         console.log(msg);
         alert('添加成功');
+        window.location.href = "/app/"+msg.data._id;
     }
 
 };
