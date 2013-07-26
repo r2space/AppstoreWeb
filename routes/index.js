@@ -86,5 +86,9 @@ exports.guiding = function (app) {
         });
     });
 
+    // 已下载一览
+    app.get('/list/download', function (req, res) {
+       res.render("list_download", { title: "已下载一览", bright: "home", user: req.session.user });
+    });
 };
 
