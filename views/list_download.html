@@ -4,60 +4,122 @@
     <% /* include list/home/new_list.html */ %>
     <div class="page-header"><h3>已下载一览</h3></div>
 
-    <table id="MyGrid" class="table table-bordered table-hover table-condensed">
+    <table id="MyGrid" class="table table-hover">
         <thead>
         <tr>
-            <th>项目1</th><th>项目1</th><th>项目1</th><th>项目1</th><th>项目1</th><th>项目1</th>
+            <th>图标</th><th>App</th><th>设备</th><th>要求</th><th>公开</th><th>操作</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
+            <td style="width:100px">
+                <img src="http://www.app178.com/uploads/allimg/110820/1_0r019593260s.jpg"/>
+            </td>
+            <td>名称: 我的App<br>
+                版本: 1.2<br>
+                简介:想说啥就说啥吧<br>
+                还有啥说不了的。
+            </td>
+            <td>
+                <img src="/images/system/ios.png" style="width:48px"/>
+            </td>
+            <td>系统: iOS6.2以上<br>
+                设备: iPhone4,iPhone5<br>
+                     iPad2,iPad3
+            </td>
+            <td>公开</td>
+
+            <td>
+                <button>详细</button>
+                <button>编辑</button>
+            </td>
         </tr>
         <tr>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
+            <td style="width:100px">
+                <img src="http://www.sz.js.cn/upload/catch/img1.gtimg.com/tech/pics/hv1/109/65/804/52296784.jpg"/>
+            </td>
+            <td>名称: 我的App<br>
+                版本: 1.2<br>
+                简介:想说啥就说啥吧<br>
+                还有啥说不了的。
+            </td>
+            <td>
+                <img src="/images/system/android.png" style="width:48px"/>
+            </td>
+            <td>系统: iOS6.2以上<br>
+                设备: iPhone4,iPhone5<br>
+                iPad2,iPad3
+            </td>
+            <td>公开</td>
+
+            <td>
+                <button>详细</button>
+                <button>编辑</button>
+            </td>
         </tr>
-        <tr>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-        </tr>
-        <tr>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-            <td>sfs</td>
-        </tr>
+
         </tbody>
         <tfoot>
         <tr>
-            <th>
-            sdfsdf
+            <th colspan="6">
+
+                <!-- 分页 -->
+                <div class="pagination pagination-right">
+                    <ul>
+                        <li><a href="#">Prev</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">Next</a></li>
+                    </ul>
+                </div>
             </th>
         </tr>
         </tfoot>
     </table>
+    <div id="list_container">
+
+    </div>
 </div>
 
-<script type="text/javascript">
-    $(document).ready(function() {
+<% include common/template_detail_list.html %>
 
-    });
-</script>
+<!--<script type="text/javascript">-->
+    <!--var container = $("#list_container");-->
+    <!--var id_prex = "dl_list";-->
+    <!--var list = DetailList.create();-->
+    <!--$(document).ready(function() {-->
+        <!--list.init(container, {-->
+            <!--id_prex :  id_prex-->
+            <!--,str    : {"loading": "Loading........"}-->
+            <!--,titles: ['图标','App','设备', '要求', '公开', '操作']-->
+        <!--});-->
+        <!--//init();-->
+        <!--//loadData();-->
+    <!--});-->
+
+    <!--function loadData() {-->
+        <!--setPage();-->
+    <!--}-->
+    <!--function setPage(pages) {-->
+        <!--var page_tmpl = $('#template_pages').html();-->
+        <!--var page_data ={-->
+            <!--"id_prex": id_prex-->
+            <!--,"str_prev_page": "前一页"-->
+            <!--,"str_next_page": "下一页"-->
+            <!--,"page_num" : 1-->
+            <!--,"page_start": 1-->
+            <!--,"page_range": 5-->
+            <!--,"page_count": 20-->
+        <!--}-->
+        <!--var str_pages = _.template(page_tmpl, page_data);-->
+        <!--var head_pages = $("#" + id_prex + "_head_pages");-->
+        <!--var foot_pages = $("#" + id_prex + "_foot_pages");-->
+        <!--head_pages.html(str_pages);-->
+        <!--foot_pages.html(str_pages);-->
+    <!--}-->
+<!--</script>-->
 
 <% include common/foot.html %>

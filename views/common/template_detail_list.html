@@ -1,0 +1,35 @@
+<script src="/javascripts/common/detail_list.js"></script>
+
+<!-- 引入分页共通模板 -->
+<% include template_pages.html %>
+
+<!-- 详细共通模板 -->
+<script type="text/template" id="template_detail_list">
+    <table id="{{id_prex}}_table" class="table table-hover">
+        <thead>
+        <tr>
+            <th colspan="{{titles.length}}">
+                <!-- Head分页 -->
+                <div id="{{id_prex}}_head_pages" class="pagination pagination-right"></div>
+            </th>
+        </tr>
+        <tr>
+            <!-- 设置title -->
+            <$ _.each(titles, function(name) { $> <th>{{name}}</th> <$ }); $>
+        </tr>
+        </thead>
+        <tbody id="{{id_prex}}_tbody">
+        <tr>
+            <td colspan="{{titles.length}}">{{str.loading}}</td>
+        </tr>
+        </tbody>
+        <tfoot id="{{id_prex}}_foot">
+        <tr>
+            <th colspan="{{titles.length}}">
+                <!-- Foot分页 -->
+                <div id="{{id_prex}}_foot_pages" class="pagination pagination-right"></div>
+            </th>
+        </tr>
+        </tfoot>
+    </table>
+</script>
