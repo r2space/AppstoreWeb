@@ -1,95 +1,73 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
+<% include common/head.html %>
 
-    <% include common/required.html %>
-    <link href="/stylesheets/starwall.css" rel="stylesheet">
+<!-- Side bar -->
+<% include common/sidebar.html %>
+<div class="span9">
+<% include list/home/new_list.html %>
+<% include list/home/download_list.html %>
+<% include list/home/comment_list.html %>
+</div>
 
-  </head>
-  <body>
-    <!-- 导航栏 -->
-    <% include common/navbar.html %>
 
-    <div class="main">
-      <!-- Side bar -->
-      <% include common/sidebar.html %>
 
-      <section id="thumbnails">
-        <div class="row-fluid">
-          <ul class="thumbnails">
-            <li class="span3">
-              <div class="thumbnail">
-                <a href="/star">
-                  <img data-src="holder.js/260x180" alt="260x180" src="/images/cross.png">
-                </a>
-                <div class="caption">
-                  <h4>Cross</h4>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
-                </div>
-              </div>
-            </li>
-            <li class="span3">
-              <div class="thumbnail">
-                <a href="/star">
-                  <img data-src="holder.js/260x180" alt="260x180" src="/images/3.png">
-                </a>
-                <div class="caption">
-                  <h4>Thumbnail label</h4>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
-                </div>
-              </div>
-            </li>
-            <li class="span3">
-              <div class="thumbnail">
-                <img data-src="holder.js/260x180" alt="260x180" src="/images/3.png">
-                <div class="caption">
-                  <h4>Thumbnail label</h4>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
-                </div>
-              </div>
-            </li>
-          </ul>
-        
-          <ul class="thumbnails">
+<!-- This is just a little bit of custom CSS code to enhance things. Feel free to place this in your main CSS file. I've commented to say what each bit does. -->
+<style type="text/css">
+        /* Removes the default 20px margin and creates some padding space for the indicators and controls */
+    .carousel {
+        margin-bottom: 0;
+        padding: 0 40px 30px 40px;
+    }
+        /* Reposition the controls slightly */
+    .carousel-control {
+        left: -12px;
+    }
+    .carousel-control.right {
+        right: -12px;
+    }
+        /* Changes the position of the indicators */
+    .carousel-indicators {
+        right: 50%;
+        top: auto;
+        bottom: 0px;
+        margin-right: -19px;
+    }
+        /* Changes the colour of the indicators */
+    .carousel-indicators li {
+        background: #c0c0c0;
+    }
+    .carousel-indicators .active {
+        background: #333333;
+    }
 
-            <li class="span3">
-              <div class="thumbnail">
-                <img data-src="holder.js/260x180" alt="260x180" src="/images/3.png">
-                <div class="caption">
-                  <h4>Thumbnail label</h4>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
-                </div>
-              </div>
-            </li>
-            <li class="span3">
-              <div class="thumbnail">
-                <img data-src="holder.js/260x180" alt="260x180" src="/images/3.png">
-                <div class="caption">
-                  <h4>Thumbnail label</h4>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
-                </div>
-              </div>
-            </li>
-            <li class="span3">
-              <div class="thumbnail">
-                <img data-src="holder.js/260x180" alt="260x180" src="/images/3.png">
-                <div class="caption">
-                  <h4>Thumbnail label</h4>
-                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+    .desc {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(128,0,0,0.4);
+        width: 100%;
+        height: 100%;
+        color:#fff !important;
+    }
+</style>
 
-      </section>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myCarousel').carousel({
+            interval: 10000
+        })
 
-    </div>
+        $("[rel='tooltip']").tooltip();
 
-    <footer>
-      <p>Copyright © 2012, Cross Corporation. All Rights Reserved.</p>
-    </footer>
-    
-  </body>
-</html>
+        $('#item1').hover(
+                function(){
+                    $(this).find('.desc').slideDown(250); //.fadeIn(250)
+                },
+                function(){
+                    $(this).find('.desc').slideUp(250); //.fadeOut(205)
+                }
+        );
+    });
+</script>
+
+<% include common/foot.html %>
