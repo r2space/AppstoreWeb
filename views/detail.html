@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- @todo: fill with your company info or remove -->
+    <meta name="description" content="" />
+    <meta name="author" content="Themelize.me" />
+
+    <!-- Bootstrap CSS -->
+    <link href="/ui/css/bootstrap.css" rel="stylesheet" />
+    <link href="/ui/css/responsive.css" rel="stylesheet" />
+
+    <!-- Flexslider -->
+    <link href="/ui/css/flexslider.css" rel="stylesheet" />
+
+    <!-- Theme style -->
+    <link href="/ui/css/theme-style.css" rel="stylesheet" />
+
+    <!--Your custom colour override-->
+    <link href="#" id="colour-scheme" rel="stylesheet" />
+
+    <!-- Your custom override -->
+    <link href="/ui/css/custom-style.css" rel="stylesheet" />
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons - @todo: fill with your icons or remove -->
+    <link rel="shortcut icon" href="/ui/img/icons/favicon.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ui/img/icons/114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ui/img/icons/72x72.png" />
+    <link rel="apple-touch-icon-precomposed" href="img/icons/default.png" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300|Rambla|Calligraffitti' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body class="page page-index">
+<div id="navigation" class="wrapper">
+    <div class="navbar  navbar-static-top">
+
+        <!--Hidden Header Region-->
+        <div class="header-hidden">
+            <div class="header-hidden-inner container">
+                <div class="row-fluid">
+                    <div class="span4">
+                        <h3>About Us</h3>
+                        <p>Making the web a prettier place one template at a time! We make beautiful, quality, responsive Drupal & web templates!</p>
+                        <a href="about.html" class="btn btn-mini btn-primary">Find out more</a> </div>
+                    <div class="span4">
+                        <!--@todo: replace with company contact details-->
+                        <h3>Contact Us</h3>
+                        <address>
+                            <p><abbr title="Phone"><i class="icon-phone"></i></abbr> 019223 8092344</p>
+                            <p><abbr title="Email"><i class="icon-envelope"></i></abbr> info@themelize.me</p>
+                            <p><abbr title="Address"><i class="icon-home"></i></abbr> Sunshine House, Sunville. SUN12 8LU.</p>
+                        </address>
+                    </div>
+                    <div class="span4">
+                        <!--Colour Switch for demo - @todo: remove in production-->
+                        <div class="colour-switcher">
+                            <h3>Theme Colours</h3>
+                            <a href="#green" class="green active _tooltip" data-placement="bottom" data-original-title="Green (Default)">Green</a> <a href="#red" class="red _tooltip" data-placement="bottom" data-original-title="Red">Red</a> <a href="#blue" class="blue _tooltip" data-placement="bottom" data-original-title="Blue">Blue</a>
+                            <p>Cookies are NOT enabled so colour selection is not persistent.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Header & Branding region-->
+        <div class="header">
+            <div class="header-inner container">
+                <div class="row-fluid">
+                    <div class="span6">
+                        <!--branding/logo-->
+                        <a class="brand" href="index.html" title="Home">
+                            <h1><span>App</span>Store</h1>
+                        </a>
+                        <div class="slogan">企业级应用管理</div>
+                    </div>
+
+                    <!--header rightside-->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="navbar-inner">
+
+                <!--mobile collapse menu button-->
+                <a class="btn btn-navbar pull-left" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+
+                <!--user menu-->
+                <ul class="nav user-menu pull-right">
+                    <li><a href="signup.html" class="btn btn-primary signup">注册</a></li>
+                    <li class="dropdown"> <a href="login.html" class="btn btn-primary dropdown-toggle login" id="login-drop" data-toggle="dropdown">登录</a>
+                        <div class="dropdown-menu" role="menu" aria-labelledby="login-drop">
+                            <form action="login.html" class="form-inline" id="login-form-drop" role="menuitem" />
+                            <div class="input-append">
+                                <input type="text" class="input-small email" placeholder="Email" />
+                                <input type="password" class="input-small password" placeholder="Password" />
+                                <input type="button" class="btn btn-primary login" value="Login" />
+                            </div>
+                            </form>
+                            <span class="divider" role="menuitem"></span> <small role="menuitem">Not a member? <a href="#" class="signup">Sign up now!</a></small> <small role="menuitem"><a href="#">Forgotten password?</a></small> </div>
+                    </li>
+                </ul>
+
+                <!--everything within this div is collapsed on mobile-->
+                <div class="nav-collapse collapse">
+
+                    <!--main navigation-->
+                    <ul class="nav" id="main-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="pricing.html" class="menu-item">App登录</a></li>
+                        <li><a href="pricing.html" class="menu-item">我管理的App</a></li>
+                        <li><a href="customers.html" class="menu-item">我维护的App</a></li>
+                        <li><a href="customers.html" class="menu-item">更新介绍</a></li>
+
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+</div>
+<div id="content">
+    <div class="container">
+        <div class="row-fluid">
+            <h2 class="title-divider"><span>App  <span class="de-em">详细</span></span> <small> Dreamarts dalian</small></h2>
+        </div>
+        <div class="row">
+            <!--Sidebar-->
+            <div class="span3 sidebar sidebar-left">
+                <div class="inner">
+
+                    <div class="block">
+                        <h4 class="title-divider"><span>平台</span></h4>
+                        <div class="tag-cloud"> <span><a href="#">iOS</a> (12)</span> <span><a href="#">Android</a> (51)</span> <span><a href="#">WP</a> (43)</span> <span><a href="#">Web</a> (84)</span></div>
+                    </div>
+                    <div class="block">
+                        <h4 class="title-divider"><span>业务种类</span></h4>
+                        <ul class="big-list tags">
+                            <li><a href="#">贩卖/零售</a> (90)</li>
+                            <li><a href="#">制造</a> (44)</li>
+                            <li><a href="#">政府部门/事业单位</a> (54)</li>
+                            <li><a href="#">金融</a> (4)</li>
+                            <li><a href="#">运输</a> (71)</li>
+                            <li><a href="#">服务</a> (58)</li>
+                            <li><a href="#">信息 通信/广播</a> (9)</li>
+                            <li><a href="#">电器 煤气</a> (9)</li>
+                            <li><a href="#">教育</a> (9)</li>
+                            <li><a href="#">其他</a> (9)</li>
+                        </ul>
+                    </div>
+                    <div class="block">
+                        <h4 class="title-divider"><span>规模</span></h4>
+                        <ul class="big-list tags">
+                            <li><a href="#">2000人</a> (58)</li>
+                            <li><a href="#">1000人</a> (9)</li>
+                            <li><a href="#">500人</a> (9)</li>
+                            <li><a href="#">100人</a> (9)</li>
+                            <li><a href="#">50人</a> (9)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--Blog Roll Content-->
+            <div class="span9 blog-roll blog-list">
+                <div class="tabbable">
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">简介</a></li>
+                        <li class=""><a href="#tab2" data-toggle="tab">注意事项</a></li>
+                        <li class=""><a href="#tab3" data-toggle="tab">案例</a></li>
+                        <li class=""><a href="#tab3" data-toggle="tab">版本更新</a></li>
+                        <li class=""><a href="#tab3" data-toggle="tab">服务</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade" id="tab1">
+                            <p>Dignissim tincidunt mattis lorem, sagittis nisi, amet ut pulvinar lectus cursus ac! Enim turpis odio dis. Non ut vel, nisi dapibus? Velit augue tortor, ut ac ac nec tortor nec, mauris massa.</p>
+                        </div>
+                        <div class="tab-pane fade" id="tab2">
+                            <p>Aliquet risus, penatibus, ac integer ultricies ultricies elementum augue proin habitasse placerat. Nunc habitasse duis, elementum, porttitor porta? Purus, ac odio. Habitasse, egestas vut.</p>
+                        </div>
+                        <div class="tab-pane fade active in" id="tab3">
+                            <p>Turpis elit, egestas nec etiam! Porta parturient amet! Eros aenean sit lacus sagittis massa? Massa a nunc! Nisi vut! Lundium, dictumst, nunc enim, natoque, cras nec, dictumst et rhoncus!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--Main Content-->
+            <div class="span9 blog-post">
+
+                <!-- Blog post -->
+                <div class="media row-fluid">
+                    <div class="span11">
+                        <div class="media-body">
+                            <h3 class="title media-heading">Porta risus porttitor facilisis sit dapibus</h3>
+
+                            <!-- Meta details mobile -->
+                            <div class="media-object"> <img src="/ui/img/blog/water-pump.jpg" alt="Picture of frog by Ben Fredericson" /> </div>
+                            <p class="lead">Montes cursus, turpis scelerisque adipiscing vel in. Ultrices platea ridiculus nascetur vut aliquet odio vel placerat! A, ultricies augue turpis scelerisque, porta diam ac!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Comments-->
+                <div class="comments" id="comments">
+                    <h3>Comments</h3>
+                    <ul class="media-list">
+                        <li class="media row-fluid"> <a class="span1" href="#"> <img src="/ui/img/team/deniro.jpg" alt="Picture of Erin" class="media-object img-polaroid" /> </a>
+                            <div class="span11 media-body">
+                                <ul class="inline meta muted">
+                                    <li><i class="icon-calendar"></i> <span class="visible-desktop">Created:</span> Thu 24th Jan 2013</li>
+                                    <li><i class="icon-user"></i> <span class="visible-desktop">By</span> <a href="#">Dave</a></li>
+                                </ul>
+                                <h5 class="media-heading">a nec in sed hac ultrices cursus</h5>
+                                <p>a nec in sed hac ultrices cursusa nec in sed hac ultrices cursusa nec in sed hac ultrices cursusa nec in sed hac ultrices cursus</p>
+                            </div>
+                        </li>
+                        <li class="media row-fluid"> <a class="span1" href="#"> <img src="/ui/img/team/deniro.jpg" alt="Picture of Tom" class="media-object img-polaroid" /> </a>
+                            <div class="span11 media-body">
+                                <ul class="inline meta muted">
+                                    <li><i class="icon-calendar"></i> <span class="visible-desktop">Created:</span> Tue 15th Jan 2013</li>
+                                    <li><i class="icon-user"></i> <span class="visible-desktop">By</span> <a href="#">Alex</a></li>
+                                </ul>
+                                <h5 class="media-heading">Turpis odio dictumst tempor ac et!</h5>
+                                <p>Turpis odio dictumst tempor ac et!Turpis odio dictumst tempor ac et!Turpis odio dictumst tempor ac et!Turpis odio dictumst tempor ac et!</p>
+                            </div>
+                        </li>
+                        <li class="media row-fluid"> <a class="span1" href="#"> <img src="/ui/img/team/bono.jpg" alt="Picture of Joe" class="media-object img-polaroid" /> </a>
+                            <div class="span11 media-body">
+                                <ul class="inline meta muted">
+                                    <li><i class="icon-calendar"></i> <span class="visible-desktop">Created:</span> Fri 11th Jan 2013</li>
+                                    <li><i class="icon-user"></i> <span class="visible-desktop">By</span> <a href="#">Jo</a></li>
+                                </ul>
+                                <h5 class="media-heading">Urna natoque in phasellus rhoncus aliquet penatibus</h5>
+                                <p>Urna natoque in phasellus rhoncus aliquet penatibusUrna natoque in phasellus rhoncus aliquet penatibusUrna natoque in phasellus rhoncus aliquet penatibusUrna natoque in phasellus rhoncus aliquet penatibus</p>
+                            </div>
+                        </li>
+                        <li class="media row-fluid"> <a class="span1" href="#"> <img src="/ui/img/team/bono.jpg" alt="Picture of Jo" class="media-object img-polaroid" /> </a>
+                            <div class="span11 media-body">
+                                <ul class="inline meta muted">
+                                    <li><i class="icon-calendar"></i> <span class="visible-desktop">Created:</span> Sat 5th Jan 2013</li>
+                                    <li><i class="icon-user"></i> <span class="visible-desktop">By</span> <a href="#">Dave</a></li>
+                                </ul>
+                                <h5 class="media-heading">Urna natoque in phasellus rhoncus aliquet penatibus</h5>
+                                <p>Urna natoque in phasellus rhoncus aliquet penatibusUrna natoque in phasellus rhoncus aliquet penatibusUrna natoque in phasellus rhoncus aliquet penatibusUrna natoque in phasellus rhoncus aliquet penatibus</p>
+                            </div>
+                        </li>
+                        <li class="media row-fluid"> <a class="span1" href="#"> <img src="/ui/img/team/deniro.jpg" alt="Picture of Jo" class="media-object img-polaroid" /> </a>
+                            <div class="span11 media-body">
+                                <ul class="inline meta muted">
+                                    <li><i class="icon-calendar"></i> <span class="visible-desktop">Created:</span> Thu 3rd Jan 2013</li>
+                                    <li><i class="icon-user"></i> <span class="visible-desktop">By</span> <a href="#">Alex</a></li>
+                                </ul>
+                                <h5 class="media-heading">Enim augue elit adipiscing placerat natoque</h5>
+                                <p>Enim augue elit adipiscing placerat natoqueEnim augue elit adipiscing placerat natoqueEnim augue elit adipiscing placerat natoqueEnim augue elit adipiscing placerat natoque</p>
+                            </div>
+                        </li>
+                        <li class="media row-fluid"> <a class="span1" href="#"> <img src="/ui/img/team/jobs.jpg" alt="Picture of Tom" class="media-object img-polaroid" /> </a>
+                            <div class="span11 media-body">
+                                <ul class="inline meta muted">
+                                    <li><i class="icon-calendar"></i> <span class="visible-desktop">Created:</span> Tue 1st Jan 2013</li>
+                                    <li><i class="icon-user"></i> <span class="visible-desktop">By</span> <a href="#">Tom</a></li>
+                                </ul>
+                                <h5 class="media-heading">Urna natoque in phasellus rhoncus aliquet penatibus</h5>
+                                <p>Urna natoque in phasellus rhoncus aliquet penatibusUrna natoque in phasellus rhoncus aliquet penatibusUrna natoque in phasellus rhoncus aliquet penatibusUrna natoque in phasellus rhoncus aliquet penatibus</p>
+                            </div>
+                        </li>
+                        <li class="media row-fluid"> <a class="span1" href="#"> <img src="/ui/img/team/adele.jpg" alt="Picture of Dave" class="media-object img-polaroid" /> </a>
+                            <div class="span11 media-body">
+                                <ul class="inline meta muted">
+                                    <li><i class="icon-calendar"></i> <span class="visible-desktop">Created:</span> Fri 28th Dec 2012</li>
+                                    <li><i class="icon-user"></i> <span class="visible-desktop">By</span> <a href="#">Erin</a></li>
+                                </ul>
+                                <h5 class="media-heading">Porta risus porttitor facilisis sit dapibus</h5>
+                                <p>Porta risus porttitor facilisis sit dapibusPorta risus porttitor facilisis sit dapibusPorta risus porttitor facilisis sit dapibusPorta risus porttitor facilisis sit dapibus</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="comment-form">
+                        <form id="comment-form" />
+                        <fieldset>
+                            <legend>Add Comment</legend>
+                            <input type="text" class="input-block-level" placeholder="Name" />
+                            <br />
+                            <input type="text" class="input-block-level" placeholder="Email" />
+                            <br />
+                            <textarea rows="8" class="input-block-level" placeholder="Comment"></textarea>
+                            <label class="checkbox">
+                                <input type="checkbox" />
+                                Subscribe to updates </label>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--.container-->
+</div>
+<!--#content-->
+
+
+<!-- FOOTER -->
+<footer id="footer">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="subfooter">
+                <div class="span6">
+                    <p>Copyright 2013 &copy; DreamArts</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--Scripts -->
+<script src="/ui/js/jquery.js"></script>
+
+<!-- @todo: remove unused Javascript for better performance -->
+<script src="/ui/js/bootstrap-transition.js"></script>
+<script src="/ui/js/bootstrap-alert.js"></script>
+<script src="/ui/js/bootstrap-affix.js"></script>
+<script src="/ui/js/bootstrap-modal.js"></script>
+<script src="/ui/js/bootstrap-dropdown.js"></script>
+<script src="/ui/js/bootstrap-scrollspy.js"></script>
+<script src="/ui/js/bootstrap-tab.js"></script>
+<script src="/ui/js/bootstrap-tooltip.js"></script>
+<script src="/ui/js/bootstrap-popover.js"></script>
+<script src="/ui/js/bootstrap-button.js"></script>
+<script src="/ui/js/bootstrap-collapse.js"></script>
+<script src="/ui/js/bootstrap-carousel.js"></script>
+<script src="/ui/js/bootstrap-typeahead.js"></script>
+
+<!--Non-Bootstrap JS-->
+<script src="/ui/js/jquery.quicksand.js"></script>
+<script src="/ui/js/jquery.flexslider-min.js"></script>
+
+<!--Custom scripts mainly used to trigger libraries -->
+<script src="/ui/js/script.js"></script>
+</body>
+</html>

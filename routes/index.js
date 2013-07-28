@@ -51,6 +51,18 @@ exports.guiding = function (app) {
         user.registerConfirm(req, res);
     });
 
+    // 主页面
+    app.get('/index', function (req, res) {
+        res.render("index", {
+            title: "index", bright: "home", user: req.session.user
+        });
+    });
+    // 主页面
+    app.get('/detail', function (req, res) {
+        res.render("detail", {
+            title: "index", bright: "home", user: req.session.user
+        });
+    });
     // ----------------------------------
     // 主页面
     app.get('/starwall', function (req, res) {
