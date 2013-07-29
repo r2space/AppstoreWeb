@@ -10,6 +10,7 @@ var Pages = {
              prev_page: "前一页"
             ,next_page: "下一页"
         }
+        ,owner: undefined
         ,callback: null
         ,init: function(container_, data) {
             if( typeof(container_) ===  "string")
@@ -21,6 +22,7 @@ var Pages = {
             this.id = data.id;
             this.range = data.range || this.range;
             this.tmpl_id = data.tmpl_id || this.tmpl_id;
+            this.owner = data.owner;
             this.callback = data.callback;
 
             // Copy左边有的字符串
@@ -40,7 +42,7 @@ var Pages = {
                 if( page ) {
                     $(this).click(function() {
                         if(_this.callback)
-                            _this.callback(parseInt(page));
+                            _this.callback.call(_this.owner, parseInt(page));
                     });
                 }
             });

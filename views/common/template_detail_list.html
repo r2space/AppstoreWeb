@@ -1,35 +1,95 @@
 <script src="/javascripts/common/detail_list.js"></script>
+<script>
+    // 初期化所有列
+    DetailList.all_cols = [
+        {name: "icon", title: "图标"}
+        ,{name: "info", title: "App"}
+        ,{name: "device", title: "设备"}
+        ,{name: "require", title: "要求"}
+        ,{name: "status", title: "状态"}
+        ,{name: "option", title: "操作"}
+    ];
+</script>
 
 <!-- 引入分页共通模板 -->
 <% include template_pages.html %>
 
-<!-- 详细共通模板 -->
+<!-- 详细列表共通模板 -->
 <script type="text/template" id="template_detail_list">
     <table id="{{id_prex}}_table" class="table table-hover">
-        <thead>
+        <thead id="{{id_prex}}_thead">
         <tr>
-            <th colspan="{{titles.length}}">
+            <th colspan="{{cols.length}}">
                 <!-- Head分页 -->
                 <div id="{{id_prex}}_head_pages" class="pagination pagination-right"></div>
             </th>
         </tr>
         <tr>
             <!-- 设置title -->
-            <$ _.each(titles, function(name) { $> <th>{{name}}</th> <$ }); $>
+            <$ _.each(cols, function(col) { $> <th>{{col.name}}</th> <$ }); $>
         </tr>
         </thead>
         <tbody id="{{id_prex}}_tbody">
         <tr>
-            <td colspan="{{titles.length}}">{{str.loading}}</td>
+            <td colspan="{{cols.length}}">{{str.loading}}</td>
         </tr>
         </tbody>
         <tfoot id="{{id_prex}}_foot">
         <tr>
-            <th colspan="{{titles.length}}">
+            <th colspan="{{cols.length}}">
                 <!-- Foot分页 -->
                 <div id="{{id_prex}}_foot_pages" class="pagination pagination-right"></div>
             </th>
         </tr>
         </tfoot>
     </table>
+</script>
+
+<!-- 详细列表项目共通模板 -->
+<script type="text/template" id="template_detail_list_item">
+<$ _.each(apps, function(app) { $>
+    <tr>
+        <$ _.each(cols, function(col) { $>
+        <$ if(col.name == "icon") { $>
+            <td style="width:100px">
+                <img src="{{app.icon.big}}"/>
+            </td>
+        <$ } else if(col.name == "info") { $>
+            <td>名称: {{ _.escape(app.name) }}<br>
+                版本: {{ _.escape(app.version) }}<br>
+                简介: {{ _.escape(app.memo) }}<br>
+            </td>
+        <$ } else if(col.name == "device") { $>
+            <td>
+                <img src="/images/system/ios.png" style="width:48px"/>
+            </td>
+        <$ } else if(col.name == "require") { $>
+            <!-- 需求 -->
+            <td>系统: {{ _.escape(app.require.os) }}<br>
+                设备:  {{ _.escape(app.require.device) }}<br>
+            </td>
+        <$ } else if(col.name == "status") { $>
+            <!-- 状态 -->
+            <td>
+                <$ if(app.status == -1) { $>
+                无效
+                <$ } else if(app.status == 0) { $>
+                未公开
+                <$ } else if(app.status == 1) { $>
+                社内公开
+                <$ } else if(app.status == 2) { $>
+                社外限定公开
+                <$ } else if(app.status == 3) { $>
+                社外任意公开
+                <$ } $>
+            </td>
+        <$ } else if(col.name == "option") { $>
+            <td>
+                <button>详细</button>
+                <button>编辑</button>
+            </td>
+        <$ } $>
+        <$ }); $>
+    </tr>
+<$ }); $>
 </script>
