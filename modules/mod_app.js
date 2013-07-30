@@ -72,6 +72,14 @@ exports.find = function (appId, callback_) {
     });
 };
 
+exports.getAppsByIds = function(ids_, callback_){
+  var app = model();
+
+  app.find({'_id': {$in: ids_}}).exec(function(err, result){
+    callback_(err, result);
+  });
+};
+
 exports.list = function (condition_, options_, callback_) {
   var app = model();
     console.log(condition_);

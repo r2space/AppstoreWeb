@@ -181,6 +181,18 @@ exports.getAppInfo = function (req_, res_) {
     });
 };
 
+exports.downloadedList = function (req_, res_){
+  var uid = req_.session.user._id;
+
+  app.downloadedList(uid, function(err, result){
+    if (err) {
+      return res_.send(json.errorSchema(err.code, err.message));
+    } else {
+      return res_.send(json.dataSchema(result));
+    }
+  });
+};
+
 exports.list = function (req_, res_){
   var start = Number(util.checkString(req_.query.start));
   var count = Number(util.checkString(req_.query.count));

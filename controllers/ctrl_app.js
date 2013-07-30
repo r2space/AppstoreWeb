@@ -1,5 +1,6 @@
 var app = require("../modules/mod_app.js")
   , user = lib.mod.user
+  , downloadInfo = require("../modules/mod_download")
   , async = require("async");
 var error = lib.core.error;
 
@@ -18,6 +19,27 @@ exports.create = function (data_, callback_){
 
 exports.getAppInfoById = function(app_id_,callback_){
     app.find(app_id_,callback_);
+};
+
+exports.downloadedList = function(uid_, callback_){
+  var tasks = [];
+  var task_getAppIds = function(cb){
+    downloadInfo.appIdsByUser(uid_,function(err, ids){
+      cb(err,ids);
+    });
+  };
+  tasks.push(task_getAppIds);
+
+  var task_getApps = function(ids, cb){
+    app.getAppsByIds(ids, function(err, result){
+      cb(err, result);
+    });
+  };
+  tasks.push(task_getApps);
+
+  async.waterfall(tasks,function(err,result){
+    return callback_(err, result);
+  });
 };
 
 exports.list = function(uid_, sort_, asc_, admin_, start_, count_, callback_){

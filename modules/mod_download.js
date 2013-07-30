@@ -28,3 +28,10 @@ exports.count = function(app_id, callback_){
         callback_(err,count);
     });
 };
+
+exports.appIdsByUser = function(uid_, callback_){
+    var download = model();
+    download.find({create_user:uid_}).distinct('app_id',function(err,ids){
+        callback_(err, ids);
+    });
+};
