@@ -25,3 +25,18 @@ exports.getAppInfo = function (req_, res_) {
         }
     });
 };
+
+exports.list = function (req_, res_){
+  var start = Number(util.checkString(req_.query.start));
+  var count = Number(util.checkString(req_.query.count));
+  var sort = util.checkString(req_.query.sort);
+  var asc = Number(util.checkString(req_.query.asc));
+
+  app.list(sort, asc, start, count, function(err, result){
+    if (err) {
+        return res._send(json.errorSchema(err.code, err.message));
+      } else {
+        return res_.send(json.dataSchema(result));
+      }
+  });
+};

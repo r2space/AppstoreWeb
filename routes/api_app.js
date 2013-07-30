@@ -7,7 +7,10 @@ exports.guiding = function(app){
 
   app.get('/app/info.json',function(req,res){
     application.getAppInfo(req,res);
-  })
+  });
 
-  
+  app.get('/app/list.json', function(req, res){
+    application.list(req, res);
+  });
+
 };

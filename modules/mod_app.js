@@ -58,3 +58,17 @@ exports.find = function (appId, callback_) {
         callback_(err, result);
     });
 };
+
+exports.list = function (condition_, options_, callback_) {
+  var app = model();
+    console.log(options_);
+  app.find(condition_)
+    .skip(options_.start || 0)
+    .limit(options_.limit || 20)
+    .sort(options_.sort)
+    .exec(function(err, result){
+      app.count(condition_).exec(function(err, count){
+        callback_(err,{total:count,items:result});
+      });
+    });
+};
