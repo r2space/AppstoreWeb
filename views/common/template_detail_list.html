@@ -138,8 +138,8 @@
             <strong>简介:</strong> {{ _.escape(app.memo) }}<br>
         </td>
     <$ } else if(col.name == "os") { $>
-        <td style="width:100px;">
-            <img src="{{ $app.osImagePath(app.require.os) }}" style="width:48px"/>
+        <td style="min-width:48px;">
+            <img src="{{ $app.osImagePath(app.require.os) }}" style="width:48px;height:auto"/>
         </td>
     <$ } else if(col.name == "require") { $>
         <!-- 需求 -->
