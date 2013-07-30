@@ -2,97 +2,113 @@
 
 <!-- Side bar -->
 
-<% include common/app_add_sidebar.html %>
-
 
 <script type="text/javascript">
-    <% if (appId != '0') { %>
+    <%
+    if (appId != '0') { %>
 
         $(function () {
             smart.doget('/app/info.json?app_id=<%=appId%>', function (err, data) {
                 console.log(data);
-                $("#name").val(data.name);
-                $("#version").val(data.version);
-                $("#memo").val(data.memo);
-                $("#description").val(data.description);
-                for(var i = 1 ;i <= 5;i++){
-                    if(data.editstep >= i  )
-                        $("#step"+(i)+"").attr("href","/app/add/step"+(i)+"?appId="+data._id);
-                    else
-                        $("#step"+(i)+"").attr("href","#");
+                $("#support").val(data.support);
+                $("#notice").val(data.notice);
+                $("#release_note").val(data.release_note);
+                for (var i = 1; i <= 4; i++) {
+                    if (data.editstep >= i) {
+                        $("#step" + (i) + "").attr("href", "/app/add/step" + (i) + "?appId=" + data._id);
+                        $($("#step" + (i) + "").find('i')[0]).css("display", "block");
+                    } else
+                        $("#step" + (i) + "").attr("href", "#");
+
+                    $("#step4").addClass("active");
                 }
             });
         });
 
-    <% } %>
-    function didSendStepCallback(result){
+    <%
+    }
+    %>
+    function didSendStepCallback(result) {
         console.log("console.log(result);");
         console.log(result);
         var appId = result.data._id;
-        console.log("appp id   is   %s",appId);
-        window.location.href = "/app/add/step5?appId="+appId;
-    };
-    function didSendFn(data){
+        console.log("appp id   is   %s", appId);
+        window.location.href = "/app/add/step5?appId=" + appId;
+    }
+    ;
+    function didSendFn(data) {
         var sendData = {};
         var crsf = $("#_csrf").val();
         for (var i in data) {
             sendData[data[i].name] = data[i].value;
-            if(data[i].name == 'appId'){
+            if (data[i].name == 'appId') {
                 sendData["_id"] = data[i].value;
             }
         }
         sendData["_csrf"] = crsf;
         return sendData;
-    };
+    }
+    ;
 
 </script>
-
-<div class="span9">
-
-    <form class="required-validate form-horizontal" action="/app/create/step4.json" method="post"
-          onsubmit="return validateCallback(this,didSendStepCallback,didSendFn,'确认提交吗？')">
-        <input name="appId" value="<%=appId%>"/>
-
-        <div class="widget-box">
-            <div class="widget-title">
-                <h5><i class="icon-info-sign"></i>版本信息</h5>
-            </div>
-            <div class="widget-content nopadding">
-
-                <div class="control-group">
-                    <label class="control-label">support</label>
-
-                    <div class="controls">
-                        <textarea class="required"  name="support" id="support"></textarea>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">注意事项</label>
-
-                    <div class="controls">
-                        <textarea class="required"  name="notice" id="notice"></textarea>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">release_note</label>
-
-                    <div class="controls">
-                        <textarea class="required" name="release_note" id="release_note"/></textarea>
-                    </div>
-                </div>
-
-
-                <div class="control-group">
-                    <label class="control-label"></label>
-
-                    <div class="controls">
-                        <button class="btn btn-small btn-success" type="submit">登录</button>
-                        <button class="btn btn-small" type="">取消</button>
-                    </div>
-                </div>
-            </div>
+<br>
+<br>
+<div class="container-fluid top_line">
+    <div class="row-fluid">
+        <div class="span2">
+            <% include common/app_add_sidebar.html %>
         </div>
-    </form>
+        <div class="span10 span10_left_line">
+
+
+            <div class="span9">
+
+                <form class="required-validate form-horizontal" action="/app/create/step4.json" method="post"
+                      onsubmit="return validateCallback(this,didSendStepCallback,didSendFn,'确认提交吗？')">
+                    <input type="hidden" name="appId" value="<%=appId%>"/>
+
+                    <div class="widget-box">
+                        <div class="widget-content nopadding">
+
+                            <div class="control-group">
+                                <label class="control-label">support</label>
+
+                                <div class="controls">
+                                    <textarea class="required" name="support" id="support"></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">注意事项</label>
+
+                                <div class="controls">
+                                    <textarea class="required" name="notice" id="notice"></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">release_note</label>
+
+                                <div class="controls">
+                                    <textarea class="required" name="release_note" id="release_note"/></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label class="control-label"></label>
+
+                                <div class="controls">
+                                    <button class="btn btn-small btn-success" type="submit">下一步</button>
+                                    <button class="btn btn-small" type="">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
 </div>
 
 

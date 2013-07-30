@@ -8,6 +8,7 @@ exports.create = function (data_, callback_){
   app_.update_date = date;
 
   app.create(app_, function(err, result){
+      console.log(err);
     err = err ? new error.InternalServer(err) : null;
     return callback_(err, result);
   });

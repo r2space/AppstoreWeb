@@ -429,14 +429,10 @@ var $app = {
         $("#icon_small_file_hid").val(fid);
         $("#icon_small_img").css("display", "block");
         $("#icon_small_btn").css("display", "none");
-        var span =   $("#icon_small_span");
-        $("#icon_small_span").html('取消');
-        $("#icon_small_span").css("cursor","pointer");
         $("#icon_small_span").bind("click",function(e){
             $("#icon_small_btn").css("display", "block");
-            $("#icon_small_img").after(span.html());
             $("#icon_small_img").css("display", "none");
-
+            $("#icon_small_span").unbind('click');
         });
         $("#icon_small_img").attr("src", "/picture/" + fid);
 
@@ -447,7 +443,11 @@ var $app = {
         $("#icon_big_file_hid").val(fid);
         $("#icon_big_img").css("display", "block");
         $("#icon_big_btn").css("display", "none");
-        $("#icon_big_span").css("display", "none");
+        $("#icon_big_span").bind("click",function(e){
+            $("#icon_big_btn").css("display", "block");
+            $("#icon_big_img").css("display", "none");
+            $("#icon_big_span").unbind('click');
+        });
         $("#icon_big_img").attr("src", "/picture/" + fid);
 
     },
