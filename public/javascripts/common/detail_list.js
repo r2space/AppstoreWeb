@@ -16,6 +16,7 @@ var DetailList = {
         ,tfoot: undefined
         ,head_pages: null
         ,foot_pages: null
+        ,isShowTopPages: false
         ,init: function(container_, data) {
             var _this = this;
             if( typeof(container_) ===  "string")
@@ -30,6 +31,8 @@ var DetailList = {
 
             // 初始化列
             this.cols = this._parse_cols(data.cols);
+
+            this.isShowTopPages = data.isShowTopPages || false;
 
             // 初始化列表显示
             var tmpl_table = $('#' + this.tmpl_table_id).html();
@@ -95,38 +98,12 @@ var DetailList = {
         }
         ,load: function(page_num){
             page_num = page_num || 1;
-            alert(page_num);
 
             // for test
             var d = {
-                apps: [
-                    {
-                        name: "AAAAAA"
-                        ,memo: "AAAAA----"
-                        ,appType: "iphone,ipad"
-                        ,icon:{
-                            big:""
-                            ,small: ""
-                        }
-                        ,category: "10001"
-                        ,version: "1.2.3"
-                        ,downloadId: ""
-                        ,open_date: {}
-                        ,expire_date: {}
-                        ,create_date: {}
-                        , create_user: "1111"
-                        , update_date: {}
-                        , update_user: "222"
-                        , require: {
-                            os: "iOS"
-                            ,device:"iphone4以上,ipad5"
-                            ,server: "nothing"              //服务器要求
-                        }
-                        , size: 4848448
-                        , status: -1                // 状态：-1、无效app 0、未公开 1、社内公开 2、社外限定公开 3、社外任意公开
-                        , rank: 300
-                    }
-                ]};
+                apps: test_detail_list_data
+                ,isShowTopPages: this.isShowTopPages
+            };
             this.load_end(d);
         }
         ,load_end: function(data_) {

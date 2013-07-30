@@ -470,5 +470,15 @@ var $app = {
         alert('添加成功');
         window.location.href = "/app/" + msg.data._id;
     }
-
+    , osImagePath: function(os) {
+         if($sw.string.equalsIgnoreCase("ios", os)) {
+             return "/images/system/ios.png";
+         } else if($sw.string.equalsIgnoreCase("android", os)) {
+             return "/images/system/android.png";
+         } else if($sw.string.equalsIgnoreCase("wp", os)) {
+             return "";// TODO:
+         } else {
+             // TODO: 追加默认处理图标
+         }
+    }
 };
