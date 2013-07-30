@@ -60,7 +60,7 @@ exports.updateRank = function (appId, rank, callback_) {
 
 exports.updateDownloadCount = function(appId_, dlCount_, callback_) {
   var app = model();
-  app.findByIdAndUpdate(appId, { downloadCount: dlCount_ }, function (err, result) {
+  app.findByIdAndUpdate(appId_, { downloadCount: dlCount_ }, function (err, result) {
     callback_(err, result);
   });
 };

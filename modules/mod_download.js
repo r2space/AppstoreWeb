@@ -6,7 +6,7 @@ var Download = new schema({
     app_id : {type:String}
     , create_at: { type: Date, default: Date.now }
     , ip    : {type:String}
-    , user_id :{type:String}
+    , create_user :{type:String}
     , type  : {type:String}
     , device : {type:String}
 });
@@ -23,6 +23,7 @@ exports.create = function (down_, callback_) {
 };
 
 exports.count = function(app_id, callback_){
+    var app = model();
     app.count({app_id: app_id}).exec(function(err, count){
         callback_(err,count);
     });

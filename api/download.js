@@ -25,4 +25,4 @@ function getClientIp(req) {
         ipAddress = req.connection.remoteAddress;
     }
     return ipAddress;
-};
+}
