@@ -36,36 +36,70 @@
             <i class="icon-star"></i>
             <i class="icon-star-half-empty"></i>
             <i class="icon-star-empty"></i>
-          <span>
-          （<i class="icon-user"></i>30）
-          </span>
+            <span>（<i class="icon-user"></i>30）</span>
             <br/>
             <a id="download" name="download" class="btn btn-small btn-success" downloadid="51c969e6d4fb0a5623000001" href="/file/download.json?_id=51c969e6d4fb0a5623000001">下载</a>
             <button class="btn btn-small btn-success" type="button">　分 享　</button>
+
+            <div class="itemgroup">
+                <div>
+                    <label>版本</label><div>1.0</div>
+                </div>
+                <div>
+                    <label>更新</label><div>2013/07/30</div>
+                </div>
+                <div>
+                    <label>大小</label><div>6M</div>
+                </div>
+                <div>
+                    <label>语言</label><div>中文,日本語</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <section id="thumbnails">
         <div class="detail">
             <ul class="nav nav-tabs" style="height: 37px;">
-                <li class="active"><a href="#">简介</a></li>
-                <li><a href="#">Release Notes</a></li>
+                <li class="active"><a href="#1" data-toggle="tab">产品介绍</a></li>
+                <li><a href="#2" data-toggle="tab">发行说明</a></li>
+                <li><a href="#3" data-toggle="tab">服务与支持</a></li>
+                <li><a href="#4" data-toggle="tab">注意事项</a></li>
+                <li><a href="#5" data-toggle="tab">案例说明</a></li>
             </ul>
 
-            <div class="textarea" id="info_description">
-
+            <div class="tab-content">
+                <div class="tab-pane active" id="1">
+                    <div class="textarea" id="description">
+                        <span>详细的说明内容</span>
+                        <br />
+                        <span><i class="icon-download-alt"></i>下载介绍文档</span>&nbsp;<a href="#">default.ppt</a>
+                    </div>
+                    <div id="screenshot">
+                        <img src="/images/cross1.png" />
+                        <img src="/images/cross2.png" />
+                        <img src="/images/cross3.png" />
+                        <img src="/images/cross1.png" />
+                    </div>
+                </div>
+                <div class="tab-pane" id="2">
+                    <div class="textarea-large" id="releasenote"></div>
+                </div>
+                <div class="tab-pane" id="3">
+                    <div class="textarea-large" id="support"></div>
+                </div>
+                <div class="tab-pane" id="4">
+                    <div class="textarea-large" id="precautions"></div>
+                </div>
+                <div class="tab-pane" id="5">
+                    <div class="textarea-large" id="customer"></div>
+                </div>
             </div>
-            <div id="info_screenshot">
-                <img src="/images/cross1.png"></img>
-                <img src="/images/cross2.png"></img>
-                <img src="/images/cross3.png"></img>
-                <img src="/images/cross1.png"></img>
 
-            </div>
 
         </div>
 
-        <div class="comment"  >
+        <div class="comment">
             <span><i class="icon-pencil"></i>&nbsp;写评价</span>
             <textarea id="comment_context"></textarea>
 
