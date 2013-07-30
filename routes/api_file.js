@@ -20,7 +20,6 @@ exports.guiding = function (app) {
         });
     });
     app.get('/file/download.json', function (req, res) {
-        console.log("/file/download.json");
         download.create(req,res);
         common.download(req, res);
     });

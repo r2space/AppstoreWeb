@@ -6,6 +6,8 @@ var user = lib.api.user
     , appapi = require('./api_app')
     , userapi = require('./api_user');
 
+var ctrlapp = require('../controllers/ctrl_app');
+
 /*
  * GET home page.
  */
@@ -51,6 +53,18 @@ exports.guiding = function (app) {
         user.registerConfirm(req, res);
     });
 
+    // 主页面
+    app.get('/index', function (req, res) {
+        res.render("index", {
+            title: "index", bright: "home", user: req.session.user
+        });
+    });
+    // 主页面
+    app.get('/detail', function (req, res) {
+        res.render("detail", {
+            title: "index", bright: "home", user: req.session.user
+        });
+    });
     // ----------------------------------
     // 主页面
     app.get('/starwall', function (req, res) {
@@ -66,6 +80,38 @@ exports.guiding = function (app) {
         });
     });
 
+    app.get('/app/add/step1', function (req, res) {
+        var appId = req.query.appId || '0';
+        res.render('app_add_step_1', {
+            title: "star", bright: "home", user: req.session.user, appId: appId
+        });
+    });
+    app.get('/app/add/step2', function (req, res) {
+        var appId = req.query.appId || '0';
+        res.render('app_add_step_2', {
+            title: "star", bright: "home", user: req.session.user, appId: appId
+        });
+    });
+
+    app.get('/app/add/step3', function (req, res) {
+        var appId = req.query.appId || 0;
+        res.render('app_add_step_3', {
+            title: "star", bright: "home", user: req.session.user, appId: appId
+        });
+    });
+    app.get('/app/add/step4', function (req, res) {
+        var appId = req.query.appId || 0;
+        res.render('app_add_step_4', {
+            title: "star", bright: "home", user: req.session.user, appId: appId
+        });
+    });
+
+    app.get('/app/add/step5', function (req, res) {
+        var appId = req.query.appId || 0;
+        res.render('app_add_step_5', {
+            title: "star", bright: "home", user: req.session.user, appId: appId
+        });
+    });
 
     app.get('/app/addview', function (req, res) {
         res.render("app_add", {
@@ -77,18 +123,19 @@ exports.guiding = function (app) {
     app.get('/app/:app_id', function (req, res) {
         var app_id = req.params.app_id;
 
-        console.log("app_id =  %s",app_id);
-
 
         res.render("app_detail", {
-            app_id : app_id,
+            app_id: app_id,
             title: "star", bright: "home", user: req.session.user
         });
     });
 
     // 已下载一览
     app.get('/list/download', function (req, res) {
-       res.render("list_download", { title: "已下载一览", bright: "home", user: req.session.user });
+        res.render("list_download", { title: "已下载一览", bright: "home", user: req.session.user });
+    });
+    app.get('*', function (req, res) {
+        res.send("404");
     });
 };
 

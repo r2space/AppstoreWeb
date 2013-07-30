@@ -30,7 +30,6 @@ watch = function(filename) {
 compile = function(path) {
 
   var lessFileName = ph.basename(path);
-  console.log("Compiled files: " + lessFileName);
 
   var lessParser = new less.Parser({
     paths: [ ph.dirname(path) ],

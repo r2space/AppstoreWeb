@@ -3,7 +3,7 @@ var mongo = require('mongoose')
     , schema = mongo.Schema;
 
 var App = new schema({
-    name: {type: String, required: true}  //名称
+    name: {type: String}  //名称
     , description: {type: String}           //详细介绍
     , memo: {type: String}                  //简介
     , release_note: {type: String}           //
@@ -20,6 +20,7 @@ var App = new schema({
     , category: [String]                    //分类
     , version: {type: String}               //版本
     , downloadId: {type: String}            //下载Id
+    , pptfile: {type: String}            //pptfile 演示文件
     , open_date: {type: Date}             //公开日期
     , expire_date: {type: Date}           //过期
     , create_date: {type: Date}           //创建日期
@@ -33,6 +34,10 @@ var App = new schema({
     }, size: {type: Number}                      //大小
     , status: {type: Number}                 // 状态：-1、无效app 0、未公开 1、社内公开 2、社外限定公开 3、社外任意公开
     , rank: {type: Number}
+    , support :{type:String}
+    , notice : {type:String}
+    , editstep :{type:Number}           //编辑进行的状态
+
 });
 
 function model() {
@@ -56,5 +61,19 @@ exports.find = function (appId, callback_) {
     var app = model();
     model().findOne({_id:appId}, function (err, result) {
         callback_(err, result);
+    });
+};
+
+exports.list = function (condition_, options_, callback_) {
+  var app = model();
+    console.log(options_);
+  app.find(condition_)
+    .skip(options_.start || 0)
+    .limit(options_.limit || 20)
+    .sort(options_.sort)
+    .exec(function(err, result){
+      app.count(condition_).exec(function(err, count){
+        callback_(err,{total:count,items:result});
+      });
     });
 };

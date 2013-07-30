@@ -8,9 +8,7 @@ exports.create = function(req_, res_){
     data.create_user = creator;
     data.device = 'ios';
     data.ip = getClientIp(req_);
-    console.log(req_);
     download.create(data, function(err, result){
-        console.log(result);
         return ;
     });
 };
