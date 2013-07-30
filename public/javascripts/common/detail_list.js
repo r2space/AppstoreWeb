@@ -96,8 +96,9 @@ var DetailList = {
 
             return result;
         }
-        ,load: function(page_num){
-            page_num = page_num || 1;
+        ,load: function(start, limit){
+            start = start || 0;
+            limit = limit || this.foot_pages.limit;
 
             // for test
             var d = {
@@ -118,8 +119,7 @@ var DetailList = {
 
             // test
             var testData = {
-                num: 1
-                ,start: 1
+                start: 0
                 ,count: 3
             };
             this.head_pages.show(testData);
