@@ -19,6 +19,14 @@
   border-bottom: 1px solid #EEE;
   text-transform: uppercase;
 }
+.sidebar ul li .done {
+    background-color: #EEE;
+    text-decoration: none;
+}
+.sidebar ul li .active {
+    background-color: #EEE;
+    text-decoration: none;
+}
 .sidebar ul li a:hover {
   background-color: #EEE;
   text-decoration: none;

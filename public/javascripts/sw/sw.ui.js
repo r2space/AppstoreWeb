@@ -40,7 +40,7 @@ function initLayout() {
     if(left < 0){
         left = 0;
     }
-    $("#_navbar").css("margin-left",left);
+//    $("#_navbar").css("margin-left",left);
 }
 
 function initUI(_box) {

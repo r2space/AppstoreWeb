@@ -22,6 +22,9 @@ exports.updateAppStep1 = function (req_, res_) {
         if (docs.editstep < editstep) {
             docs.editstep = editstep;
         }
+        if (!docs.editstep) {
+            docs.editstep = editstep;
+        }
         docs.save(function (err_, result) {
             if (err_) {
                 return res_.send(json.errorSchema(err_.code, err_.message));
@@ -61,10 +64,15 @@ exports.createAppStep2 = function (req_, res_) {
         docs.screenshot = screenshot;
         docs.pptfile = pptfile;
         docs.video = video;
-
+        console.log(docs.editstep);
         if (docs.editstep < editstep) {
+            console.log("set step   %s", editstep);
             docs.editstep = editstep;
         }
+        if (!docs.editstep) {
+            docs.editstep = editstep;
+        }
+
         docs.save(function (err_, result) {
             if (err_) {
                 return res_.send(json.errorSchema(err_.code, err_.message));
@@ -88,7 +96,11 @@ exports.createAppStep3 = function (req_, res_) {
         docs.permission.download = permission_download;
         docs.permission.view = permission_view;
         docs.permission.edit = permission_edit;
+
         if (docs.editstep < editstep) {
+            docs.editstep = editstep;
+        }
+        if (!docs.editstep) {
             docs.editstep = editstep;
         }
         docs.save(function (err_, result) {
@@ -110,7 +122,11 @@ exports.createAppStep4 = function (req_, res_) {
         docs.support = support;
         docs.notice = notice;
         docs.release_note = release_note;
+
         if (docs.editstep < editstep) {
+            docs.editstep = editstep;
+        }
+        if (!docs.editstep) {
             docs.editstep = editstep;
         }
         docs.save(function (err_, result) {
@@ -169,10 +185,12 @@ exports.list = function (req_, res_){
   var count = Number(util.checkString(req_.query.count));
   var sort = util.checkString(req_.query.sort);
   var asc = Number(util.checkString(req_.query.asc));
+  var uid = req_.session.user._id;
+  var admin = req_.query.admin ? true : false;
 
-  app.list(sort, asc, start, count, function(err, result){
+  app.list(uid, sort, asc, admin, start, count, function(err, result){
     if (err) {
-        return res._send(json.errorSchema(err.code, err.message));
+        return res_.send(json.errorSchema(err.code, err.message));
       } else {
         return res_.send(json.dataSchema(result));
       }
