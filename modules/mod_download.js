@@ -21,3 +21,9 @@ exports.create = function (down_, callback_) {
         callback_(err, result);
     });
 };
+
+exports.count = function(app_id, callback_){
+    app.count({app_id: app_id}).exec(function(err, count){
+        callback_(err,count);
+    });
+};
