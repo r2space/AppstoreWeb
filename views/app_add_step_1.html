@@ -18,11 +18,19 @@
                 $("form").attr("action", "/app/update/step1.json");
                 //控制sidebar
                 console.log(data.editstep);
-                for (var i = 1; i <= 5; i++) {
-                    if (data.editstep > i)
+                for (var i = 1; i <= 4; i++) {
+                    if (data.editstep >= i){
                         $("#step" + (i) + "").attr("href", "/app/add/step" + (i) + "?appId=" + data._id);
-                    else
+                        $($("#step" + (i) + "").find('i')[0]).css("display","block");
+                        console.log(data.editstep)  ;
+
+
+                    }else{
                         $("#step" + (i) + "").attr("href", "#");
+                    }
+
+
+                        $("#step1").addClass("active");
                 }
             });
 
@@ -120,12 +128,12 @@
 </script>
 <br>
 <br>
-<div class="container-fluid">
+<div class="container-fluid top_line">
     <div class="row-fluid">
         <div class="span2">
             <% include common/app_add_sidebar.html %>
         </div>
-        <div class="span10">
+        <div class="span10 span10_left_line">
 
             <form class="required-validate form-horizontal" action="/app/create/step1.json" method="post"
                   onsubmit="return validateCallback(this,didSendStep1Callback,didSendFn,'确认提交吗？')">
@@ -216,7 +224,7 @@
                             <label class="control-label"></label>
 
                             <div class="controls">
-                                <button class="btn btn-small btn-success" type="submit">登录</button>
+                                <button class="btn btn-small btn-success" type="submit">下一步</button>
                                 <button class="btn btn-small" type="">取消</button>
                             </div>
                         </div>
