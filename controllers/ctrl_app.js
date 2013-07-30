@@ -1,4 +1,5 @@
 var app = require("../modules/mod_app.js");
+var error = lib.core.error;
 
 exports.create = function (data_, callback_){
   var date = Date.now();

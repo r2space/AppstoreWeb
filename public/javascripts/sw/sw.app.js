@@ -32,18 +32,7 @@ var $app = {
     initialize: function () {
         var that = this;
         that.viewDidload();
-        if (app_id) {
-            console.log("app_id  ==  %s", app_id);
-            that.app_id = app_id;
 
-            ajaxGetCallback(null, {
-                url: "/app/info.json",
-                data: {
-                    app_id: app_id
-                }
-
-            }, that.renderAppDetailById);
-        }
     },
     renderAppDetailById: function (msg) {
         console.log(msg);
@@ -53,8 +42,8 @@ var $app = {
         $("#info_description").html(info.description);
         $("#info_icon_big").attr("src", "/picture/" + info.icon.big);
         $("#info_screenshot").html("");
-        console.log("info.downloadId   :%s",info.downloadId);
-        $("#download").attr("href","/file/download.json?_id="+info.downloadId);
+        console.log("info.downloadId   :%s", info.downloadId);
+        $("#download").attr("href", "/file/download.json?_id=" + info.downloadId);
         for (var i = 0; i < info.screenshot.length; i++)
             $("#info_screenshot").append("<img src=\"/picture/" + info.screenshot[i] + "\"></img>")
 
@@ -79,9 +68,16 @@ var $app = {
             $("#setuserlist").html('');
             ajaxGetCallback($("#download_set_btn"), {}, that.didDownloadSelectRender);
         });
+        $("#pptfile_btn").bind("click", function () {
+            $("#pptfile_file").bind("change", function (e) {
+                uploadFiles('didUploadPPTFile', e.target.files, that.didUploadPPTFile);
+                $("#pptfile_file").unbind("change");
+            });
+            var src = $("#pptfile_file");
+            src.attr("accept", "");
+            src.trigger('click');
+        });
 
-
-        var upload_event = ['icon_small_', 'icon_big_', 'image_big_', 'video_big_'];
         $("#icon_small_btn").bind("click", function () {
             $("#icon_small_file").bind("change", function (e) {
                 uploadFiles('didUploadSmallFile', e.target.files, that.didUploadSmallFile);
@@ -89,7 +85,6 @@ var $app = {
             });
             var src = $("#icon_small_file");
             src.attr("accept", "");
-            src.attr("multiple", "multiple");
             src.trigger('click');
         });
         $("#icon_big_btn").bind("click", function () {
@@ -102,7 +97,7 @@ var $app = {
             src.attr("multiple", "multiple");
             src.trigger('click');
         });
-        $("#app_file_btn").bind("click",function(){
+        $("#app_file_btn").bind("click", function () {
             console.log("app_file_btn");
             $("#app_file").bind("change", function (e) {
                 uploadFiles('didUploadAppFile', e.target.files, that.didUploadAppFile);
@@ -110,12 +105,16 @@ var $app = {
             });
             var src = $("#app_file");
             src.attr("accept", "");
-            src.attr("multiple", "multiple");
             src.trigger('click');
         });
         $("#image_big_btn").bind("click", function () {
             $("#image_big_file").bind("change", function (e) {
-                uploadFiles('didUploadSmallFile', e.target.files, that.didUploadImageFile);
+                if (e.target.files.length < 7) {
+                    uploadFiles('didUploadSmallFile', e.target.files, that.didUploadImageFile);
+                } else {
+                    alert('上传图片不要超过6张');
+                }
+
                 $("#icon_big_file").unbind("change");
             });
             var src = $("#image_big_file");
@@ -294,6 +293,15 @@ var $app = {
             });
         });
     },
+    didUploadPPTFile: function (status, input, fid) {
+        console.log(fid);
+        var fid = fid.data.items[0]._id;
+        $("#pptfile_hid").val(fid);
+        $("#pptfile_hid").attr("readonly", "readonly");
+        $("#pptfile_hid").after(fid);
+
+    },
+
     //下载者选择
     didDownloadSelectRender: function (msg) {
         $("#setuserlist").html(' ');
@@ -411,7 +419,7 @@ var $app = {
         console.log(fid);
         var fid = fid.data.items[0]._id;
         $("#app_file_hid").val(fid);
-        $("#app_file_hid").attr("readonly","readonly");
+        $("#app_file_hid").attr("readonly", "readonly");
         $("#app_file_btn").after(fid);
 
     },
@@ -421,7 +429,15 @@ var $app = {
         $("#icon_small_file_hid").val(fid);
         $("#icon_small_img").css("display", "block");
         $("#icon_small_btn").css("display", "none");
-        $("#icon_small_span").css("display", "none");
+        var span =   $("#icon_small_span");
+        $("#icon_small_span").html('取消');
+        $("#icon_small_span").css("cursor","pointer");
+        $("#icon_small_span").bind("click",function(e){
+            $("#icon_small_btn").css("display", "block");
+            $("#icon_small_img").after(span.html());
+            $("#icon_small_img").css("display", "none");
+
+        });
         $("#icon_small_img").attr("src", "/picture/" + fid);
 
     },
@@ -442,19 +458,17 @@ var $app = {
         for (var i = 0; i < fid.data.items.length; i++) {
             console.log(fid.data.items[i]);
             fids.push(fid.data.items[i]._id);
-            $("#image_big_img").after("<img class='image_big_show' src='/picture/" + fid.data.items[i]._id + "' />");
+            $($("#image_show img").eq(i)[0]).attr("src", '/picture/' + fid.data.items[i]._id);
         }
 
         $("#image_big_file_hid").val(fids);
-        $("#image_big_btn").css("display", "none");
-        $("#image_big_span").css("display", "none");
 
     },
 
     didSendAppInfo: function (msg) {
         console.log(msg);
         alert('添加成功');
-        window.location.href = "/app/"+msg.data._id;
+        window.location.href = "/app/" + msg.data._id;
     }
 
 };
