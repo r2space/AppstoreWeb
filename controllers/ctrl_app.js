@@ -16,3 +16,18 @@ exports.create = function (data_, callback_){
 exports.getAppInfoById = function(app_id_,callback_){
     app.find(app_id_,callback_);
 };
+
+exports.list = function(sort_, asc_, start_, count_, callback_){
+  var condition = {};
+    var options = {
+        start: start_
+      , limit: count_
+    };
+    if (sort_){
+      options.sort = {};
+      options.sort[sort_] = asc_ == 1 ? 1 : -1;
+    }
+  app.list(condition, options, function(err, result){
+    callback_(err,result);
+  });
+};
