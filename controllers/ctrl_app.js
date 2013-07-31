@@ -12,10 +12,14 @@ exports.create = function (data_, callback_){
   app_.update_date = date;
 
   app.create(app_, function(err, result){
-      console.log(err);
     err = err ? new error.InternalServer(err) : null;
     return callback_(err, result);
   });
+};
+exports.findAppInfoById = function (app_id_, callback_) {
+    app.find(app_id_, function (err, docs) {
+        callback_(err, docs);
+    });
 };
 
 exports.getAppInfoById = function (app_id_, callback_) {
@@ -31,7 +35,6 @@ exports.getAppInfoById = function (app_id_, callback_) {
         var download_list = [];
         var app_info = docs;
         proxy.after('permission_ready', 4, function () {
-            console.log(app_info);
             return callback_(null, app_info);
         });
 
@@ -41,7 +44,6 @@ exports.getAppInfoById = function (app_id_, callback_) {
         });
 
         proxy2.after('edit_ready', docs.permission.edit.length, function () {
-            console.log(edit_list)  ;
             app_info.edit_list = edit_list;
             proxy.emit('permission_ready');
         });
@@ -68,7 +70,6 @@ exports.getAppInfoById = function (app_id_, callback_) {
             });
         });
         docs.permission.edit.forEach(function (id, i) {
-            console.log(id);
             user.find({_id: id}, function (err, user_docs) {
                 edit_list.push({id: id, name: user_docs[0].name});
                 proxy2.emit('edit_ready');

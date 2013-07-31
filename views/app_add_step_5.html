@@ -22,7 +22,10 @@
                 }
                 $("#pre_view").attr("href","/app/"+data._id);
                 $("#finish_add").bind('click',function(){
-                    alert('发布成功');
+                    smart.dopost('/app/create/step5.json',{_id:data._id},function(msg){
+                        alert('发布成功');
+                    });
+
                 });
             });
         });

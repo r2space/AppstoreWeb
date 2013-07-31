@@ -96,7 +96,7 @@
 
                 $("#view_user_selected").html('');
                 for (var i = 0; i < data.view_list.length; i++) {
-                    $("#view_user_selected").append("<li class=\"user_has_selected\" data=\"" + data.view_list[i].id + "\"><div ><div style='float: left'><i class='icon-user'/>" +  data.view_list[i].name + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+                    $("#view_user_selected").append("<li class=\"user_has_selected\" data=\"" + data.view_list[i].id + "\"><div ><div style='float: left'><i class='icon-user'/>" +  data.view_list[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
                 }
 
                 $(".user_has_selected").each(function (i, li) {
