@@ -37,6 +37,10 @@ var App = new schema({
     , support :{type:String}
     , notice : {type:String}
     , editstep :{type:Number}           //编辑进行的状态
+    , admin_list : {type: schema.Types.Mixed}
+    , edit_list :    {type: schema.Types.Mixed}
+    , view_list :  {type: schema.Types.Mixed}
+    , download_list :  {type: schema.Types.Mixed}
 
 });
 
@@ -60,6 +64,7 @@ exports.updateRank = function (appId, rank, callback_) {
 exports.find = function (appId, callback_) {
     var app = model();
     model().findOne({_id:appId}, function (err, result) {
+
         callback_(err, result);
     });
 };

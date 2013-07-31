@@ -15,6 +15,12 @@
                 $("#memo").val(data.memo);
                 $("#description").val(data.description);
                 $("#device").val(data.require.device);
+                $input = $("input[name=appType]");
+                for(var i=0 ;i<$input.length;i++){
+                    if($($input[i]).val()==data.appType){
+                        $($input[i]).attr("checked","checked");
+                    }
+                }
                 $("form").attr("action", "/app/update/step1.json");
                 //控制sidebar
                 console.log(data.editstep);
@@ -28,9 +34,7 @@
                     }else{
                         $("#step" + (i) + "").attr("href", "#");
                     }
-
-
-                        $("#step1").addClass("active");
+                    $("#step1").addClass("active");
                 }
             });
 
@@ -148,15 +152,15 @@
                             <div class="controls row-fluid">
                                 <div class="span6">
                                     <label class="radio span2">
-                                        <input type="radio" name="appType" id="appType" value="iPhone" checked/>
+                                        <input type="radio" name="appType" id="appType" value="iPhone" />
                                         iPhone
                                     </label>
                                     <label class="radio span2">
-                                        <input type="radio" name="appType" id="appType" value="Android" checked/>
+                                        <input type="radio" name="appType" id="appType" value="Android" />
                                         Android
                                     </label>
                                     <label class="radio span2">
-                                        <input type="radio" name="appType" id="appType" value="Android" checked/>
+                                        <input type="radio" name="appType" id="appType" value="Android" />
                                         Android
                                     </label>
                                 </div>
@@ -225,7 +229,6 @@
 
                             <div class="controls">
                                 <button class="btn btn-small btn-success" type="submit">下一步</button>
-                                <button class="btn btn-small" type="">取消</button>
                             </div>
                         </div>
 

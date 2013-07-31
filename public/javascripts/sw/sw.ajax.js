@@ -85,6 +85,7 @@ function validateCallback(form, callback, fn,confirmMsg) {
         return false;
     }
     var f = fn($form.serializeArray());
+
     var csrftoken = $('#_csrf').val();
     console.log(f);
     var data =  (fn?fn($form.serializeArray()):{

@@ -10,9 +10,6 @@
         $(function () {
             smart.doget('/app/info.json?app_id=<%=appId%>', function (err, data) {
                 console.log(data);
-                $("#support").val(data.support);
-                $("#notice").val(data.notice);
-                $("#release_note").val(data.release_note);
                 for (var i = 1; i <= 4; i++) {
                     if (data.editstep >= i) {
                         $("#step" + (i) + "").attr("href", "/app/add/step" + (i) + "?appId=" + data._id);
@@ -22,6 +19,14 @@
 
                     $("#step4").addClass("active");
                 }
+                if(!data.support){
+                    return;
+                }
+
+                $("#support").val(data.support);
+                $("#notice").val(data.notice);
+                $("#release_note").val(data.release_note);
+
             });
         });
 
@@ -98,7 +103,6 @@
 
                                 <div class="controls">
                                     <button class="btn btn-small btn-success" type="submit">下一步</button>
-                                    <button class="btn btn-small" type="">取消</button>
                                 </div>
                             </div>
                         </div>
