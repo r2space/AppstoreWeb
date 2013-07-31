@@ -37,10 +37,10 @@ var App = new schema({
     , support :{type:String}
     , notice : {type:String}
     , editstep :{type:Number}           //编辑进行的状态
-    , admin_list : {type: schema.Types.Mixed}
-    , edit_list :    {type: schema.Types.Mixed}
-    , view_list :  {type: schema.Types.Mixed}
-    , download_list :  {type: schema.Types.Mixed}
+    , admin_list : {type: schema.Types.Mixed}          //返回前台的 管理员信息
+    , edit_list :    {type: schema.Types.Mixed}        //返回前台的 编辑者信息
+    , view_list :  {type: schema.Types.Mixed}          //返回前台的 浏览者信息
+    , download_list :  {type: schema.Types.Mixed}      //返回前台的 下载者信息
     , downloadCount :{type: Number}
 });
 
