@@ -134,6 +134,14 @@ exports.guiding = function (app) {
     app.get('/list/download', function (req, res) {
         res.render("list_download", { title: "已下载一览", bright: "home", user: req.session.user });
     });
+    // 通知一览
+    app.get('/list/notification', function (req, res) {
+        res.render("list_notification", { title: "通知一览", bright: "home", user: req.session.user });
+    });
+    // 管理一览
+    app.get('/list/manage', function (req, res) {
+        res.render("list_manage", { title: "管理一览", bright: "home", user: req.session.user });
+    });
     app.get('*', function (req, res) {
         res.send("404");
     });

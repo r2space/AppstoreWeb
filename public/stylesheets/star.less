@@ -2,15 +2,37 @@
   margin-top: 10px;
   margin-left: 20px;
   width: 200px;
-  text-align: right;
+  text-align: center;
+
+  /**/
+  .itemgroup {
+    margin-top: 10px;
+    div {
+      label {
+        float: left;
+        width: 30px;
+        text-align: left;
+        margin-left: 10px;
+        font-size: 12px;
+      }
+      div {
+        margin-left: 40px;
+        width: 100px;
+        line-height: 20px;
+        margin-bottom: 5px;
+        font-size: 12px;
+        text-align: right;
+      }
+    }
+  }
 }
 .sidebar hr {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 .sidebar img {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border: 1px solid #EEE;
 
   -webkit-border-radius: 3px;
@@ -18,7 +40,7 @@
 
 .main {
   margin: 0 auto;
-  width: 1020px;
+  width: 920px;
 }
 
 section {
@@ -27,7 +49,7 @@ section {
 
 .detail {
 
-  min-height: 330px;
+  min-height: 490px;
 
   background-color: #FAFAFA;
   width: 675px;
@@ -39,8 +61,8 @@ section {
   -webkit-border-radius: 2px;
 
   img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 300px;
     margin-left: 10px;
 
     border: 1px solid #EEF;
@@ -52,7 +74,7 @@ section {
   background-color: white;
   width: 660px;
   height: 100px;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-left: 5px;
   margin-bottom: 10px;
   padding-left: 5px;
@@ -61,7 +83,19 @@ section {
   line-height: 30px;
   border: 1px solid #EEF;
 }
+.textarea-large {
+  background-color: white;
+  width: 660px;
+  height: 410px;
+  overflow-y: auto;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  -webkit-border-radius: 2px;
 
+  line-height: 30px;
+  border: 1px solid #EEF;
+}
 
 .comment {
   min-height: 200px;
@@ -72,7 +106,7 @@ section {
 
   textarea {
     width: 650px;
-    height: 100px;
+    height: 80px;
     margin-left: 5px;
   }
 
@@ -105,5 +139,11 @@ section {
 
     }
   }
+}
+
+#screenshot {
+  height: 320px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 

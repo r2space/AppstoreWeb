@@ -91,15 +91,8 @@
         var list = DetailList.create();
         list.init($("#list_container"), {
             id_prex :  "dl_list"
-            ,str    : {"loading": "Loading........"}
-            ,cols   : [
-                {name: "icon"}
-                ,{name: "info"}
-                ,{name: "device"}
-                ,{name: "require"}
-                ,{name: "status"}
-                ,{name: "option"}
-            ]
+            ,str    : {"loading": "加载中........"}
+            ,cols   : [ "icon", "info", "os", "require", "status", "update_info", "rank", "downloadcount", "option"]
         });
 
         // 初始化加载数据

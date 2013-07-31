@@ -1,5 +1,8 @@
-var app = require("../modules/mod_app.js");
 var EventProxy = require('eventproxy');
+var app = require("../modules/mod_app.js")
+  , user = lib.mod.user
+  , downloadInfo = require("../modules/mod_download")
+  , async = require("async");
 var error = lib.core.error;
 var user = lib.mod.user;
 exports.create = function (data_, callback_){
@@ -88,17 +91,78 @@ exports.getAppInfoById = function (app_id_, callback_) {
 
 };
 
-exports.list = function(sort_, asc_, start_, count_, callback_){
+exports.downloadedList = function(uid_, callback_){
+  var tasks = [];
+  var task_getAppIds = function(cb){
+    downloadInfo.appIdsByUser(uid_,function(err, ids){
+      cb(err,ids);
+    });
+  };
+  tasks.push(task_getAppIds);
+
+  var task_getApps = function(ids, cb){
+    app.getAppsByIds(ids, function(err, result){
+      cb(err, result);
+    });
+  };
+  tasks.push(task_getApps);
+
+  async.waterfall(tasks,function(err,result){
+    return callback_(err, result);
+  });
+};
+
+exports.list = function(uid_, sort_, asc_, admin_, start_, count_, callback_){
   var condition = {};
-    var options = {
-        start: start_
-      , limit: count_
-    };
-    if (sort_){
-      options.sort = {};
-      options.sort[sort_] = asc_ == 1 ? 1 : -1;
-    }
-  app.list(condition, options, function(err, result){
-    callback_(err,result);
+  if (admin_) {
+    condition.$or = [
+        {'create_user': uid_}
+      , {'permission.admin': uid_}
+      , {'permission.edit': uid_}
+    ];
+  }
+  var options = {
+      start: start_
+    , limit: count_
+  };
+  if (sort_){
+    options.sort = {};
+    options.sort[sort_] = asc_ == 1 ? 1 : -1;
+  }
+
+  var tasks = [];
+  var task_getAppList = function(cb){
+    app.list(condition, options, function(err, result){
+      cb(err,result);
+    });
+  };
+  tasks.push(task_getAppList);
+
+  var task_getCreator = function(result, cb){
+    async.forEach(result.items, function(app, cb_){
+      user.at(app.create_user, function(err, creator){
+        app._doc.creator = creator;
+        cb_(err);
+      });
+    }, function(err){
+      cb(err, result);
+    });
+  };
+  tasks.push(task_getCreator);
+
+  var task_getUpdater = function(result, cb){
+    async.forEach(result.items, function(app, cb_){
+      user.at(app.update_user, function(err, updater){
+        app._doc.updater = updater;
+        cb_(err);
+      });
+    }, function(err){
+      cb(err, result);
+    });
+  };
+  tasks.push(task_getUpdater);
+
+  async.waterfall(tasks,function(err,result){
+    return callback_(err, result);
   });
 };
