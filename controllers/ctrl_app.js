@@ -36,23 +36,23 @@ exports.getAppInfoById = function (app_id_, callback_) {
         });
 
         proxy1.after('admin_ready', docs.permission.admin.length, function () {
-            app_info.part.permission.admin = admin_list;
+            app_info.admin_list = admin_list;
             proxy.emit('permission_ready');
         });
 
         proxy2.after('edit_ready', docs.permission.edit.length, function () {
             console.log(edit_list)  ;
-            app_info.part.permission.edit = edit_list;
+            app_info.edit_list = edit_list;
             proxy.emit('permission_ready');
         });
 
         proxy3.after('view_ready', docs.permission.view.length, function () {
-            app_info.part.permission.view = view_list;
+            app_info.view_list = view_list;
             proxy.emit('permission_ready');
         });
 
         proxy4.after('download_ready', docs.permission.download.length, function () {
-            app_info.part.permission.download = download_list;
+            app_info.download_list = download_list;
             proxy.emit('permission_ready');
         });
         proxy.fail(callback_);
@@ -141,7 +141,7 @@ exports.list = function(uid_, sort_, asc_, admin_, start_, count_, callback_){
   var task_getCreator = function(result, cb){
     async.forEach(result.items, function(app, cb_){
       user.at(app.create_user, function(err, creator){
-        app.part.create_user = creator;
+        app._doc.creator = creator;
         cb_(err);
       });
     }, function(err){
@@ -153,7 +153,7 @@ exports.list = function(uid_, sort_, asc_, admin_, start_, count_, callback_){
   var task_getUpdater = function(result, cb){
     async.forEach(result.items, function(app, cb_){
       user.at(app.update_user, function(err, updater){
-        app.part.permission.edit = updater;
+        app._doc.updater = updater;
         cb_(err);
       });
     }, function(err){
