@@ -1,17 +1,49 @@
 <% include common/head.html %>
 
+<!-- 加载模板 -->
+<% include common/template_carousel.html %>
+
 <!-- Side bar -->
 <% include common/sidebar.html %>
 <div class="span9">
-<% include list/home/new_list.html %>
-<% include list/home/download_list.html %>
-<% include list/home/comment_list.html %>
+    <% var app_id="51f8b790218498f541000001" %>
+    <% var file_id="" %>
+    <% var carousel_id = "" %>
+    <section id="thumbnails">
+        <div class="breadcrumb breadcrumb-ext"><h4>新追加</h4></div>
+        <!--<div id="container_new_list" class="well"  style="background:#ffffff;width:800px">-->
+        <!--</div>&lt;!&ndash;/well&ndash;&gt;-->
+        <% carousel_id = "carousel1" %>
+        <% include common/carousel_temp.html %>
+    </section>
+    <br><br>
+    <section id="thumbnails">
+        <div class="breadcrumb breadcrumb-ext"><h4>下载最多</h4></div>
+        <% carousel_id = "carousel2" %>
+        <% include common/carousel_temp.html %>
+    </section>
+    <br><br>
+    <section id="thumbnails">
+        <div class="breadcrumb breadcrumb-ext"><h4>评价最多</h4></div>
+        <% carousel_id = "carousel3" %>
+        <% include common/carousel_temp.html %>
+    </section>
+    <br><br>
 </div>
-
-
 
 <!-- This is just a little bit of custom CSS code to enhance things. Feel free to place this in your main CSS file. I've commented to say what each bit does. -->
 <style type="text/css">
+    .carousel-image {
+        border: 1px solid #EEE;
+        max-width:100%;
+        max-height:auto;
+        width:100%;
+        height:auto;
+    }
+    .breadcrumb-ext {
+        padding: 1px 5px;
+        width:800px;
+    }
         /* Removes the default 20px margin and creates some padding space for the indicators and controls */
     .carousel {
         margin-bottom: 0;
@@ -53,20 +85,35 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#myCarousel').carousel({
-            interval: 10000
-        })
+//        var c_new_list = Carousel.create();
+//        c_new_list.init($("#container_new_list"), {id_prex: "new_list"});
+//        c_new_list.load_end({
+//           apps: [1,2,3,4,5,6,7,8,9]
+//        });
 
-        $("[rel='tooltip']").tooltip();
+        $("#carousel1").carousel({ interval: 10000 });
+        $("#carousel2").carousel({ interval: 10000 });
+        $("#carousel3").carousel({ interval: 10000 });
+        var carousel_image_height;
+        $(".carousel-image").each(function(){
+            if(carousel_image_height) {
+                $(this).css({'height': carousel_image_height + "px"});
+            } else {
+                carousel_image_height = $(this).width();
+                $(this).css({'height': carousel_image_height + "px"});
+            }
+        });
 
-        $('#item1').hover(
-                function(){
-                    $(this).find('.desc').slideDown(250); //.fadeIn(250)
-                },
-                function(){
-                    $(this).find('.desc').slideUp(250); //.fadeOut(205)
-                }
-        );
+//        $("[rel='tooltip']").tooltip();
+//
+//        $('#item1').hover(
+//                function(){
+//                    $(this).find('.desc').slideDown(250); //.fadeIn(250)
+//                },
+//                function(){
+//                    $(this).find('.desc').slideUp(250); //.fadeOut(205)
+//                }
+//        );
     });
 </script>
 
