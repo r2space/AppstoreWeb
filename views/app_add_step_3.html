@@ -31,8 +31,8 @@
                 $('input[name="permission.view"]').val(permission.view.join(','));
                 $('input[name="permission.download"]').val(permission.download.join(','));
                 $("#admin_user_selected").html('');
-                for (var i = 0; i < data.admin_list.length; i++) {
-                    $("#admin_user_selected").append("<li class=\"user_has_selected\"><div ><div style='float: left'><i class='icon-user'/>" + data.admin_list[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+                for (var i = 0; i < data.part.permission.admin.length; i++) {
+                    $("#admin_user_selected").append("<li class=\"user_has_selected\"><div ><div style='float: left'><i class='icon-user'/>" + data.part.permission.admin[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
                 }
 
                 $(".user_has_selected").each(function (i, li) {
@@ -49,8 +49,8 @@
                 });
                 $("#edit_user_selected").html('');
 
-                for (var i = 0; i < data.edit_list.length; i++) {
-                    $("#edit_user_selected").append("<li class=\"user_has_selected\"><div ><div style='float: left'><i class='icon-user'/>" + data.edit_list[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+                for (var i = 0; i < data.part.permission.edit.length; i++) {
+                    $("#edit_user_selected").append("<li class=\"user_has_selected\"><div ><div style='float: left'><i class='icon-user'/>" + data.part.permission.edit[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
                 }
 
                 $(".user_has_selected").each(function (i, li) {
@@ -70,8 +70,8 @@
                 });
 
                 $("#download_user_selected").html('');
-                for (var i = 0; i < data.download_list.length; i++) {
-                    $("#download_user_selected").append("<li class=\"user_has_selected\" data=\"" + data.download_list[i].id + "\"><div ><div style='float: left'><i class='icon-user'/>" + data.download_list[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+                for (var i = 0; i < data.part.permission.download.length; i++) {
+                    $("#download_user_selected").append("<li class=\"user_has_selected\" data=\"" + data.part.permission.download[i].id + "\"><div ><div style='float: left'><i class='icon-user'/>" + data.part.permission.download[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
                 }
                 $(".user_has_selected").each(function (i, li) {
                     $(this).mouseover(function () {
@@ -95,8 +95,8 @@
                 });
 
                 $("#view_user_selected").html('');
-                for (var i = 0; i < data.view_list.length; i++) {
-                    $("#view_user_selected").append("<li class=\"user_has_selected\" data=\"" + data.view_list[i].id + "\"><div ><div style='float: left'><i class='icon-user'/>" + data.view_list[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+                for (var i = 0; i < data.part.permission.view.length; i++) {
+                    $("#view_user_selected").append("<li class=\"user_has_selected\" data=\"" + data.part.permission.view[i].id + "\"><div ><div style='float: left'><i class='icon-user'/>" + data.part.permission.view[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
                 }
 
                 $(".user_has_selected").each(function (i, li) {
