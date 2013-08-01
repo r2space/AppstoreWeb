@@ -69,10 +69,15 @@
         $app.initialize();
     });
     function didSendStepCallback(result) {
-        if (result.data.status == 300) {
-            alert(result.data.error);
-            return;
+        try{
+            if (result.data.status == 300) {
+                alert(result.data.error);
+                return;
+            }
+        }catch (e){
+
         }
+
         console.log("console.log(result);");
         console.log(result);
         var appId = result.data._id;

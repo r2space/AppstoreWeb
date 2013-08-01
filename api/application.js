@@ -11,7 +11,7 @@ exports.updateAppStep1 = function (req_, res_) {
     var appType = req_.body.appType;
     var category = req_.body.category;
     var editstep = 1;
-    app.getAppInfoById(appId, function (err, docs) {
+    app.findAppInfoById(appId, function (err, docs) {
         docs.name = name;
         docs.version = version;
         docs.memo = memo;
@@ -40,6 +40,7 @@ exports.createAppStep1 = function (req_, res_) {
     data.require = {device: req_.body['require.device']};
     data.create_user = creator;
     data.editstep = 1;
+    data.editing = 0;
     app.create(data, function (err, result) {
         if (err) {
             return res_.send(json.errorSchema(err.code, err.message));
@@ -70,7 +71,7 @@ exports.createAppStep2 = function (req_, res_) {
         return res_.send(json.dataSchema({status:300,error:"没有上传素材图片"}));
     }
 
-    app.getAppInfoById(appId, function (err, docs) {
+    app.findAppInfoById(appId, function (err, docs) {
         docs.icon.big = icon_big;
         docs.icon.small = icon_small;
         docs.screenshot = screenshot;
@@ -107,7 +108,7 @@ exports.createAppStep3 = function (req_, res_) {
     console.log(permission_download);
     console.log(permission_admin);
     var editstep = 3;
-    app.getAppInfoById(appId, function (err, docs) {
+    app.findAppInfoById(appId, function (err, docs) {
         docs.permission.admin = permission_admin;
         docs.permission.download = permission_download;
         docs.permission.view = permission_view;
@@ -119,8 +120,11 @@ exports.createAppStep3 = function (req_, res_) {
         if (!docs.editstep) {
             docs.editstep = editstep;
         }
+        console.log(docs);
         docs.save(function (err_, result) {
+
             if (err_) {
+                console.log(err_);
                 return res_.send(json.errorSchema(err_.code, err_.message));
             } else {
                 return res_.send(json.dataSchema(result));
@@ -134,7 +138,7 @@ exports.createAppStep4 = function (req_, res_) {
     var notice = req_.body.notice;
     var release_note = req_.body.release_note;
     var editstep = 4;
-    app.getAppInfoById(appId, function (err, docs) {
+    app.findAppInfoById(appId, function (err, docs) {
         docs.support = support;
         docs.notice = notice;
         docs.release_note = release_note;
@@ -156,11 +160,9 @@ exports.createAppStep4 = function (req_, res_) {
 };
 exports.createAppStep5 = function (req_, res_) {
     var appId = req_.body._id;
-    var downloadId = req_.body.downloadId;
     var editstep = 5;
-    app.getAppInfoById(appId, function (err, dosc) {
-        dosc.downloadId = downloadId;
-
+    app.findAppInfoById(appId, function (err, dosc) {
+        dosc.editing = 1;
         dosc.save(function (err_, result) {
             if (err_) {
                 return res_.send(json.errorSchema(err_.code, err_.message));

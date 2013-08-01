@@ -33,11 +33,15 @@ var App = new schema({
         , server: {type: String}              //服务器要求
     }, size: {type: Number}                      //大小
     , status: {type: Number}                 // 状态：-1、无效app 0、未公开 1、社内公开 2、社外限定公开 3、社外任意公开
+    , editing : {type:Number}               //编辑中   0 、表示编辑中     1、表示编辑完成
     , rank: {type: Number}
     , support :{type:String}
     , notice : {type:String}
     , editstep :{type:Number}           //编辑进行的状态
-    , part : {type:schema.Types.Mixed}
+    , admin_list : {type: schema.Types.Mixed}          //返回前台的 管理员信息
+    , edit_list :    {type: schema.Types.Mixed}        //返回前台的 编辑者信息
+    , view_list :  {type: schema.Types.Mixed}          //返回前台的 浏览者信息
+    , download_list :  {type: schema.Types.Mixed}      //返回前台的 下载者信息
     , downloadCount :{type: Number}
 });
 
