@@ -7,21 +7,15 @@
 
     <script src="/javascripts/sw/sw.comment.js"></script>
     <script src="/javascripts/sw/sw.app.js"></script>
+    <script src="/javascripts/sw/sw.stardetail.js"></script>
     <link href="/vendor/lightbox/lightbox.css" rel="stylesheet">
     <link href="/stylesheets/star.css" rel="stylesheet">
-
-    <script type="text/javascript">
-        var app_id = '<%=app_id%>';
-        $(function () {
-            $app.initialize();
-            $Comment.initialize();
-        });
-    </script>
 
 </head>
 <body>
 
 <% include common/navbar.html %>
+<input type="hidden" id="app_id" name="app_id" value="<%= app_id %>" />
 
 <div class="main">
 
@@ -43,16 +37,13 @@
 
             <div class="itemgroup">
                 <div>
-                    <label>版本</label><div>1.0</div>
+                    <label>版本</label><div id="version">1.0</div>
                 </div>
                 <div>
-                    <label>更新</label><div>2013/07/30</div>
+                    <label>更新</label><div id="lastupdate">2013/07/30</div>
                 </div>
                 <div>
-                    <label>大小</label><div>6M</div>
-                </div>
-                <div>
-                    <label>语言</label><div>中文,日本語</div>
+                    <label>大小</label><div id="appsize">6M</div>
                 </div>
             </div>
         </div>
@@ -71,6 +62,13 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="1">
                     <div class="textarea" id="description">
+                        <span>详细的说明内容</span><br/>
+                        <span>详细的说明内容</span><br/>
+                        <span>详细的说明内容</span><br/>
+                        <span>详细的说明内容</span><br/>
+                        <span>详细的说明内容</span><br/>
+                        <span>详细的说明内容</span><br/>
+                        <span>详细的说明内容</span><br/>
                         <span>详细的说明内容</span>
                         <br />
                         <span><i class="icon-download-alt"></i>下载介绍文档</span>&nbsp;<a href="#">default.ppt</a>
