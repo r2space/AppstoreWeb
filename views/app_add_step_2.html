@@ -9,7 +9,22 @@
 
         $(function () {
             smart.doget('/app/info.json?app_id=<%=appId%>', function (err, data) {
+                console.log(data.editstep);
+                for (var i = 1; i <= 4; i++) {
+                    if (data.editstep >= i) {
+                        $("#step" + (i) + "").attr("href", "/app/add/step" + (i) + "?appId=" + data._id);
+                        $($("#step" + (i) + "").find('i')[0]).css("display", "block");
+                    }
+                    else
+                        $("#step" + (i) + "").attr("href", "#");
+
+                    $("#step2").addClass("active");
+                }
                 console.log(data);
+                console.log(data.icon.big.length);
+                if (!data.icon || data.icon.big.length == 0) {
+                    return;
+                }
                 var big_fid = data.icon.big;
                 $("#icon_big_file_hid").val(big_fid);
                 $("#icon_big_img").css("display", "block");
@@ -43,17 +58,7 @@
                 $("#image_big_file_hid").val(fids);
                 $("#video").val(data.video);
                 $("#pptfile_hid").val(data.pptfile);
-                console.log(data.editstep);
-                for (var i = 1; i <= 4; i++) {
-                    if (data.editstep >= i){
-                        $("#step" + (i) + "").attr("href", "/app/add/step" + (i) + "?appId=" + data._id);
-                        $($("#step" + (i) + "").find('i')[0]).css("display","block");
-                    }
-                    else
-                        $("#step" + (i) + "").attr("href", "#");
 
-                    $("#step2").addClass("active");
-                }
             });
         });
 
@@ -64,6 +69,10 @@
         $app.initialize();
     });
     function didSendStepCallback(result) {
+        if (result.data.status == 300) {
+            alert(result.data.error);
+            return;
+        }
         console.log("console.log(result);");
         console.log(result);
         var appId = result.data._id;
@@ -192,7 +201,6 @@
 
                                 <div class="controls">
                                     <button class="btn btn-small btn-success" type="submit">下一步</button>
-                                    <button class="btn btn-small" type="">取消</button>
                                 </div>
                             </div>
 

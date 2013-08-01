@@ -5,6 +5,7 @@ var download = require("../controllers/ctrl_download")
 exports.create = function(req_, res_){
     var creator = req_.session.user._id;
     var data = {};
+    data.app_id = req_.query.app_id;
     data.create_user = creator;
     data.device = 'ios';
     data.ip = getClientIp(req_);
@@ -24,4 +25,4 @@ function getClientIp(req) {
         ipAddress = req.connection.remoteAddress;
     }
     return ipAddress;
-};
+}

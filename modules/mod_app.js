@@ -37,7 +37,8 @@ var App = new schema({
     , support :{type:String}
     , notice : {type:String}
     , editstep :{type:Number}           //编辑进行的状态
-
+    , part : {type:schema.Types.Mixed}
+    , downloadCount :{type: Number}
 });
 
 function model() {
@@ -57,16 +58,33 @@ exports.updateRank = function (appId, rank, callback_) {
         callback_(err, result);
     });
 };
+
+exports.updateDownloadCount = function(appId_, dlCount_, callback_) {
+  var app = model();
+  app.findByIdAndUpdate(appId_, { downloadCount: dlCount_ }, function (err, result) {
+    callback_(err, result);
+  });
+};
+
 exports.find = function (appId, callback_) {
     var app = model();
     model().findOne({_id:appId}, function (err, result) {
+
         callback_(err, result);
     });
 };
 
+exports.getAppsByIds = function(ids_, callback_){
+  var app = model();
+
+  app.find({'_id': {$in: ids_}}).exec(function(err, result){
+    callback_(err, result);
+  });
+};
+
 exports.list = function (condition_, options_, callback_) {
   var app = model();
-    console.log(options_);
+    console.log(condition_);
   app.find(condition_)
     .skip(options_.start || 0)
     .limit(options_.limit || 20)

@@ -4,51 +4,157 @@
 
 <script src="/javascripts/sw/sw.app.js"></script>
 <script type="text/javascript">
+    $(function () {
+        $app.initialize();
+    });
     <%
     if (appId != '0') { %>
 
         $(function () {
             smart.doget('/app/info.json?app_id=<%=appId%>', function (err, data) {
                 console.log(data);
-                $("#name").val(data.name);
-                $("#version").val(data.version);
-                $("#memo").val(data.memo);
-                $("#description").val(data.description);
-                for(var i = 1 ;i <= 4;i++){
-                    if(data.editstep >= i  ){
+                for (var i = 1; i <= 4; i++) {
+                    if (data.editstep >= i) {
                         $("#step" + (i) + "").attr("href", "/app/add/step" + (i) + "?appId=" + data._id);
-                        $($("#step" + (i) + "").find('i')[0]).css("display","block");
+                        $($("#step" + (i) + "").find('i')[0]).css("display", "block");
                     }
                     else
-                        $("#step"+(i)+"").attr("href","#");
+                        $("#step" + (i) + "").attr("href", "#");
                     $("#step3").addClass("active");
                 }
+                if (!data.name) {
+                    return;
+                }
+                var permission = data.permission;
+                $('input[name="permission.admin"]').val(permission.admin.join(','));
+                $('input[name="permission.edit"]').val(permission.edit.join(','));
+                $('input[name="permission.view"]').val(permission.view.join(','));
+                $('input[name="permission.download"]').val(permission.download.join(','));
+                $("#admin_user_selected").html('');
+                for (var i = 0; i < data.part.permission.admin.length; i++) {
+                    $("#admin_user_selected").append("<li class=\"user_has_selected\"><div ><div style='float: left'><i class='icon-user'/>" + data.part.permission.admin[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+                }
+
+                $(".user_has_selected").each(function (i, li) {
+                    $(this).mouseover(function () {
+                        $(this).find(".close_user").css("display", "block");
+                    });
+                    $(this).mouseleave(function () {
+                        $(this).find(".close_user").css("display", "none");
+                    });
+                    $(this).click(function () {
+                        $(this).remove();
+                    });
+
+                });
+                $("#edit_user_selected").html('');
+
+                for (var i = 0; i < data.part.permission.edit.length; i++) {
+                    $("#edit_user_selected").append("<li class=\"user_has_selected\"><div ><div style='float: left'><i class='icon-user'/>" + data.part.permission.edit[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+                }
+
+                $(".user_has_selected").each(function (i, li) {
+                    $(this).mouseover(function () {
+                        $(this).find(".close_user").css("display", "block");
+                    });
+                    $(this).mouseleave(function () {
+                        $(this).find(".close_user").css("display", "none");
+                    });
+                    $(this).click(function () {
+                        var data = $(this).attr("data");
+                        var new_chk_value_id = _.without(chk_value_id, data);
+                        $("#permission_edit_input").val(new_chk_value_id);
+                        $(this).remove();
+                    });
+
+                });
+
+                $("#download_user_selected").html('');
+                for (var i = 0; i < data.part.permission.download.length; i++) {
+                    $("#download_user_selected").append("<li class=\"user_has_selected\" data=\"" + data.part.permission.download[i].id + "\"><div ><div style='float: left'><i class='icon-user'/>" + data.part.permission.download[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+                }
+                $(".user_has_selected").each(function (i, li) {
+                    $(this).mouseover(function () {
+                        $(this).find(".close_user").css("display", "block");
+                    });
+                    $(this).mouseleave(function () {
+                        $(this).find(".close_user").css("display", "none");
+                    });
+                    $(this).click(function () {
+                        var data = $(this).attr("data");
+                        console.log(data);
+                        console.log(chk_value_id);
+                        console.log(chk_value_id);
+                        var new_chk_value_id = _.without(chk_value_id, data);
+                        console.log(new_chk_value_id);
+                        console.log();
+                        $("#permission_download_input").val(new_chk_value_id);
+                        $(this).remove();
+                    });
+
+                });
+
+                $("#view_user_selected").html('');
+                for (var i = 0; i < data.part.permission.view.length; i++) {
+                    $("#view_user_selected").append("<li class=\"user_has_selected\" data=\"" + data.part.permission.view[i].id + "\"><div ><div style='float: left'><i class='icon-user'/>" + data.part.permission.view[i].name.name_zh + "</div><div class='close_user' style='display: none;float: right;'>X</div><div><br></li>");
+                }
+
+                $(".user_has_selected").each(function (i, li) {
+                    $(this).mouseover(function () {
+                        $(this).find(".close_user").css("display", "block");
+                    });
+                    $(this).mouseleave(function () {
+                        $(this).find(".close_user").css("display", "none");
+                    });
+                    $(this).click(function () {
+                        var data = $(this).attr("data");
+                        var new_chk_value_id = _.without(chk_value_id, data);
+                        $("#permission_view_input").val(new_chk_value_id);
+                        $(this).remove();
+                    });
+
+                });
+
             });
         });
 
     <%
     }
     %>
-    function didSendStepCallback(result){
+    function didSendStepCallback(result) {
         console.log("console.log(result);");
         console.log(result);
         var appId = result.data._id;
-        console.log("appp id   is   %s",appId);
-        window.location.href = "/app/add/step4?appId="+appId;
-    };
-    function didSendFn(data){
+        console.log("appp id   is   %s", appId);
+        window.location.href = "/app/add/step4?appId=" + appId;
+    }
+    ;
+    function didSendFn(data) {
         var sendData = {};
         var crsf = $("#_csrf").val();
         for (var i in data) {
             sendData[data[i].name] = data[i].value;
-            if(data[i].name == 'appId'){
+            if (data[i].name == 'appId') {
                 sendData["_id"] = data[i].value;
+            }
+            if (data[i].name == "permission.admin") {
+                sendData[data[i].name] = data[i].value.split(',');
+            }
+            if (data[i].name == "permission.edit") {
+                sendData[data[i].name] = data[i].value.split(',');
+            }
+            if (data[i].name == "permission.view") {
+                sendData[data[i].name] = data[i].value.split(',');
+            }
+            if (data[i].name == "permission.download") {
+                sendData[data[i].name] = data[i].value.split(',');
             }
         }
         sendData["_csrf"] = crsf;
         console.log(sendData);
         return sendData;
-    };
+    }
+    ;
 
 </script>
 <br>
@@ -83,10 +189,12 @@
                                     </div>
 
 
-                                    <div style="margin-left: 15px" id="admin_set_btn" action="/user/list.json" data="{ }"
+                                    <div style="margin-left: 15px" id="admin_set_btn" action="/user/list.json"
+                                         data="{ }"
                                          for="required"
                                          generated="true"
-                                         class="help-inline setUserList" href="#document-selector" data-toggle="modal">设定
+                                         class="help-inline setUserList" href="#document-selector" data-toggle="modal">
+                                        设定
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +214,8 @@
                                     <div style="margin-left: 15px" id="edit_set_btn" action="/user/list.json" data="{ }"
                                          for="required"
                                          generated="true"
-                                         class="help-inline setUserList" data="{sds:323,dfdf:343}" href="#document-selector"
+                                         class="help-inline setUserList" data="{sds:323,dfdf:343}"
+                                         href="#document-selector"
                                          data-toggle="modal">设定
                                     </div>
                                 </div>
@@ -152,10 +261,12 @@
                                     </div>
 
 
-                                    <div style="margin-left: 15px" id="download_set_btn" action="/user/list.json" data="{ }"
+                                    <div style="margin-left: 15px" id="download_set_btn" action="/user/list.json"
+                                         data="{ }"
                                          for="required"
                                          generated="true"
-                                         class="help-inline setUserList" href="#document-selector" data-toggle="modal">设定
+                                         class="help-inline setUserList" href="#document-selector" data-toggle="modal">
+                                        设定
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +276,6 @@
 
                                 <div class="controls">
                                     <button class="btn btn-small btn-success" type="submit">下一步</button>
-                                    <button class="btn btn-small" type="">取消</button>
                                 </div>
                             </div>
 
@@ -177,7 +287,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!-- This is just a little bit of custom CSS code to enhance things. Feel free to place this in your main CSS file. I've commented to say what each bit does. -->

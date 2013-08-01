@@ -11,12 +11,19 @@
         $(function () {
             smart.doget('/app/info.json?app_id=<%=appId%>', function (err, data) {
                 console.log(data);
-                for(var i = 1 ;i <= 4;i++){
-                    if(data.editstep >= i  )
-                        $("#step"+(i)+"").attr("href","/app/add/step"+(i)+"?appId="+data._id);
-                    else
-                        $("#step"+(i)+"").attr("href","#");
+                for (var i = 1; i <= 4; i++) {
+                    if (data.editstep >= i) {
+                        $("#step" + (i) + "").attr("href", "/app/add/step" + (i) + "?appId=" + data._id);
+                        $($("#step" + (i) + "").find('i')[0]).css("display", "block");
+                    } else
+                        $("#step" + (i) + "").attr("href", "#");
+
+                    $("#step5").addClass("active");
                 }
+                $("#pre_view").attr("href","/app/"+data._id);
+                $("#finish_add").bind('click',function(){
+                    alert('发布成功');
+                });
             });
         });
 
@@ -59,32 +66,13 @@
             </div>
             <div class="widget-content nopadding">
 
-                <div class="control-group">
-                    <label class="control-label">上传APP</label>
-
-                    <div class="controls">
-                        <input type="file" id="app_file" name="appfile" style="display: none" value=""/>
-                        <button id="app_file_btn" class="btn" onclick="return false;">上传</button>
-                        <input type="hidden" name="downloadId" id="app_file_hid"/>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">公开</label>
-
-                    <div class="controls">
-                        <input type="text" name="pwd2" id="pwd2"/>
-                    </div>
-                </div>
-
-
 
                 <div class="control-group">
                     <label class="control-label"></label>
 
                     <div class="controls">
-                        <button class="btn btn-small btn-success" type="submit">发布</button>
-                        <button class="btn btn-small" type="">浏览</button>
+                        <a id="pre_view" href="#" target="_blank" class="btn btn-large btn-primary">浏览</a>
+                        <a id="finish_add" href="#" class="btn btn-large btn-success">发布</a>
                     </div>
                 </div>
             </div>

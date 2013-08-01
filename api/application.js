@@ -7,7 +7,7 @@ exports.updateAppStep1 = function (req_, res_) {
     var version = req_.body.version;
     var memo = req_.body.memo;
     var description = req_.body.description;
-    var device = req_.body.device;
+    var device = req_.body['require.device'];
     var appType = req_.body.appType;
     var category = req_.body.category;
     var editstep = 1;
@@ -57,6 +57,18 @@ exports.createAppStep2 = function (req_, res_) {
     var pptfile = req_.body.pptfile;
     var video = req_.body.video;
     var editstep = 2;
+    console.log(icon_big.length);
+    console.log(icon_small.length);
+    console.log(screenshot.length);
+    if(icon_big.length == 0 ){
+        return res_.send(json.dataSchema({status:300,error:"没有上传大图标"}));
+    }
+    if(icon_small.length == 0 ){
+        return res_.send(json.dataSchema({status:300,error:"没有上传小图标"}));
+    }
+    if(screenshot.length == 0 ){
+        return res_.send(json.dataSchema({status:300,error:"没有上传素材图片"}));
+    }
 
     app.getAppInfoById(appId, function (err, docs) {
         docs.icon.big = icon_big;
@@ -90,6 +102,10 @@ exports.createAppStep3 = function (req_, res_) {
     var permission_view = req_.body['permission.view'];
     var permission_download = req_.body['permission.download'];
     var permission_admin = req_.body['permission.admin'];
+    console.log(permission_view);
+    console.log(permission_edit);
+    console.log(permission_download);
+    console.log(permission_admin);
     var editstep = 3;
     app.getAppInfoById(appId, function (err, docs) {
         docs.permission.admin = permission_admin;
@@ -160,6 +176,7 @@ exports.createApp = function (req_, res_) {
     var creator = req_.session.user._id;
     var data = util.checkObject(req_.body);
     data.create_user = creator;
+    data.update_user = creator;
     app.create(data, function (err, result) {
         if (err) {
             return res_.send(json.errorSchema(err.code, err.message));
@@ -173,11 +190,23 @@ exports.getAppInfo = function (req_, res_) {
     var app_id = req_.query.app_id;
     app.getAppInfoById(app_id, function (err, result) {
         if (err) {
-            return res._send(json.errorSchema(err.code, err.message));
+            return res_.send(json.errorSchema(err.code, err.message));
         } else {
             return res_.send(json.dataSchema(result));
         }
     });
+};
+
+exports.downloadedList = function (req_, res_){
+  var uid = req_.session.user._id;
+
+  app.downloadedList(uid, function(err, result){
+    if (err) {
+      return res_.send(json.errorSchema(err.code, err.message));
+    } else {
+      return res_.send(json.dataSchema(result));
+    }
+  });
 };
 
 exports.list = function (req_, res_){

@@ -130,13 +130,22 @@ var smart = {
     return src;
   },
 
-  date: function(date) {
+  date: function(date, format, withTimezone) {
+    if(typeof(date) != "string" || date == "")
+        return "";
+    format = format || "yyyy/MM/dd hh:mm";
+    withTimezone = (withTimezone == true)? true: false;
+
     var timezone = $("#timezone").val();
     var time = Date.parse(date, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
     time += new Date().getTimezoneOffset() * 60 * 1000;
     time += timezone.substring(3,6) * 3600 * 1000;
-    // 2013/04/18 08:00(+0800)
-    return new Date(time).Format("yyyy/MM/dd hh:mm") + "(" + timezone.substring(3,9) + ")";
+
+    if(withTimezone) { // 2013/04/18 08:00(+0800)
+        return new Date(time).Format(format) + "(" + timezone.substring(3,9) + ")";
+    } else { // 2013/04/18 08:00
+        return new Date(time).Format(format);
+    }
     //return new Date(time).toLocaleString() + $.datepicker.formatDate('yy/mm/dd h:mm', new Date(time)) 
   },
 
