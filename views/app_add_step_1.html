@@ -24,7 +24,7 @@
                 $("form").attr("action", "/app/update/step1.json");
                 //控制sidebar
                 console.log(data.editstep);
-                for (var i = 1; i <= 4; i++) {
+                for (var i = 1; i <= 5; i++) {
                     if (data.editstep >= i){
                         $("#step" + (i) + "").attr("href", "/app/add/step" + (i) + "?appId=" + data._id);
                         $($("#step" + (i) + "").find('i')[0]).css("display","block");
@@ -174,7 +174,6 @@
 
                             <div class="controls">
                                 <input class="required" type="text" name="name" id="name" value="">
-                                <span for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
                             </div>
                         </div>
                         <div class="control-group">
@@ -182,7 +181,6 @@
 
                             <div class="controls">
                                 <input class="required" type="text" name="version" id="version">
-                                <span for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
                             </div>
                         </div>
                         <div class="control-group">
@@ -190,7 +188,6 @@
 
                             <div class="controls">
                                 <input class="required" type="text" name="memo" id="memo">
-                                <span for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
                             </div>
                         </div>
                         <div class="control-group">
@@ -199,7 +196,6 @@
                             <div class="controls">
                                 <textarea class="required" name="description" id="description"
                                           style="resize: none;"></textarea>
-                                <span for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
                             </div>
                         </div>
                         <div class="control-group">
@@ -219,7 +215,6 @@
 
                             <div class="controls">
                                 <input class="required" type="text" name="require.device" id="device">
-                                <span for="required" generated="true" class="help-inline" style="">请填写您的应用名称</span>
                             </div>
                         </div>
 

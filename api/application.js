@@ -41,6 +41,7 @@ exports.createAppStep1 = function (req_, res_) {
     data.create_user = creator;
     data.editstep = 1;
     data.editing = 0;
+    data.status = -1;
     app.create(data, function (err, result) {
         if (err) {
             return res_.send(json.errorSchema(err.code, err.message));
@@ -61,14 +62,14 @@ exports.createAppStep2 = function (req_, res_) {
     console.log(icon_big.length);
     console.log(icon_small.length);
     console.log(screenshot.length);
-    if(icon_big.length == 0 ){
-        return res_.send(json.dataSchema({status:300,error:"没有上传大图标"}));
+    if (icon_big.length == 0) {
+        return res_.send(json.dataSchema({status: 300, error: "没有上传大图标"}));
     }
-    if(icon_small.length == 0 ){
-        return res_.send(json.dataSchema({status:300,error:"没有上传小图标"}));
+    if (icon_small.length == 0) {
+        return res_.send(json.dataSchema({status: 300, error: "没有上传小图标"}));
     }
-    if(screenshot.length == 0 ){
-        return res_.send(json.dataSchema({status:300,error:"没有上传素材图片"}));
+    if (screenshot.length == 0) {
+        return res_.send(json.dataSchema({status: 300, error: "没有上传素材图片"}));
     }
 
     app.findAppInfoById(appId, function (err, docs) {
@@ -163,6 +164,8 @@ exports.createAppStep5 = function (req_, res_) {
     var editstep = 5;
     app.findAppInfoById(appId, function (err, dosc) {
         dosc.editing = 1;
+        dosc.status = 1;
+        dosc.editstep  = editstep;
         dosc.save(function (err_, result) {
             if (err_) {
                 return res_.send(json.errorSchema(err_.code, err_.message));
@@ -199,31 +202,31 @@ exports.getAppInfo = function (req_, res_) {
     });
 };
 
-exports.downloadedList = function (req_, res_){
-  var uid = req_.session.user._id;
+exports.downloadedList = function (req_, res_) {
+    var uid = req_.session.user._id;
 
-  app.downloadedList(uid, function(err, result){
-    if (err) {
-      return res_.send(json.errorSchema(err.code, err.message));
-    } else {
-      return res_.send(json.dataSchema(result));
-    }
-  });
+    app.downloadedList(uid, function (err, result) {
+        if (err) {
+            return res_.send(json.errorSchema(err.code, err.message));
+        } else {
+            return res_.send(json.dataSchema(result));
+        }
+    });
 };
 
-exports.list = function (req_, res_){
-  var start = Number(util.checkString(req_.query.start));
-  var count = Number(util.checkString(req_.query.count));
-  var sort = util.checkString(req_.query.sort);
-  var asc = Number(util.checkString(req_.query.asc));
-  var uid = req_.session.user._id;
-  var admin = req_.query.admin ? true : false;
+exports.list = function (req_, res_) {
+    var start = Number(util.checkString(req_.query.start));
+    var count = Number(util.checkString(req_.query.count));
+    var sort = util.checkString(req_.query.sort);
+    var asc = Number(util.checkString(req_.query.asc));
+    var uid = req_.session.user._id;
+    var admin = req_.query.admin ? true : false;
 
-  app.list(uid, sort, asc, admin, start, count, function(err, result){
-    if (err) {
-        return res_.send(json.errorSchema(err.code, err.message));
-      } else {
-        return res_.send(json.dataSchema(result));
-      }
-  });
+    app.list(uid, sort, asc, admin, start, count, function (err, result) {
+        if (err) {
+            return res_.send(json.errorSchema(err.code, err.message));
+        } else {
+            return res_.send(json.dataSchema(result));
+        }
+    });
 };
