@@ -6,32 +6,27 @@
 <!-- Side bar -->
 <% include common/sidebar.html %>
 <div class="span9">
-    <% var app_id="51f8b790218498f541000001" %>
-    <% var file_id="" %>
-    <% var carousel_id = "" %>
     <section id="thumbnails">
         <div class="breadcrumb breadcrumb-ext"><h4>新着</h4></div>
-        <!--<div id="container_new_list" class="well"  style="background:#ffffff;width:800px">-->
-        <!--</div>&lt;!&ndash;/well&ndash;&gt;-->
-        <% carousel_id = "carousel1" %>
-        <% include common/carousel_temp.html %>
+        <div id="container_new_list" style="padding:5px; background:#ffffff;width:800px">
+        </div><!--well-->
     </section>
     <br><br>
     <section id="thumbnails">
         <div class="breadcrumb breadcrumb-ext"><h4>おすすめ</h4></div>
-        <% carousel_id = "carousel2" %>
-        <% include common/carousel_temp.html %>
+        <div id="container_download_list" style="padding:5px; background:#ffffff;width:800px">
+        </div><!--well-->
     </section>
     <br><br>
     <section id="thumbnails">
         <div class="breadcrumb breadcrumb-ext"><h4>ランキング</h4></div>
-        <% carousel_id = "carousel3" %>
-        <% include common/carousel_temp.html %>
+        <div id="container_comment_list" style="padding:5px; background:#ffffff;width:800px">
+        </div><!--well-->
     </section>
     <br><br>
 </div>
 
-<!-- This is just a little bit of custom CSS code to enhance things. Feel free to place this in your main CSS file. I've commented to say what each bit does. -->
+<!-- 滚动列表CSS-->
 <style type="text/css">
     /*
     .span3 img {
@@ -50,76 +45,48 @@
         padding: 1px 5px;
         width:800px;
     }
-        /* Removes the default 20px margin and creates some padding space for the indicators and controls */
     .carousel {
         margin-bottom: 0;
         padding: 0 40px 30px 40px;
     }
-        /* Reposition the controls slightly */
     .carousel-control {
         left: -12px;
     }
     .carousel-control.right {
         right: -12px;
     }
-        /* Changes the position of the indicators */
     .carousel-indicators {
         right: 50%;
         top: auto;
         bottom: 0px;
         margin-right: -19px;
     }
-        /* Changes the colour of the indicators */
     .carousel-indicators li {
         background: #c0c0c0;
     }
     .carousel-indicators .active {
         background: #333333;
     }
-
-    .desc {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: rgba(128,0,0,0.4);
-        width: 100%;
-        height: 100%;
-        color:#fff !important;
-    }
 </style>
 
 <script type="text/javascript">
     $(document).ready(function() {
-//        var c_new_list = Carousel.create();
-//        c_new_list.init($("#container_new_list"), {id_prex: "new_list"});
-//        c_new_list.load_end({
-//           apps: [1,2,3,4,5,6,7,8,9]
-//        });
+        var crsf = $("#_csrf").val();
 
-        $("#carousel1").carousel({ interval: 10000 });
-        $("#carousel2").carousel({ interval: 10000 });
-        $("#carousel3").carousel({ interval: 10000 });
-        var carousel_image_height;
-        $(".carousel-image").each(function(){
-            if(carousel_image_height) {
-                $(this).css({'height': carousel_image_height + "px"});
-            } else {
-                carousel_image_height = $(this).width();
-                $(this).css({'height': carousel_image_height + "px"});
-            }
-        });
+        // 新着一览
+        var new_list = Carousel.create();
+        new_list.init($("#container_new_list"), { name: "new_list" ,url: new_list.get_new_list_url() });
+        new_list.load();//(test_detail_list_data);
 
-//        $("[rel='tooltip']").tooltip();
-//
-//        $('#item1').hover(
-//                function(){
-//                    $(this).find('.desc').slideDown(250); //.fadeIn(250)
-//                },
-//                function(){
-//                    $(this).find('.desc').slideUp(250); //.fadeOut(205)
-//                }
-//        );
+        // 下载最多一览
+        var download_list = Carousel.create();
+        download_list.init($("#container_download_list"), { name: "download_list" ,url: new_list.get_download_list_url() });
+        download_list.load();
+
+        // 评价最高一览
+        var comment_list = Carousel.create();
+        comment_list.init($("#container_comment_list"), { name: "comment_list" ,url: new_list.get_comment_list_url() });
+        comment_list.load();
     });
 </script>
 
