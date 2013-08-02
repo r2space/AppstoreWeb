@@ -136,12 +136,13 @@ var $app = {
             $("#setuserlist").append('<tr class="userCheckBox">' +
                 ' <td><input type="checkbox" name="user_id" value="{_id:\'' + msg.data.items[i]._id + '\',name:\'' + msg.data.items[i].name.name_zh + '\'}"/></td>' +
                 ' <td>' + msg.data.items[i].name.name_zh + '</td>' +
-                ' <td><a href="#" data=' + msg.data.items[i]._id + '>选择</a></td>' +
-
                 ' </tr>');
         }
 
         $(".userCheckBox").bind("click", function (e) {
+            if($(e.target).attr("type")=="checkbox"){
+                return;
+            }
             if ("checked" != $($(e.target).parent()[0]).find("input").attr("checked"))
                 $($(e.target).parent()[0]).find("input").attr("checked", "checked");
             else
@@ -191,11 +192,13 @@ var $app = {
             $("#setuserlist").append('<tr class="userCheckBox">' +
                 ' <td><input type="checkbox" name="user_id" value="{_id:\'' + msg.data.items[i]._id + '\',name:\'' + msg.data.items[i].name.name_zh + '\'}"/></td>' +
                 ' <td>' + msg.data.items[i].name.name_zh + '</td>' +
-                ' <td><a href="#" data=' + msg.data.items[i]._id + '>选择</a></td>' +
 
                 ' </tr>');
         }
         $(".userCheckBox").bind("click", function (e) {
+            if($(e.target).attr("type")=="checkbox"){
+                return;
+            }
             if ("checked" != $($(e.target).parent()[0]).find("input").attr("checked"))
                 $($(e.target).parent()[0]).find("input").attr("checked", "checked");
             else
@@ -245,11 +248,13 @@ var $app = {
             $("#setuserlist").append('<tr class="userCheckBox">' +
                 ' <td><input type="checkbox" name="user_id" value="{_id:\'' + msg.data.items[i]._id + '\',name:\'' + msg.data.items[i].name.name_zh + '\'}"/></td>' +
                 ' <td>' + msg.data.items[i].name.name_zh + '</td>' +
-                ' <td><a href="#" data=' + msg.data.items[i]._id + '>选择</a></td>' +
 
                 ' </tr>');
         }
         $(".userCheckBox").bind("click", function (e) {
+            if($(e.target).attr("type")=="checkbox"){
+                return;
+            }
             if ("checked" != $($(e.target).parent()[0]).find("input").attr("checked"))
                 $($(e.target).parent()[0]).find("input").attr("checked", "checked");
             else
@@ -309,11 +314,13 @@ var $app = {
             $("#setuserlist").append('<tr class="userCheckBox">' +
                 ' <td><input type="checkbox" name="user_id" value="{_id:\'' + msg.data.items[i]._id + '\',name:\'' + msg.data.items[i].name.name_zh + '\'}"/></td>' +
                 ' <td>' + msg.data.items[i].name.name_zh + '</td>' +
-                ' <td><a href="#" data=' + msg.data.items[i]._id + '>选择</a></td>' +
 
                 ' </tr>');
         }
         $(".userCheckBox").bind("click", function (e) {
+            if($(e.target).attr("type")=="checkbox"){
+                return;
+            }
             if ("checked" != $($(e.target).parent()[0]).find("input").attr("checked"))
                 $($(e.target).parent()[0]).find("input").attr("checked", "checked");
             else

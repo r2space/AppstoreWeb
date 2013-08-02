@@ -2,7 +2,6 @@
 
 <!-- Side bar -->
 
-<% include common/app_add_sidebar.html %>
 <script src="/javascripts/sw/sw.app.js"></script>
 <script type="text/javascript">
     <%
@@ -11,7 +10,7 @@
         $(function () {
             smart.doget('/app/info.json?app_id=<%=appId%>', function (err, data) {
                 console.log(data);
-                for (var i = 1; i <= 4; i++) {
+                for (var i = 1; i <= 5; i++) {
                     if (data.editstep >= i) {
                         $("#step" + (i) + "").attr("href", "/app/add/step" + (i) + "?appId=" + data._id);
                         $($("#step" + (i) + "").find('i')[0]).css("display", "block");
@@ -55,34 +54,44 @@
     };
 
 </script>
-
-
-<div class="span9">
-
-    <form class="required-validate form-horizontal" action="/app/create/step5.json" method="post"
-          onsubmit="return validateCallback(this,didSendStepCallback,didSendFn,'确认提交吗？')">
-        <input type="hidden" name="appId" value="<%=appId%>"/>
-
-        <div class="widget-box">
-            <div class="widget-title">
-                <h5><i class="icon-info-sign"></i>公开APP</h5>
-            </div>
-            <div class="widget-content nopadding">
-
-
-                <div class="control-group">
-                    <label class="control-label"></label>
-
-                    <div class="controls">
-                        <a id="pre_view" href="#" target="_blank" class="btn btn-large btn-primary">浏览</a>
-                        <a id="finish_add" href="#" class="btn btn-large btn-success">发布</a>
-                    </div>
-                </div>
-            </div>
+<br>
+<br>
+<div class="container-fluid top_line">
+    <div class="row-fluid">
+        <div class="span2">
+            <% include common/app_add_sidebar.html %>
         </div>
-    </form>
-</div>
+        <div class="span10 span10_left_line">
 
+            <div class="span9">
+
+                <form class="required-validate form-horizontal" action="/app/create/step5.json" method="post"
+                      onsubmit="return validateCallback(this,didSendStepCallback,didSendFn,'确认提交吗？')">
+                    <input type="hidden" name="appId" value="<%=appId%>"/>
+
+                    <div class="widget-box">
+                        <div class="widget-content nopadding">
+
+
+                            <div class="control-group">
+                                <label class="control-label"></label>
+
+                                <div class="controls">
+                                    <a id="pre_view" href="#" target="_blank" class="btn btn-large btn-primary">浏览</a>
+                                    <a id="finish_add" href="#" class="btn btn-large btn-success">发布</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
 
 <!-- This is just a little bit of custom CSS code to enhance things. Feel free to place this in your main CSS file. I've commented to say what each bit does. -->
 <style type="text/css">

@@ -37,7 +37,6 @@ exports.getAppInfoById = function (app_id_, callback_) {
         proxy.after('permission_ready', 4, function () {
             return callback_(null, app_info);
         });
-
         proxy1.after('admin_ready', docs.permission.admin.length, function () {
             app_info.admin_list = admin_list;
             proxy.emit('permission_ready');
