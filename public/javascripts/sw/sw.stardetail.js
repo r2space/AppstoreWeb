@@ -15,7 +15,7 @@ $(function () {
     // 侧栏
     $("#app_name").html(star.name);
     $('#version').html(star.version);
-    $('#lastupdate').html(smart.date(star.update_date));
+    $('#lastupdate').html(smart.date(star.update_date).substr(2, 8));
 
 //    $("#info_description").html(info.description);
 //    $("#info_icon_big").attr("src", "/picture/" + info.icon.big);
