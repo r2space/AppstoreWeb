@@ -15,7 +15,6 @@
 <body>
 
 <% include common/navbar.html %>
-<input type="hidden" id="app_id" name="app_id" value="<%= app_id %>" />
 
 <div class="main">
 
@@ -25,12 +24,14 @@
             <hr/>
             <img id="info_icon_big" src="/images/cross.png">
             <hr/>
-            <i class="icon-star"></i>
-            <i class="icon-star"></i>
-            <i class="icon-star"></i>
-            <i class="icon-star-half-empty"></i>
-            <i class="icon-star-empty"></i>
-            <span>（<i class="icon-user"></i>30）</span>
+            <span id="score">
+                <i class="icon-star"></i>
+                <i class="icon-star"></i>
+                <i class="icon-star"></i>
+                <i class="icon-star-half-empty"></i>
+                <i class="icon-star-empty"></i>
+            </span>
+            （<i class="icon-user"></i><span id="commenter">30</span>）
             <br/>
             <a id="download" name="download" class="btn btn-small btn-success" downloadid="51c969e6d4fb0a5623000001" href="/file/download.json?_id=51c969e6d4fb0a5623000001">ダウンロード</a>
             <button class="btn btn-small btn-success" type="button">シェア</button>
@@ -43,7 +44,7 @@
                     <label>更新</label><div id="lastupdate">2013/07/30</div>
                 </div>
                 <div>
-                    <label>Size</label><div id="appsize">6M</div>
+                    <label>Size</label><div id="appsize">1M</div>
                 </div>
             </div>
         </div>
@@ -72,12 +73,7 @@
                         <br />
                         <span><i class="icon-download-alt"></i>資料をダウンロード</span>&nbsp;<a href="#">default.ppt</a>
                     </div>
-                    <div id="screenshot">
-                        <img src="/images/cross1.png" />
-                        <img src="/images/cross2.png" />
-                        <img src="/images/cross3.png" />
-                        <img src="/images/cross1.png" />
-                    </div>
+                    <div id="gallery"></div>
                 </div>
                 <div class="tab-pane" id="2">
                     <div class="textarea-large" id="releasenote"></div>
@@ -121,6 +117,27 @@
 
 </div>
 
+<script type="text/template" id="score-template">
+    <$ var f = Math.floor(avg), s = avg - Math.floor(avg); for (var i = 0; i < 5; i++) { $>
+
+    <$ if (i < f) { $>
+    <i class="icon-star"></i>
+    <$ } else if (i == f && s <= 0.3 ) { $>
+    <i class="icon-star-empty"></i>
+    <$ } else if (i == f && s > 0.3 && s < 0.7 ) { $>
+    <i class="icon-star-half-empty"></i>
+    <$ } else if (i == f && s >= 0.7 ) { $>
+    <i class="icon-star"></i>
+    <$ } else if (i > f) { $>
+    <i class="icon-star-empty"></i>
+    <$ } $>
+
+    <$ } $>
+</script>
+
+<script type="text/template" id="gallery-template">
+    <img src='/picture/{{imgid}}' />
+</script>
 <script type="text/template" id="comment-template">
     <li >
         <img class="portrait" src="/images/user.png">

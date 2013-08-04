@@ -2,7 +2,7 @@
   "db": {
        "host": "10.2.8.235"
     , "port": 27017
-    , "dbname": "startwall"
+    , "dbname": "starwall"
     , "pool": 5
   },
 

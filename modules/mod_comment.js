@@ -40,6 +40,17 @@ exports.getRankAvg = function(appId_, callback_){
   });
 };
 
+// 获取指定评价的总和及评价人数（用于计算平均评价值）
+exports.getRankTotal = function(appId_, callback_){
+  var comment = model();
+  comment.aggregate([
+    { $match: {appId: appId_} },
+    { $group: {_id: '$appId', sum: {$sum: '$rank'}, count: {$sum: 1}} }
+  ], function(err, result){
+    callback_(err, result ? result[0] : {});
+  });
+};
+
 exports.list = function(condition_, options_, callback_){
   var comment = model();
   comment.find(condition_)

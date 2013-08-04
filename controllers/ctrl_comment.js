@@ -93,3 +93,15 @@ exports.list = function(appId_, version_, start_, count_, callback_){
     return callback_(err, result);
   });
 };
+
+// 获取指定评价的总和及评价人数（用于计算平均评价值）
+exports.ranktotal = function(appId_, callback_){
+
+  comment.getRankTotal(appId_, function(err, result){
+    if (err) {
+      return callback_(err);
+    } else {
+      callback_(err, result);
+    }
+  });
+};

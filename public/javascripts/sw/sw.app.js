@@ -34,20 +34,20 @@ var $app = {
         that.viewDidload();
 
     },
-    renderAppDetailById: function (msg) {
-        console.log(msg);
-        var info = eval(msg.data);
-        console.log(info);
-        $("#app_name").html(info.name);
-        $("#info_description").html(info.description);
-        $("#info_icon_big").attr("src", "/picture/" + info.icon.big);
-        $("#info_screenshot").html("");
-        console.log("info.downloadId   :%s", info.downloadId);
-        $("#download").attr("href", "/file/download.json?_id=" + info.downloadId);
-        for (var i = 0; i < info.screenshot.length; i++)
-            $("#info_screenshot").append("<img src=\"/picture/" + info.screenshot[i] + "\"></img>")
-
-    },
+//    renderAppDetailById: function (msg) {
+//        console.log(msg);
+//        var info = eval(msg.data);
+//        console.log(info);
+//        $("#app_name").html(info.name);
+//        $("#info_description").html(info.description);
+//        $("#info_icon_big").attr("src", "/picture/" + info.icon.big);
+//        $("#info_screenshot").html("");
+//        console.log("info.downloadId   :%s", info.downloadId);
+//        $("#download").attr("href", "/file/download.json?_id=" + info.downloadId);
+//        for (var i = 0; i < info.screenshot.length; i++)
+//            $("#info_screenshot").append("<img src=\"/picture/" + info.screenshot[i] + "\"></img>")
+//
+//    },
     viewDidload: function () {
         var that = this;
 
