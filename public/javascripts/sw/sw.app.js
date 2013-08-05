@@ -34,20 +34,20 @@ var $app = {
         that.viewDidload();
 
     },
-    renderAppDetailById: function (msg) {
-        console.log(msg);
-        var info = eval(msg.data);
-        console.log(info);
-        $("#app_name").html(info.name);
-        $("#info_description").html(info.description);
-        $("#info_icon_big").attr("src", "/picture/" + info.icon.big);
-        $("#info_screenshot").html("");
-        console.log("info.downloadId   :%s", info.downloadId);
-        $("#download").attr("href", "/file/download.json?_id=" + info.downloadId);
-        for (var i = 0; i < info.screenshot.length; i++)
-            $("#info_screenshot").append("<img src=\"/picture/" + info.screenshot[i] + "\"></img>")
-
-    },
+//    renderAppDetailById: function (msg) {
+//        console.log(msg);
+//        var info = eval(msg.data);
+//        console.log(info);
+//        $("#app_name").html(info.name);
+//        $("#info_description").html(info.description);
+//        $("#info_icon_big").attr("src", "/picture/" + info.icon.big);
+//        $("#info_screenshot").html("");
+//        console.log("info.downloadId   :%s", info.downloadId);
+//        $("#download").attr("href", "/file/download.json?_id=" + info.downloadId);
+//        for (var i = 0; i < info.screenshot.length; i++)
+//            $("#info_screenshot").append("<img src=\"/picture/" + info.screenshot[i] + "\"></img>")
+//
+//    },
     viewDidload: function () {
         var that = this;
 
@@ -136,12 +136,13 @@ var $app = {
             $("#setuserlist").append('<tr class="userCheckBox">' +
                 ' <td><input type="checkbox" name="user_id" value="{_id:\'' + msg.data.items[i]._id + '\',name:\'' + msg.data.items[i].name.name_zh + '\'}"/></td>' +
                 ' <td>' + msg.data.items[i].name.name_zh + '</td>' +
-                ' <td><a href="#" data=' + msg.data.items[i]._id + '>选择</a></td>' +
-
                 ' </tr>');
         }
 
         $(".userCheckBox").bind("click", function (e) {
+            if($(e.target).attr("type")=="checkbox"){
+                return;
+            }
             if ("checked" != $($(e.target).parent()[0]).find("input").attr("checked"))
                 $($(e.target).parent()[0]).find("input").attr("checked", "checked");
             else
@@ -191,11 +192,13 @@ var $app = {
             $("#setuserlist").append('<tr class="userCheckBox">' +
                 ' <td><input type="checkbox" name="user_id" value="{_id:\'' + msg.data.items[i]._id + '\',name:\'' + msg.data.items[i].name.name_zh + '\'}"/></td>' +
                 ' <td>' + msg.data.items[i].name.name_zh + '</td>' +
-                ' <td><a href="#" data=' + msg.data.items[i]._id + '>选择</a></td>' +
 
                 ' </tr>');
         }
         $(".userCheckBox").bind("click", function (e) {
+            if($(e.target).attr("type")=="checkbox"){
+                return;
+            }
             if ("checked" != $($(e.target).parent()[0]).find("input").attr("checked"))
                 $($(e.target).parent()[0]).find("input").attr("checked", "checked");
             else
@@ -245,11 +248,13 @@ var $app = {
             $("#setuserlist").append('<tr class="userCheckBox">' +
                 ' <td><input type="checkbox" name="user_id" value="{_id:\'' + msg.data.items[i]._id + '\',name:\'' + msg.data.items[i].name.name_zh + '\'}"/></td>' +
                 ' <td>' + msg.data.items[i].name.name_zh + '</td>' +
-                ' <td><a href="#" data=' + msg.data.items[i]._id + '>选择</a></td>' +
 
                 ' </tr>');
         }
         $(".userCheckBox").bind("click", function (e) {
+            if($(e.target).attr("type")=="checkbox"){
+                return;
+            }
             if ("checked" != $($(e.target).parent()[0]).find("input").attr("checked"))
                 $($(e.target).parent()[0]).find("input").attr("checked", "checked");
             else
@@ -309,11 +314,13 @@ var $app = {
             $("#setuserlist").append('<tr class="userCheckBox">' +
                 ' <td><input type="checkbox" name="user_id" value="{_id:\'' + msg.data.items[i]._id + '\',name:\'' + msg.data.items[i].name.name_zh + '\'}"/></td>' +
                 ' <td>' + msg.data.items[i].name.name_zh + '</td>' +
-                ' <td><a href="#" data=' + msg.data.items[i]._id + '>选择</a></td>' +
 
                 ' </tr>');
         }
         $(".userCheckBox").bind("click", function (e) {
+            if($(e.target).attr("type")=="checkbox"){
+                return;
+            }
             if ("checked" != $($(e.target).parent()[0]).find("input").attr("checked"))
                 $($(e.target).parent()[0]).find("input").attr("checked", "checked");
             else

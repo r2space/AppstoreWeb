@@ -26,3 +26,14 @@ exports.list = function(req_, res_){
     }
   });
 };
+
+// 获取指定评价的总和及评价人数（用于计算平均评价值）
+exports.ranktotal = function(req_, res_){
+  comment.ranktotal(req_.query.appId, function(err, result){
+    if (err) {
+      return res_.send(json.errorSchema(err.code, err.message));
+    } else {
+      return res_.send(json.dataSchema(result));
+    }
+  });
+};

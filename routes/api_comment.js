@@ -8,4 +8,8 @@ exports.guiding = function(app){
   app.get('/app/comment/list.json', function(req, res){
     comment.list(req, res);
   });
+
+  app.get('/app/comment/ranktotal.json', function(req, res){
+    comment.ranktotal(req, res);
+  });
 };
