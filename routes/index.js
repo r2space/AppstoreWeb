@@ -4,7 +4,8 @@ var user = lib.api.user
     , fileapi = require('./api_file')
     , commentapi = require('./api_comment')
     , appapi = require('./api_app')
-    , userapi = require('./api_user');
+    , userapi = require('./api_user')
+    , categorory = require('../modules/mod_category');
 
 var ctrlapp = require('../controllers/ctrl_app');
 
@@ -68,8 +69,10 @@ exports.guiding = function (app) {
     // ----------------------------------
     // 主页面
     app.get('/starwall', function (req, res) {
+
         res.render("starwall", {
             title: "starwall", bright: "home", user: req.session.user
+            ,categories: categorory.getCategories()
         });
     });
 
