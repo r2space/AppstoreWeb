@@ -10,6 +10,7 @@ var $app = {
             sendData[data[i].name] = data[i].value;
             if (data[i].name == "screenshot") {
 
+
                 sendData[data[i].name] = data[i].value.split(',');
             }
             if (data[i].name == "permission.admin") {
