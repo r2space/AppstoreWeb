@@ -28,6 +28,10 @@ exports.guiding = function(app){
     application.getAppInfo(req,res);
   });
 
+  app.get('/app/search.json', function(req, res){
+    application.search(req, res);
+  });
+
   app.get('/app/list.json', function(req, res){
     application.list(req, res);
   });
