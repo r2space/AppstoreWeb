@@ -214,6 +214,21 @@ exports.downloadedList = function (req_, res_) {
     });
 };
 
+exports.search = function (req_, res_){
+  var start = Number(util.checkString(req_.query.start));
+  var count = Number(util.checkString(req_.query.count));
+  var uid = req_.session.user._id;
+  var keyword = req_.query.keyword;
+
+  app.search(uid, keyword, start, count, function(err, result){
+    if (err) {
+        return res_.send(json.errorSchema(err.code, err.message));
+      } else {
+        return res_.send(json.dataSchema(result));
+      }
+  });
+};
+
 exports.list = function (req_, res_) {
     var start = Number(util.checkString(req_.query.start));
     var count = Number(util.checkString(req_.query.count));
