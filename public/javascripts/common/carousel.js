@@ -8,6 +8,7 @@ var Carousel = {
         ,item_count: undefined
         ,_group_item_count: 4
         ,_group_max_count: 5
+        ,category: undefined
         ,init: function(container_, data) {
             var _this = this;
             if( typeof(container_) ===  "string")
@@ -42,9 +43,9 @@ var Carousel = {
             var _this = this;
             var tmpl_loading = this.getTmpl("template_loading");
             this.container.html(tmpl_loading);
-
+            var category = this.category ? this.category: "";
             $.ajax({
-                url: this.url + "&count=" + this.item_count,
+                url: this.url + "&count=" + this.item_count + "&category=" + category,
                 type: "GET",
                 async: true,
                 dataType: "json",

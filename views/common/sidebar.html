@@ -12,7 +12,7 @@
             <ul>
                 <li>
                     <% category.items.forEach(function(c) { %>
-                    <a href="#"> <i class="pull-right icon-plane"></i><%= c.name %></a>
+                    <a href="javascript:filterCategory(<%= c.code %>, '<%= c.name %>');"> <i class="pull-right icon-plane"></i><%= c.name %></a>
                     <% }); %>
                 </li>
             </ul>

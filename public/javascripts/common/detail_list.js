@@ -111,8 +111,10 @@ var DetailList = {
             var u = this.url;
             if(u.indexOf("?") < 0)
                 u += "?";
+
+            var category = this.category ? this.category: "";
             $.ajax({
-                url: u + "&start=" + start + "&count=" + limit,
+                url: u + "&start=" + start + "&count=" + limit + "&category=" + category,
                 type: "GET",
                 async: true,
                 dataType: "json",
@@ -129,7 +131,7 @@ var DetailList = {
                             start: this.start
                             ,limit: this.limit
                             ,page: this.page
-                            ,apps: result.data.items
+                            ,apps: result.data
                             ,data: result.data
                             ,isShowTopPages: this.isShowTopPages
                         });
@@ -142,9 +144,13 @@ var DetailList = {
         }
         ,load_end: function(data_) {
             var _this = this;
+            var apps = data_.apps;
+            if(apps.items)
+                apps = apps.items;
+
             var data = {
                 cols: _this.cols
-                ,apps: data_.apps
+                ,apps: apps
             };
             var tmpl_item = $('#' + this.tmpl_item_id).html();
             var res_item = _.template(tmpl_item, data);

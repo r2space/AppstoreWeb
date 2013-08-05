@@ -64,7 +64,6 @@
             <!--"video" : "" });-->
     <!--}-->
 <!--</script>-->
-<script src="/javascripts/sw/sw.app.js"></script>
 <script src="/javascripts/common/detail_list.js"></script>
 <script>
     // 初期化所有列
@@ -102,12 +101,12 @@
         <$ } $>
         <tr>
             <!-- 设置title -->
-            <$ _.each(cols, function(col) { $> <th nowrap>{{col.title}}</th> <$ }); $>
+            <$ _.each(cols, function(col) { $> <th nowrap>{{ _.escape(col.title) }}</th> <$ }); $>
         </tr>
         </thead>
         <tbody id="{{id_prex}}_tbody">
         <tr>
-            <td colspan="{{cols.length}}">{{str.loading}}</td>
+            <td colspan="{{cols.length}}">{{ _.escape(str.loading) }}</td>
         </tr>
         </tbody>
         <tfoot id="{{id_prex}}_foot">
@@ -147,7 +146,7 @@
         <$ } else if(col.name == "os") { $>
             <td style="min-width:48px;">
 
-                <img src="{{ osPath }}" style="width:48px;height:auto"/>
+                {{app.appType}}<img src="{{ _.escape(osPath) }}" style="width:48px;height:auto"/>
             </td>
         <$ } else if(col.name == "require") { $>
             <!-- 需求 -->
@@ -173,12 +172,12 @@
         <$ } else if(col.name == "option") { $>
             <td nowrap>
 
-                <$ if(app.permission && app.permission.edit) { $>
+                <$ if($app.canEdit(app)) { $>
                     <a href="/app/add/step1?appId={{ app._id }}" style="float:left;margin-right:2px;"><button class="btn btn-small btn-success">编辑</button></a>
                 <$ } else { $>
                     <a href="#" style="float:left;margin-right:2px;"><button class="btn btn-small btn-success" disabled>编辑</button></a>
                 <$ } $>
-                <$ if(app.downloadId) { $>
+                <$ if($app.canDownload(app)) { $>
                     <a href="/file/download.json?_id={{ app.downloadId }}&app_id={{ app._id }}" style="float:right;"><button class="btn btn-small btn-success">下载</button></a>
                 <$ } else { $>
                     <a href="#" style="float:right;"><button class="btn btn-small btn-success" disabled>下载</button></a>

@@ -483,10 +483,30 @@ var $app = {
              return "/images/system/ios.png";
          } else if($sw.string.equalsIgnoreCase("android", os)) {
              return "/images/system/android.png";
+         } else if($sw.string.equalsIgnoreCase("web", os)) {
+             return "";// TODO:
          } else if($sw.string.equalsIgnoreCase("wp", os)) {
              return "";// TODO:
          } else {
              // TODO: 追加默认处理图标
          }
+    }
+    , canEdit: function(app) {
+         var uid = smart.uid();
+         if(uid && app && app.permission && app.permission.edit) {
+             var result = _.find(app.permission.edit, function(uid_){ return uid == uid_; } );
+             if(result)
+                return true;
+         }
+         return false;
+    }
+    , canDownload: function(app) {
+        var uid = smart.uid();
+        if(uid && app && app.downloadId && app.permission && app.permission.download) {
+            var result = _.find(app.permission.edit, function(uid_){ return uid == uid_; } );
+            if(result)
+                return true;
+        }
+        return false;
     }
 };
