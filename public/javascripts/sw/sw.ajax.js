@@ -78,7 +78,6 @@ function ajaxTodoCallback(btn, opt, callback, confirmMsg) {
 function validateCallback(form, callback, fn,confirmMsg) {
     // console.log('validateCallback : %s',$form.valid());
     // return false;
-    console.log('validateCallback');
     var $form = $(form);
     // console.log(!$form.valid());
     if (!$form.valid()) {
