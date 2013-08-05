@@ -9,17 +9,22 @@
 <% include common/template_detail_list.html %>
 
 <script type="text/javascript">
+    var list = DetailList.create();
     $(document).ready(function() {
-        var list = DetailList.create();
         list.init($("#list_container"), {
             id_prex :  "dl_list"
             ,str    : {"loading": "加载中........"}
             ,cols   : [ "icon", "info", "os", "require", "status", "update_info", "option"]
+            ,url    : "/app/list.json?admin=1"
         });
 
         // 初始化加载数据
         list.load();
     });
+
+    function loadCategory(code) {
+
+    }
 </script>
 
 <% include common/foot.html %>

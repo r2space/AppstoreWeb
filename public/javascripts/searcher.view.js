@@ -157,7 +157,7 @@
       // 全文检索
       var c = event.keyCode;
       if (c == 13) {
-        window.location = "/fulltextsearch/result?keywords=" + searchval;
+        window.location = "/list/search?keywords=" + searchval;
         return;
       }
 

@@ -8,7 +8,13 @@ var Categories = {
              ,code: 10000
              ,name: "デバイス"
              ,items: [
-                {  id: undefined, code: 10001 ,name: "iOS" }
+                {  id: undefined, code: 10001 ,name: "iOS"
+                ,items: [
+                    { id: undefined, code: 11000 ,name: "os" ,items:[
+                        ] }
+                    ,{ id: undefined, code: 10002 ,name: "device" ,items:[
+                    ] }
+                ]}
                 ,{ id: undefined, code: 10002 ,name: "Android" }
                 ,{ id: undefined, code: 10003 ,name: "PC Web" }
              ]
