@@ -58,6 +58,7 @@ exports.createAppStep2 = function (req_, res_) {
     var screenshot = req_.body.screenshot;
     var pptfile = req_.body.pptfile;
     var video = req_.body.video;
+    var downloadId = req_.body.downloadId;
     var editstep = 2;
     console.log(icon_big.length);
     console.log(icon_small.length);
@@ -78,6 +79,7 @@ exports.createAppStep2 = function (req_, res_) {
         docs.screenshot = screenshot;
         docs.pptfile = pptfile;
         docs.video = video;
+        docs.downloadId = downloadId;
         console.log(docs.editstep);
         if (docs.editstep < editstep) {
             console.log("set step   %s", editstep);

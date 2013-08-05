@@ -58,7 +58,7 @@
                 }
                 $("#image_big_file_hid").val(fids);
                 $("#video").val(data.video);
-                $("#pptfile_hid").val(data.pptfile);
+                $("#pptfile_hid").val(data.downloadId);
 
             });
         });
@@ -122,7 +122,18 @@
 
                     <div class="widget-box">
                         <div class="widget-content nopadding">
+                            <div class="control-group">
+                                <label class="control-label">上传App</label>
 
+                                <div class="controls">
+                                    <input type="hidden" id="pptfile_hid" name="downloadId"/>
+                                    <input type="file" id="pptfile_file" name="pptfile_file" style="display: none"
+                                           value=""/>
+                                    <button id="pptfile_btn" class="btn" onclick="return false;">上传</button>
+                        <span id="pptfile_span" for="required" generated="true" class="help-inline"
+                              style="">上传应用相关的演示资料</span>
+                                </div>
+                            </div>
                             <div class="control-group">
                                 <label class="control-label">图标小图</label>
 
@@ -189,18 +200,7 @@
                                 </div>
                             </div>
 
-                            <div class="control-group">
-                                <label class="control-label">上传文件</label>
 
-                                <div class="controls">
-                                    <input type="hidden" id="pptfile_hid" name="pptfile"/>
-                                    <input type="file" id="pptfile_file" name="pptfile_file" style="display: none"
-                                           value=""/>
-                                    <button id="pptfile_btn" class="btn" onclick="return false;">上传</button>
-                        <span id="pptfile_span" for="required" generated="true" class="help-inline"
-                              style="">上传应用相关的演示资料</span>
-                                </div>
-                            </div>
 
                             <div class="control-group">
                                 <label class="control-label"></label>
