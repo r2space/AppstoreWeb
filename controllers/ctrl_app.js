@@ -165,6 +165,8 @@ exports.list = function(uid_, sort_, asc_, admin_, start_, count_, callback_){
       , {'permission.admin': uid_}
       , {'permission.edit': uid_}
     ];
+  } else {
+    condition = {'permission.view': uid_};
   }
   var options = {
       start: start_
