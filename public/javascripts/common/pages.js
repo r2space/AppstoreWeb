@@ -3,13 +3,13 @@ var Pages = {
         container: null
         ,tmpl_id: "template_pages"
         ,start: 0
-        ,limit: 3
+        ,limit: 20
         ,count: 0
         ,num: 0
         ,begin_num: 0
         ,end_num: 0
         ,count_num: 0
-        ,limit_num: 5
+        ,limit_num: 20
         ,str: {
              prev_page: "前一页"
             ,next_page: "下一页"
