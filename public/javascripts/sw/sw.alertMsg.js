@@ -18,7 +18,7 @@ var $alertMsg = {
             Alertify.log.error(msg);
         } else if(this._types.confirm == type){
 
-            if(confirm("确定要清空数据吗？")){
+            if(confirm(msg)){
 
                 eval("buttons[0].call();");
             }else{
