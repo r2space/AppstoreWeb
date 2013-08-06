@@ -3,7 +3,7 @@ var Pages = {
         container: null
         ,tmpl_id: "template_pages"
         ,start: 0
-        ,limit: 20
+        ,limit: 3
         ,count: 0
         ,num: 0
         ,begin_num: 0
@@ -54,6 +54,9 @@ var Pages = {
                     });
                 }
             });
+        }
+        ,clear: function() {
+            this.container.html("");
         }
         ,start_by_num: function(num_) {
             return (num_ - 1) * this.limit;
