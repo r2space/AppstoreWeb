@@ -177,7 +177,7 @@
                                     <% if(appTypes && appTypes.items) { %>
                                     <%    appTypes.items.forEach(function(c) { %>
                                     <label class="radio span3">
-                                        <input type="radio" name="appType" id="appType" value="<%= c.code %>" />
+                                        <input class="required" type="radio" name="appType" id="appType" value="<%= c.code %>" />
                                         <%= c.name %>
                                     </label>
                                     <% }); %>
@@ -236,11 +236,11 @@
 
                             <div class="controls">
                                 <label class="radio">
-                                    <input type="radio" name="device" value="1" />
+                                    <input class="required" type="radio" name="device" value="1" />
                                     手机
                                 </label>
                                 <label class="radio">
-                                    <input type="radio" name="device" value="2" />
+                                    <input class="required" type="radio" name="device" value="2" />
                                     平板
                                 </label>
                             </div>
