@@ -8,15 +8,9 @@ var Categories = {
              ,code: 10000
              ,name: "デバイス"
              ,items: [
-                {  id: undefined, code: 10001 ,name: "iOS"
-                ,items: [
-                    { id: undefined, code: 11000 ,name: "os" ,items:[
-                        ] }
-                    ,{ id: undefined, code: 10002 ,name: "device" ,items:[
-                    ] }
-                ]}
-                ,{ id: undefined, code: 10002 ,name: "Android" }
-                ,{ id: undefined, code: 10003 ,name: "PC Web" }
+                {  id: undefined, code: 10001 ,name: "iOS", icon:"/images/system/ios.png"}
+                ,{ id: undefined, code: 10002 ,name: "Android", icon:"/images/system/android.png" }
+                ,{ id: undefined, code: 10003 ,name: "PC Web", icon:"#" }
              ]
          }
          ,{
@@ -81,4 +75,27 @@ exports.getAppTypes = function () {
 exports.getCategoryTypes = function () {
     console.log("getCategoryTypes");
     return exports.getByCode(20000);
+}
+
+exports.isAppTypes = function (category) {
+    var code = category;
+    var c_types = exports.getAppTypes();
+    for (var i in c_types.items) {
+        if(c_types.items[i].code == code)
+            return true;
+    }
+
+    return false;
+}
+
+exports.getAppTypeName = function (category) {
+    if(category) {
+        var code = category;
+        var c_types = exports.getAppTypes();
+        for (var i in c_types.items) {
+            if(c_types.items[i].code == code)
+                return c_types.items[i].name;
+        }
+    }
+    return "";
 }

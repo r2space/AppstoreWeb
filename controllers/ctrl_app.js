@@ -2,7 +2,9 @@ var EventProxy = require('eventproxy');
 var app = require("../modules/mod_app.js")
   , user = lib.mod.user
   , downloadInfo = require("../modules/mod_download")
-  , async = require("async");
+  , async = require("async")
+  , categorory = require('../modules/mod_category')
+  , devices = require('../modules/mod_device');
 var error = lib.core.error;
 var user = lib.mod.user;
 exports.create = function (data_, callback_){
@@ -130,18 +132,37 @@ exports.downloadedList = function(uid_, callback_){
         });
     };
 
+    var task_other = function(result, cb){
+        async.forEach(result, function(app, cb_){
+            app._doc.appTypeCategory = categorory.getByCode(app.appType); // 追加系统分类
+            if(app.require && app.require.device)
+                app._doc.device = devices.getDevice(app.require.device);  // 追加设备
+            cb_(null, result);
+        }, function(err){
+            cb(err, result);
+        });
+    };
+    tasks.push(task_other);
+
   async.waterfall(tasks,function(err,result){
     return callback_(err, result);
   });
 };
 
-exports.search = function(uid_, keyword_, start_, count_, callback_){
+exports.search = function(uid_, keyword_, start_, count_, category_, callback_){
   var condition = {"name": new RegExp("^.*" + keyword_.toLowerCase() + ".*$", "i")};
   var options = {
       start: start_
     , limit: count_
     , sort: {update_date:-1}
   };
+
+  if(category_) {
+      if(categorory.isAppTypes(category_))
+          condition.appType = category_;
+      else
+          condition.category = { $elemMatch: {$in: [category_]} };
+  }
 
   var tasks = [];
   var task_getAppList = function(cb){
@@ -175,12 +196,24 @@ exports.search = function(uid_, keyword_, start_, count_, callback_){
   };
   tasks.push(task_getUpdater);
 
+    var task_other = function(result, cb){
+        async.forEach(result.items, function(app, cb_){
+            app._doc.appTypeCategory = categorory.getByCode(app.appType); // 追加系统分类
+            if(app.require && app.require.device)
+                app._doc.device = devices.getDevice(app.require.device);  // 追加设备
+            cb_(null, result);
+        }, function(err){
+            cb(err, result);
+        });
+    };
+    tasks.push(task_other);
+
   async.waterfall(tasks,function(err,result){
     return callback_(err, result);
   });
 };
 
-exports.list = function(uid_, sort_, asc_, admin_, start_, count_, callback_){
+exports.list = function(uid_, sort_, asc_, admin_, category_, start_, count_, callback_){
   var condition = {};
   if (admin_) {
     condition.$or = [
@@ -191,6 +224,14 @@ exports.list = function(uid_, sort_, asc_, admin_, start_, count_, callback_){
   } else {
     condition = {'permission.view': uid_};
   }
+
+  if(category_) {
+      if(categorory.isAppTypes(category_))
+        condition.appType = category_;
+      else
+        condition.category = { $elemMatch: {$in: [category_]} };
+  }
+
   var options = {
       start: start_
     , limit: count_
@@ -231,6 +272,18 @@ exports.list = function(uid_, sort_, asc_, admin_, start_, count_, callback_){
     });
   };
   tasks.push(task_getUpdater);
+
+    var task_other = function(result, cb){
+        async.forEach(result.items, function(app, cb_){
+            app._doc.appTypeCategory = categorory.getByCode(app.appType); // 追加系统分类
+            if(app.require && app.require.device)
+                app._doc.device = devices.getDevice(app.require.device);  // 追加设备
+            cb_(null, result);
+        }, function(err){
+            cb(err, result);
+        });
+    };
+    tasks.push(task_other);
 
   async.waterfall(tasks,function(err,result){
     return callback_(err, result);

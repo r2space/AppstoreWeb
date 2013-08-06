@@ -140,19 +140,29 @@ exports.guiding = function (app) {
         res.render("list_search", { title: "检索结果一览", bright: "home", user: req.session.user
             ,keywords: req.query.keywords
             ,categories: categorory.getCategories()
+            ,apptypes: categorory.getAppTypes()
         });
     });
     // 已下载一览
     app.get('/list/download', function (req, res) {
-        res.render("list_download", { title: "已下载一览", bright: "home", user: req.session.user });
+        res.render("list_download", { title: "已下载一览", bright: "home", user: req.session.user
+            ,categories: categorory.getCategories()
+            ,apptypes: categorory.getAppTypes()
+        });
     });
     // 通知一览
     app.get('/list/notification', function (req, res) {
-        res.render("list_notification", { title: "通知一览", bright: "home", user: req.session.user });
+        res.render("list_notification", { title: "通知一览", bright: "home", user: req.session.user
+            ,categories: categorory.getCategories()
+            ,apptypes: categorory.getAppTypes()
+        });
     });
     // 管理一览
     app.get('/list/manage', function (req, res) {
-        res.render("list_manage", { title: "管理一览", bright: "home", user: req.session.user });
+        res.render("list_manage", { title: "管理一览", bright: "home", user: req.session.user
+            ,categories: categorory.getCategories()
+            ,apptypes: categorory.getAppTypes()
+        });
     });
     app.get('*', function (req, res) {
         res.send("404");

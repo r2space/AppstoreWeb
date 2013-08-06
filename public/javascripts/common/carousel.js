@@ -71,6 +71,11 @@ var Carousel = {
             var id_carousel = this.getId("carousel");
             var id_item_group_container = this.getId("item_group_container");
 
+            if(!data.items || data.items.length == 0) {
+                this.container.html("没有数据");
+                return;
+            }
+
             //初始化框架
             var page_count = Math.floor(data.items.length / this._group_item_count);
             if(data.items.length % this._group_item_count > 0)
