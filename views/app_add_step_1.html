@@ -175,9 +175,9 @@
                             <div class="controls row-fluid">
                                 <div class="span6">
                                     <% if(appTypes && appTypes.items) { %>
-                                    <%    appTypes.items.forEach(function(c) { %>
+                                    <%    appTypes.items.forEach(function(c,i) { %>
                                     <label class="radio span3">
-                                        <input class="required" type="radio" name="appType" id="appType" value="<%= c.code %>" />
+                                        <input class="required" type="radio" name="appType" id="appType" value="<%= c.code %>" <%=i==0?"checked":""%> />
                                         <%= c.name %>
                                     </label>
                                     <% }); %>
@@ -236,7 +236,7 @@
 
                             <div class="controls">
                                 <label class="radio">
-                                    <input class="required" type="radio" name="device" value="1" />
+                                    <input class="required" type="radio" name="device" value="1" checked/>
                                     手机
                                 </label>
                                 <label class="radio">
