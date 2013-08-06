@@ -33,8 +33,8 @@
             </span>
             （<i class="icon-user"></i><span id="commenter">30</span>）
             <br/>
-            <a id="download" name="download" class="btn btn-small btn-success" downloadid="51c969e6d4fb0a5623000001" href="/file/download.json?_id=51c969e6d4fb0a5623000001">ダウンロード</a>
-            <button class="btn btn-small btn-success" type="button">シェア</button>
+            <button id="download" class="btn btn-small btn-success" href="#">ダウンロード</button>
+            <button class="btn btn-small btn-success" type="button" id="share">シェア</button>
 
             <div class="itemgroup">
                 <div><label>Ver.</label><div id="version">1.0</div></div>
@@ -103,6 +103,10 @@
 
 </div>
 
+<footer>
+    <p>Copyright © 2012, Cross Corporation. All Rights Reserved.</p>
+</footer>
+
 <script type="text/template" id="score-template">
     <$ var f = Math.floor(avg), s = avg - Math.floor(avg); for (var i = 0; i < 5; i++) { $>
 
@@ -142,10 +146,6 @@
         <a href="/file/download.json?_id={{fileid}}">{{filename}}</a>
     </span>
 </script>
-
-<footer>
-    <p>Copyright © 2012, Cross Corporation. All Rights Reserved.</p>
-</footer>
 
 </body>
 </html>

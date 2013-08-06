@@ -226,6 +226,7 @@ exports.search = function (req_, res_){
   var count = Number(util.checkString(req_.query.count));
   var uid = req_.session.user._id;
   var keywords = req_.query.keywords;
+  var category = req.query.category;
 
   app.search(uid, keywords, start, count, function(err, result){
     if (err) {
@@ -243,6 +244,7 @@ exports.list = function (req_, res_) {
     var asc = Number(util.checkString(req_.query.asc));
     var uid = req_.session.user._id;
     var admin = req_.query.admin ? true : false;
+    var category = req.query.category;
 
     app.list(uid, sort, asc, admin, start, count, function (err, result) {
         if (err) {
