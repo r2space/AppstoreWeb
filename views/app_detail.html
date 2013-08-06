@@ -37,15 +37,11 @@
             <button class="btn btn-small btn-success" type="button">シェア</button>
 
             <div class="itemgroup">
-                <div>
-                    <label>Ver.</label><div id="version">1.0</div>
-                </div>
-                <div>
-                    <label>更新</label><div id="lastupdate">2013/07/30</div>
-                </div>
-                <div>
-                    <label>Size</label><div id="appsize">1M</div>
-                </div>
+                <div><label>Ver.</label><div id="version">1.0</div></div>
+                <div><label>更新</label><div id="lastupdate">2013/07/30</div></div>
+                <div><label>Size</label><div id="appsize">1M</div></div>
+                <div><label>機種</label><div id="apptype">iPhone</div></div>
+                <div><label>分類</label><div id="category">金融</div></div>
             </div>
         </div>
     </div>
@@ -62,17 +58,7 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="1">
-                    <div class="textarea" id="description">
-                        <span>詳細説明を表示</span><br/>
-                        <span>詳細説明を表示</span><br/>
-                        <span>詳細説明を表示</span><br/>
-                        <span>詳細説明を表示</span><br/>
-                        <span>詳細説明を表示</span><br/>
-                        <span>詳細説明を表示</span><br/>
-                        <span>详细的说明内容</span>
-                        <br />
-                        <span><i class="icon-download-alt"></i>資料をダウンロード</span>&nbsp;<a href="#">default.ppt</a>
-                    </div>
+                    <div class="textarea" id="description"></div>
                     <div id="gallery"></div>
                 </div>
                 <div class="tab-pane" id="2">
@@ -147,6 +133,14 @@
 
         <p style="500px;word-wrap:break-word; word-break:normal;">{{comment}}</p>
     </li>
+</script>
+
+<script type="text/template" id="attach-template">
+    <br />
+    <span>
+        <i class="icon-download-alt"></i>資料をダウンロード&nbsp;
+        <a href="/file/download.json?_id={{fileid}}">{{filename}}</a>
+    </span>
 </script>
 
 <footer>

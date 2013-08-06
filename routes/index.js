@@ -135,6 +135,13 @@ exports.guiding = function (app) {
         });
     });
 
+    // 检索结果一览
+    app.get('/list/search', function (req, res) {
+        res.render("list_search", { title: "检索结果一览", bright: "home", user: req.session.user
+            ,keywords: req.query.keywords
+            ,categories: categorory.getCategories()
+        });
+    });
     // 已下载一览
     app.get('/list/download', function (req, res) {
         res.render("list_download", { title: "已下载一览", bright: "home", user: req.session.user });

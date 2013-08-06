@@ -225,9 +225,9 @@ exports.search = function (req_, res_){
   var start = Number(util.checkString(req_.query.start));
   var count = Number(util.checkString(req_.query.count));
   var uid = req_.session.user._id;
-  var keyword = req_.query.keyword;
+  var keywords = req_.query.keywords;
 
-  app.search(uid, keyword, start, count, function(err, result){
+  app.search(uid, keywords, start, count, function(err, result){
     if (err) {
         return res_.send(json.errorSchema(err.code, err.message));
       } else {

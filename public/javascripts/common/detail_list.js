@@ -56,14 +56,14 @@ var DetailList = {
                 , callback: this.load
             });
 
-            // test
-            var testData = {
-                num: 1
-                ,start: 1
-                ,count: 3
-            };
-            this.head_pages.show(testData);
-            this.foot_pages.show(testData);
+//            // test
+//            var testData = {
+//                num: 1
+//                ,start: 1
+//                ,count: 3
+//            };
+//            this.head_pages.show(testData);
+//            this.foot_pages.show(testData);
         }
         ,_parse_cols: function(cols) {
             var result = [];
@@ -97,21 +97,60 @@ var DetailList = {
             return result;
         }
         ,load: function(start, limit){
+            var _this = this;
             start = start || 0;
             limit = limit || this.foot_pages.limit;
+            var page = Math.floor(start / this.foot_pages.limit) + 1;
 
-            // for test
-            var d = {
-                apps: test_detail_list_data
-                ,isShowTopPages: this.isShowTopPages
-            };
-            this.load_end(d);
+//            // for test
+//            var d = {
+//                apps: test_detail_list_data
+//                ,isShowTopPages: this.isShowTopPages
+//            };
+//            this.load_end(d);
+            var u = this.url;
+            if(u.indexOf("?") < 0)
+                u += "?";
+
+            var category = this.category ? this.category: "";
+            $.ajax({
+                url: u + "&start=" + start + "&count=" + limit + "&category=" + category,
+                type: "GET",
+                async: true,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                start: start,
+                limit: limit,
+                page: page,
+                success: function (result) {
+                    if (result.error) {
+                        alert(result.error.message)
+                    } else {
+                        _this.load_end({
+                            start: this.start
+                            ,limit: this.limit
+                            ,page: this.page
+                            ,apps: result.data
+                            ,data: result.data
+                            ,isShowTopPages: this.isShowTopPages
+                        });
+                    }
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
         }
         ,load_end: function(data_) {
             var _this = this;
+            var apps = data_.apps;
+            if(apps.items)
+                apps = apps.items;
+
             var data = {
                 cols: _this.cols
-                ,apps: data_.apps
+                ,apps: apps
             };
             var tmpl_item = $('#' + this.tmpl_item_id).html();
             var res_item = _.template(tmpl_item, data);
@@ -119,10 +158,21 @@ var DetailList = {
 
             // test
             var testData = {
-                start: 0
-                ,count: 3
+                start: data.start
+                ,count: data.limit
             };
-            this.head_pages.show(testData);
-            this.foot_pages.show(testData);
+            this.head_pages.clear();
+            this.foot_pages.clear();
+            //this.head_pages.show(testData);
+            //this.foot_pages.show(testData);
+
+            smart.pagination(data_.data.total, _this.foot_pages.limit, data_.page, this.foot_pages.container.attr("id"), function(){
+                var pagenum = $(event.target).attr("id").split("_")[1];
+                if(pagenum > 0){
+                    var start = (pagenum -1 ) * _this.foot_pages.limit;
+                    _this.load(start);
+                }
+                return false;
+            });
         }
     }}};
