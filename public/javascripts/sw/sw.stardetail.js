@@ -25,6 +25,12 @@ $(function () {
 
     rander(device, industrie);
   });
+
+  // 分享按钮点击事件
+  $("#share").bind("click", function () {
+    location.href = 'mailto:';
+  });
+
 });
 
 // 用code获取指定的code名称
@@ -46,7 +52,7 @@ function rander(device, industrie) {
   smart.doget("/app/info.json?app_id=" + app_id, function(err, star){
 
     // 侧栏
-    $("#app_name").html(star.name);
+    $("#app_name").html(_.escape(star.name));
     $('#version').html(star.version);
     $('#lastupdate').html(smart.date(star.update_date).substr(2, 8));
     $("#info_icon_big").attr("src", "/picture/" + star.icon.big);
@@ -66,7 +72,7 @@ function rander(device, industrie) {
     }
 
     // 分类
-    if (star.category && star.category.lenght > 0) {
+    if (star.category && star.category.length > 0) {
       var category = [];
       _.each(star.category, function(item){
         category.push(codeName(industrie, item));
@@ -78,7 +84,7 @@ function rander(device, industrie) {
 
     // 产品概要
     var tmpl = $('#attach-template').html()
-      , descriptionValue = star.description.replace(new RegExp('\r?\n', 'g'), '<br />')
+      , descriptionValue = _.escape(star.description).replace(new RegExp('\r?\n', 'g'), '<br />')
       , description = $('#description');
     description.html(descriptionValue);
     if (star.pptfile) {
@@ -87,15 +93,15 @@ function rander(device, industrie) {
 
     // Release Note
     var releasenoteValue = star.release_note.replace(new RegExp('\r?\n', 'g'), '<br />');
-    $('#releasenote').html(releasenoteValue);
+    $('#releasenote').html(_.escape(releasenoteValue));
 
     // 支持
     var supportValue = star.support.replace(new RegExp('\r?\n', 'g'), '<br />');
-    $('#support').html(supportValue);
+    $('#support').html(_.escape(supportValue));
 
     // 注意事项
     var precautionsValue = star.notice.replace(new RegExp('\r?\n', 'g'), '<br />');
-    $('#precautions').html(precautionsValue);
+    $('#precautions').html(_.escape(precautionsValue));
 
     // 截图
     var gallery = $('#gallery');
@@ -104,6 +110,13 @@ function rander(device, industrie) {
       gallery.append(_.template(tmpl, {'imgid': imgid}));
     });
 
+    // 下载按钮
+    var download = $("#download");
+    if ($app.canDownload(star)) {
+      download.attr("href", "/file/download.json?_id=" + app_id);
+    } else {
+      download.hide();
+    }
   });
 
   // 获取评价等级
