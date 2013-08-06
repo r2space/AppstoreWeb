@@ -2,6 +2,7 @@ var app = require("../controllers/ctrl_app.js")
     , util = lib.core.util
     , json = lib.core.json;
 exports.updateAppStep1 = function (req_, res_) {
+    var creator = req_.session.user._id;
     var appId = req_.body._id;
     var name = req_.body.name;
     var version = req_.body.version;
@@ -20,6 +21,8 @@ exports.updateAppStep1 = function (req_, res_) {
         docs.require = {device: device,os:os};
         docs.appType = appType;
         docs.category = category;
+        docs.update_date = new Date();
+        docs.update_user = creator;
         if (docs.editstep < editstep) {
             docs.editstep = editstep;
         }
@@ -47,6 +50,15 @@ exports.createAppStep1 = function (req_, res_) {
     data.editing = 0;
     data.status = -1;
     data.category = req_.body.category;
+    data.permission = {
+        admin : [creator],
+        edit : [creator],
+        view : [creator],
+        download :[creator]
+
+    };
+    data.update_date = new Date();
+    data.update_user = creator;
     app.create(data, function (err, result) {
         if (err) {
             return res_.send(json.errorSchema(err.code, err.message));
@@ -68,6 +80,7 @@ exports.createAppStep2 = function (req_, res_) {
     console.log(icon_big.length);
     console.log(icon_small.length);
     console.log(screenshot.length);
+
     if (icon_big.length == 0) {
         return res_.send(json.dataSchema({status: 300, error: "没有上传大图标"}));
     }
@@ -79,6 +92,8 @@ exports.createAppStep2 = function (req_, res_) {
     }
 
     app.findAppInfoById(appId, function (err, docs) {
+        docs.update_date = new Date();
+        docs.update_user = creator;
         docs.icon.big = icon_big;
         docs.icon.small = icon_small;
         docs.screenshot = screenshot;
@@ -121,7 +136,8 @@ exports.createAppStep3 = function (req_, res_) {
         docs.permission.download = permission_download;
         docs.permission.view = permission_view;
         docs.permission.edit = permission_edit;
-
+        docs.update_date = new Date();
+        docs.update_user = creator;
         if (docs.editstep < editstep) {
             docs.editstep = editstep;
         }
@@ -141,6 +157,7 @@ exports.createAppStep3 = function (req_, res_) {
     });
 };
 exports.createAppStep4 = function (req_, res_) {
+    var creator = req_.session.user._id;
     var appId = req_.body._id;
     var support = req_.body.support;
     var notice = req_.body.notice;
@@ -150,7 +167,8 @@ exports.createAppStep4 = function (req_, res_) {
         docs.support = support;
         docs.notice = notice;
         docs.release_note = release_note;
-
+        docs.update_date = new Date();
+        docs.update_user = creator;
         if (docs.editstep < editstep) {
             docs.editstep = editstep;
         }
@@ -167,13 +185,16 @@ exports.createAppStep4 = function (req_, res_) {
     });
 };
 exports.createAppStep5 = function (req_, res_) {
+    var creator = req_.session.user._id;
     var appId = req_.body._id;
     var editstep = 5;
-    app.findAppInfoById(appId, function (err, dosc) {
-        dosc.editing = 1;
-        dosc.status = 1;
-        dosc.editstep  = editstep;
-        dosc.save(function (err_, result) {
+    app.findAppInfoById(appId, function (err, docs) {
+        docs.editing = 1;
+        docs.status = 1;
+        docs.editstep  = editstep;
+        docs.update_date = new Date();
+        docs.update_user = creator;
+        docs.save(function (err_, result) {
             if (err_) {
                 return res_.send(json.errorSchema(err_.code, err_.message));
             } else {
