@@ -45,6 +45,34 @@ var Categories = {
      ]
 };
 
-exports.getCategories = function(){
+exports.getCategories = function () {
     return Categories;
+}
+
+exports.getByCode = function (code) {
+    return _getByByCode(exports.getCategories(), code);
+}
+
+function _getByByCode(category, code) {
+    if (category.code == code)
+        return category;
+
+    if (!category.items)
+        return null;
+
+    for (var i in category.items) {
+        var result = _getByByCode(category.items[i], code);
+        if (result)
+            return result;
+    }
+
+    return null;
+}
+
+exports.getAppTypes = function () {
+    return exports.getByCode(10000);
+}
+exports.getCategoryTypes = function () {
+    console.log("getCategoryTypes");
+    return exports.getByCode(20000);
 }

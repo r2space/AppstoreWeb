@@ -8,6 +8,7 @@ exports.updateAppStep1 = function (req_, res_) {
     var memo = req_.body.memo;
     var description = req_.body.description;
     var device = req_.body['require.device'];
+    var os = req_.body['require.os'];
     var appType = req_.body.appType;
     var category = req_.body.category;
     var editstep = 1;
@@ -16,7 +17,7 @@ exports.updateAppStep1 = function (req_, res_) {
         docs.version = version;
         docs.memo = memo;
         docs.description = description;
-        docs.require = {device: device};
+        docs.require = {device: device,os:os};
         docs.appType = appType;
         docs.category = category;
         if (docs.editstep < editstep) {
@@ -37,11 +38,15 @@ exports.updateAppStep1 = function (req_, res_) {
 exports.createAppStep1 = function (req_, res_) {
     var creator = req_.session.user._id;
     var data = util.checkObject(req_.body);
-    data.require = {device: req_.body['require.device']};
+    data.require = {
+        device: req_.body['require.device'],
+        os: req_.body['require.os']
+    };
     data.create_user = creator;
     data.editstep = 1;
     data.editing = 0;
     data.status = -1;
+    data.category = req_.body.category;
     app.create(data, function (err, result) {
         if (err) {
             return res_.send(json.errorSchema(err.code, err.message));

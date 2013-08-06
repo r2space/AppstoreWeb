@@ -87,6 +87,8 @@ exports.guiding = function (app) {
         var appId = req.query.appId || '0';
         res.render('app_add_step_1', {
             title: "star", bright: "home", user: req.session.user, appId: appId
+            ,appTypes: categorory.getAppTypes()
+            ,categoryTypes: categorory.getCategoryTypes()
         });
     });
     app.get('/app/add/step2', function (req, res) {
