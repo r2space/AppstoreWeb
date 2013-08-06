@@ -1,4 +1,5 @@
-var application = require('../api/application');
+var application = require('../api/application')
+  , category = require('../api/category');
 
 exports.guiding = function(app){
   app.post('/app/create.json', function(req, res){
@@ -38,6 +39,11 @@ exports.guiding = function(app){
 
   app.get('/app/downloaded/list.json', function(req, res){
     application.downloadedList(req, res);
+  });
+
+  // 获取分类一览
+  app.get('/app/category.json', function(req, res){
+    category.getCategory(req, res);
   });
 
 };
