@@ -222,7 +222,10 @@ exports.list = function(uid_, sort_, asc_, admin_, category_, start_, count_, ca
       , {'permission.edit': uid_}
     ];
   } else {
-    condition = {'permission.view': uid_};
+      condition.$and = [
+          {'permission.view': uid_}
+          , {'status': 1}           // 1、社内公开
+      ];
   }
 
   if(category_) {
