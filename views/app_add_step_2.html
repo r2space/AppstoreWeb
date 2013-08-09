@@ -21,12 +21,14 @@
 
                     $("#step2").addClass("active");
                 }
-                console.log(data);
-                console.log(data.icon.big.length);
+                if(data.appType == '10001')
+                    $("#plist_group").css("display","block");
                 if (!data.icon || data.icon.big.length == 0) {
                     return;
                 }
                 var big_fid = data.icon.big;
+
+
                 $("#icon_big_file_hid").val(big_fid);
                 $("#icon_big_img").css("display", "block");
                 $("#icon_big_btn").css("display", "none");
@@ -79,8 +81,6 @@
 
         }
 
-        console.log("console.log(result);");
-        console.log(result);
         var appId = result.data._id;
         console.log("appp id   is   %s", appId);
         window.location.href = "/app/add/step3?appId=" + appId;
@@ -130,8 +130,18 @@
                                     <input type="file" id="pptfile_file" name="pptfile_file" style="display: none"
                                            value=""/>
                                     <button id="pptfile_btn" class="btn" onclick="return false;">上传</button>
-                        <span id="pptfile_span" for="required" generated="true" class="help-inline"
-                              style="">上传应用安装文件</span>
+                                    <span id="pptfile_span" for="required" generated="true" class="help-inline" style="">上传应用安装文件</span>
+                                </div>
+                            </div>
+                            <div class="control-group" id="plist_group" style="display: none">
+                                <label class="control-label">上传Plist</label>
+
+                                <div class="controls">
+                                    <input type="hidden" id="plistfile_hid" name="plistDownloadId"/>
+                                    <input type="file" id="plistfile_file" name="plistfile_file" style="display: none"
+                                           value=""/>
+                                    <button id="plistfile_btn" class="btn" onclick="return false;">上传</button>
+                                    <span id="plistfile_span" for="required" generated="true" class="help-inline" style="">上传应用安装文件</span>
                                 </div>
                             </div>
                             <div class="control-group">

@@ -78,6 +78,15 @@ var $app = {
             src.attr("accept", "");
             src.trigger('click');
         });
+        $("#plistfile_btn").bind("click", function () {
+            $("#plistfile_file").bind("change", function (e) {
+                uploadFiles('didUploadPPTFile', e.target.files, that.didUploadPlistFile);
+                $("#plistfile_file").unbind("change");
+            });
+            var src = $("#plistfile_file");
+            src.attr("accept", "");
+            src.trigger('click');
+        });
 
         $("#icon_small_btn").bind("click", function () {
             $("#icon_small_file").bind("change", function (e) {
@@ -305,6 +314,14 @@ var $app = {
         $("#pptfile_hid").val(fid);
         $("#pptfile_hid").attr("readonly", "readonly");
         $("#pptfile_hid").after(fid);
+
+    },
+    didUploadPlistFile: function (status, input, fid) {
+        console.log(fid);
+        var fid = fid.data.items[0]._id;
+        $("#plistfile_hid").val(fid);
+        $("#plistfile_hid").attr("readonly", "readonly");
+        $("#plistfile_hid").after(fid);
 
     },
 

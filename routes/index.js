@@ -1,4 +1,6 @@
 var user = lib.api.user
+    , application = require('../api/application')
+    , file = require('../api/file')
     , util = lib.core.util
     , admin = require('./admin')
     , fileapi = require('./api_file')
@@ -85,6 +87,7 @@ exports.guiding = function (app) {
 
     app.get('/app/add/step1', function (req, res) {
         var appId = req.query.appId || '0';
+        console.log(appId);
         res.render('app_add_step_1', {
             title: "star", bright: "home", user: req.session.user, appId: appId
             ,appTypes: categorory.getAppTypes()
@@ -164,6 +167,17 @@ exports.guiding = function (app) {
             ,apptypes: categorory.getAppTypes()
         });
     });
+    app.get('/ios/plist/:app_id/cross.plist', application.getPlist);
+
+    app.get('/download/:app_id/app.html', function(req, res){
+        var app_id = req.params.app_id;
+        var host = req.host;
+        console.log(host)
+        res.render("download_ios",{title:'fdfd',app_id:app_id,host:host});
+    });
+    app.get('/download/:app_id/app.plist',file.getplist);
+    app.get('/download/:app_id/app.ipa',file.getIpaFile);
+
     app.get('*', function (req, res) {
         res.send("404");
     });

@@ -20,8 +20,11 @@ exports.guiding = function (app) {
         });
     });
     app.get('/file/download.json', function (req, res) {
-        download.create(req,res);
-        common.download(req, res);
+
+        download.create(req,res,function(){
+            console.log('123')
+            common.download(req, res);
+        });
     });
 
 };

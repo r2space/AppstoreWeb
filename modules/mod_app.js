@@ -1,8 +1,8 @@
 var mongo = require('mongoose')
     , conn = require('./connection')
     , schema = mongo.Schema;
-
 var App = new schema({
+
     name: {type: String}  //名称
     , description: {type: String}           //详细介绍
     , memo: {type: String}                  //简介
@@ -20,6 +20,7 @@ var App = new schema({
     , category: [String]                    //分类
     , version: {type: String}               //版本
     , downloadId: {type: String}            //下载Id
+    , plistDownloadId : {type:String}       // plist  下载id
     , pptfile: {type: String}            //pptfile 演示文件
     , open_date: {type: Date}             //公开日期
     , expire_date: {type: Date}           //过期
@@ -38,6 +39,10 @@ var App = new schema({
     , support :{type:String}
     , notice : {type:String}
     , editstep :{type:Number}           //编辑进行的状态
+    , bundle_identifier :{type:String}
+    , bundle_version    :{type:String}
+    , kind              :{type:String}
+    , title             :{type:String}
     , admin_list : {type: schema.Types.Mixed}          //返回前台的 管理员信息
     , edit_list :    {type: schema.Types.Mixed}        //返回前台的 编辑者信息
     , view_list :  {type: schema.Types.Mixed}          //返回前台的 浏览者信息
@@ -72,8 +77,8 @@ exports.updateDownloadCount = function(appId_, dlCount_, callback_) {
 
 exports.find = function (appId, callback_) {
     var app = model();
-    model().findOne({_id:appId}, function (err, result) {
-
+    console.log("exports.find = funct   %s",appId);
+    app.findOne({_id:appId}, function (err, result) {
         callback_(err, result);
     });
 };

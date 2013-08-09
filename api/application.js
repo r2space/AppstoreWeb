@@ -12,13 +12,19 @@ exports.updateAppStep1 = function (req_, res_) {
     var os = req_.body['require.os'];
     var appType = req_.body.appType;
     var category = req_.body.category;
+    var bundle_identifier = req_.body.bundle_identifier;
+    var bundle_version = req_.body.bundle_version;
+    var title = req_.body.title;
     var editstep = 1;
     app.findAppInfoById(appId, function (err, docs) {
         docs.name = name;
         docs.version = version;
+        docs.bundle_identifier = bundle_identifier;
+        docs.bundle_version = bundle_version;
+        docs.title = title;
         docs.memo = memo;
         docs.description = description;
-        docs.require = {device: device,os:os};
+        docs.require = {device: device, os: os};
         docs.appType = appType;
         docs.category = category;
         docs.update_date = new Date();
@@ -51,10 +57,10 @@ exports.createAppStep1 = function (req_, res_) {
     data.status = -1;
     data.category = req_.body.category;
     data.permission = {
-        admin : [creator],
-        edit : [creator],
-        view : [creator],
-        download :[creator]
+        admin: [creator],
+        edit: [creator],
+        view: [creator],
+        download: [creator]
 
     };
     data.update_date = new Date();
@@ -76,16 +82,16 @@ exports.createAppStep2 = function (req_, res_) {
     var pptfile = req_.body.pptfile;
     var video = req_.body.video;
     var downloadId = req_.body.downloadId;
+    var plistDownloadId = req_.body.plistDownloadId;
     var editstep = 2;
     console.log(icon_big.length);
     console.log(icon_small.length);
     console.log(screenshot.length);
-
-    if (icon_big.length == 0) {
-        return res_.send(json.dataSchema({status: 300, error: "没有上传大图标"}));
-    }
     if (icon_small.length == 0) {
         return res_.send(json.dataSchema({status: 300, error: "没有上传小图标"}));
+    }
+    if (icon_big.length == 0) {
+        return res_.send(json.dataSchema({status: 300, error: "没有上传大图标"}));
     }
     if (screenshot.length == 0) {
         return res_.send(json.dataSchema({status: 300, error: "没有上传素材图片"}));
@@ -100,6 +106,7 @@ exports.createAppStep2 = function (req_, res_) {
         docs.pptfile = pptfile;
         docs.video = video;
         docs.downloadId = downloadId;
+        docs.plistDownloadId = plistDownloadId;
         console.log(docs.editstep);
         if (docs.editstep < editstep) {
             console.log("set step   %s", editstep);
@@ -191,7 +198,7 @@ exports.createAppStep5 = function (req_, res_) {
     app.findAppInfoById(appId, function (err, docs) {
         docs.editing = 1;
         docs.status = 1;
-        docs.editstep  = editstep;
+        docs.editstep = editstep;
         docs.update_date = new Date();
         docs.update_user = creator;
         docs.save(function (err_, result) {
@@ -242,20 +249,20 @@ exports.downloadedList = function (req_, res_) {
     });
 };
 
-exports.search = function (req_, res_){
-  var start = Number(util.checkString(req_.query.start));
-  var count = Number(util.checkString(req_.query.count));
-  var uid = req_.session.user._id;
-  var keywords = req_.query.keywords;
-  var category = req_.query.category;
+exports.search = function (req_, res_) {
+    var start = Number(util.checkString(req_.query.start));
+    var count = Number(util.checkString(req_.query.count));
+    var uid = req_.session.user._id;
+    var keywords = req_.query.keywords;
+    var category = req_.query.category;
 
-  app.search(uid, keywords, start, count, category, function(err, result){
-    if (err) {
-        return res_.send(json.errorSchema(err.code, err.message));
-      } else {
-        return res_.send(json.dataSchema(result));
-      }
-  });
+    app.search(uid, keywords, start, count, category, function (err, result) {
+        if (err) {
+            return res_.send(json.errorSchema(err.code, err.message));
+        } else {
+            return res_.send(json.dataSchema(result));
+        }
+    });
 };
 
 exports.list = function (req_, res_) {
@@ -275,3 +282,69 @@ exports.list = function (req_, res_) {
         }
     });
 };
+
+
+exports.getPlist = function (req_, res_) {
+    console.log(req_.host);
+    var app_id = req_.params.app_id;
+    app.getAppInfoById(app_id, function (err, result) {
+        if (err) {
+            return res_.send(json.errorSchema(err.code, err.message));
+        } else {
+            var url = "http://"+req_.host+":3000/file/download.json?_id="+result.downloadId+"&amp;app_id="+app_id+"&amp;flag=phone";
+            var bundle_identifier = result.bundle_identifier;
+            var bundle_version = result.bundle_version;
+            var kind = result.kind;
+            var title = result.title;
+
+            res_.setHeader('Content-Type', "text/xml");
+            res_.send("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\
+<plist version=\"1.0\">\
+<dict>\
+<key>items</key>\
+<array>\
+<dict>\
+<key>assets</key>\
+<array>\
+<dict>\
+<key>kind</key>\
+<string>software-package</string>\
+<key>url</key>"
++"<string>"
++url
++"</string>"
++"</dict>\
+<dict>\
+<key>kind</key>\
+<string>display-image</string>\
+<key>needs-shine</key>\
+<true/>\
+<key>url</key>\
+<string>http://3g.momo.im/down/ICON.PNG</string>\
+</dict>\
+<dict>\
+<key>kind</key>\
+<string>full-size-image</string>\
+<key>url</key><string>http://3g.momo.im/down/ICON@2x.PNG</string>\
+</dict>\
+</array><key>metadata</key>\
+<dict>\
+<key>bundle-identifier</key>               \
+<string>"+bundle_identifier+"</string>     \
+<key>bundle-version</key>                  \
+<string>"+bundle_version+"</string>                       \
+<key>kind</key>                            \
+<string>software</string>                  \
+<key>title</key>                           \
+<string>"+title+"</string>                     \
+</dict>\
+</dict>\
+</array>\
+</dict>\
+</plist>");
+            return;
+        }
+    });
+
+}

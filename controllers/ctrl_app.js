@@ -19,7 +19,9 @@ exports.create = function (data_, callback_){
   });
 };
 exports.findAppInfoById = function (app_id_, callback_) {
+    console.log(app_id_);
     app.find(app_id_, function (err, docs) {
+        console.log(docs);
         callback_(err, docs);
     });
 };
@@ -36,6 +38,7 @@ exports.getAppInfoById = function (app_id_, callback_) {
         var view_list = [];
         var download_list = [];
         var app_info = docs;
+        console.log(docs);
         proxy.after('permission_ready', 4, function () {
             return callback_(null, app_info);
         });

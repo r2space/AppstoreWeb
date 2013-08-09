@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-qrcode/jquery.qrcode.min.js"></script>
+    <title></title>
+</head>
+<body>
+
+
+<div id="qrcodeCanvas"></div>
+<BR>
+<a id="btnInstallApp" style="font-size: 44px" href="itms-services://?action=download-manifest&url=http://<%=host%>:3000/download/<%=app_id%>/app.plist">
+    cross
+</a>
+<script type="text/javascript">
+    (function(){
+        jQuery('#qrcodeCanvas').qrcode({
+            text	: "http://<%=host%>:3000/download/<%=app_id%>/app.html"
+        });
+    })();
+</script>
+</body>
+</html>
