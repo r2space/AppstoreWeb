@@ -4,8 +4,11 @@ var app = require("../controllers/ctrl_app.js")
     , util = lib.core.util
     , json = lib.core.json;
 exports.getIpaFile = function (req_, res_, next) {
-    var download_id = req_.params.app_id;
-    dbfile.ipaFile(download_id, res_, next);
+    var app_id = req_.params.app_id;
+    app.findAppInfoById(app_id,function(err,docs){
+        dbfile.ipaFile(docs.downloadId, res_, next);
+    });
+
 
 };
 
@@ -13,7 +16,7 @@ exports.getplist = function (req_, res_, next) {
     var app_id = req_.params.app_id;
     app.findAppInfoById(app_id, function (err, result) {
         console.log(result);
-        var url = "http://" + req_.host + ":3000/download/" + result.downloadId + "/app.ipa";
+        var url = "http://" + req_.host + ":3000/download/" + result._id + "/app.ipa";
         var bundle_identifier = result.bundle_identifier;
         var bundle_version = result.bundle_version;
         var kind = result.kind;
