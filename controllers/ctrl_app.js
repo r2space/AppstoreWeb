@@ -7,6 +7,8 @@ var app = require("../modules/mod_app.js")
   , devices = require('../modules/mod_device');
 var error = lib.core.error;
 var user = lib.mod.user;
+var starerrors = require('../core/starerrors.js');
+var apputil = require('../core/apputil.js');
 exports.create = function (data_, callback_){
   var date = Date.now();
   var app_ = data_;
@@ -225,7 +227,10 @@ exports.list = function(uid_, sort_, asc_, admin_, category_, start_, count_, ca
       , {'permission.edit': uid_}
     ];
   } else {
-    condition = {'permission.view': uid_};
+      condition.$and = [
+          {'permission.view': uid_}
+          , {'status': 1}           // 1、社内公开
+      ];
   }
 
   if(category_) {
@@ -291,4 +296,77 @@ exports.list = function(uid_, sort_, asc_, admin_, category_, start_, count_, ca
   async.waterfall(tasks,function(err,result){
     return callback_(err, result);
   });
+};
+
+/**
+ * 渲染详细画面
+ * @param req
+ * @param res
+ * @param app_id
+ */
+exports.renderDetail = function(req, res, app_id) {
+    exports.findAppInfoById(app_id, function(err, app) {
+        if(err)
+           return starerrors.render(req, res, err);
+        // 阅览权限check
+        if(!apputil.isCanView(app, req.session.user._id))
+            return starerrors.render(req, res, new starerrors.NoViewError);
+        // 正常跳转
+        res.render("app_detail", {
+            app_id: app_id,
+            title: "star", bright: "home",
+            user: req.session.user,
+            app: app
+         });
+    });
+};
+/**
+ * 渲染追加或编辑画面
+ * @param req
+ * @param res
+ * @param step
+ */
+exports.renderAppStep = function(req, res, step) {
+    var appId = req.query.appId || '0';
+    if(req.query.appId) {// 编辑
+        exports.findAppInfoById(appId, function(err, app) {
+            if(err)
+                return starerrors.render(req, res, err);
+
+            // 编辑权限check
+            if(!apputil.isCanEdit(app, req.session.user._id))
+                return starerrors.render(req, res, new starerrors.NoEditError);
+
+            // 正常跳转
+            _renderAppStep(req, res, step, appId);
+        });
+    }else {// 追加
+        // 正常跳转
+        _renderAppStep(req, res, step, appId);
+    }
+};
+function _renderAppStep(req, res, step, appId) {
+    if (step == 1) {
+        res.render('app_add_step_1', {
+            title: "star", bright: "home", user: req.session.user, appId: appId
+            ,appTypes: categorory.getAppTypes()
+            ,categoryTypes: categorory.getCategoryTypes()
+        });
+    } else if (step == 2) {
+        res.render('app_add_step_2', {
+            title: "star", bright: "home", user: req.session.user, appId: appId
+        });
+    } else if (step == 3) {
+        res.render('app_add_step_3', {
+            title: "star", bright: "home", user: req.session.user, appId: appId
+        });
+    } else if (step == 4) {
+        res.render('app_add_step_4', {
+            title: "star", bright: "home", user: req.session.user, appId: appId
+        });
+    } else if (step == 5) {
+        res.render('app_add_step_5', {
+            title: "star", bright: "home", user: req.session.user, appId: appId
+        });
+    }
 };

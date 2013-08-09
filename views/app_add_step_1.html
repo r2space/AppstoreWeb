@@ -60,6 +60,11 @@
     }
     %>
     function didSendStep1Callback(result) {
+        // 错误信息
+        if(result.error && result.error.code) {
+            $alertMsg.error(result.error.message);
+            return;
+        }
         console.log("console.log(result);");
         console.log(result);
         var appId = result.data._id;

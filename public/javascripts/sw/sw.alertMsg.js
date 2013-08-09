@@ -24,6 +24,8 @@ var $alertMsg = {
             }else{
 
             }
+        }else if(this._types.correct ==type){
+            Alertify.log.error(msg);
         }else{
             Alertify.log.error(msg);
         }
@@ -56,6 +58,6 @@ var $alertMsg = {
     },
     correct: function (msg, options) {
         this._alert(this._types.correct, msg, options);
-    },
+    }
 
 };

@@ -510,6 +510,10 @@ var $app = {
     }
     , canEdit: function(app) {
          var uid = smart.uid();
+         if(this.canManage(app))
+            return true;
+
+         // 编辑权限
          if(uid && app && app.permission && app.permission.edit) {
              var result = _.find(app.permission.edit, function(uid_){ return uid == uid_; } );
              if(result)
@@ -519,11 +523,28 @@ var $app = {
     }
     , canDownload: function(app) {
         var uid = smart.uid();
+        if(this.canManage(app))
+            return true;
+
         if(uid && app && app.downloadId && app.permission && app.permission.download) {
             var result = _.find(app.permission.edit, function(uid_){ return uid == uid_; } );
             if(result)
                 return true;
         }
+        return false;
+    }
+    , canManage: function(app) {
+        var uid = smart.uid();
+        // 创建者
+        if(uid && app && app.create_user == uid)
+            return true;
+        // 管理者权限
+        if(uid && app && app.permission && app.permission.admin) {
+            var result = _.find(app.permission.admin, function(uid_){ return uid == uid_; } );
+            if(result)
+                return true;
+        }
+
         return false;
     }
 };
