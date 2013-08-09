@@ -84,38 +84,21 @@ exports.guiding = function (app) {
     });
 
     app.get('/app/add/step1', function (req, res) {
-        var appId = req.query.appId || '0';
-        res.render('app_add_step_1', {
-            title: "star", bright: "home", user: req.session.user, appId: appId
-            ,appTypes: categorory.getAppTypes()
-            ,categoryTypes: categorory.getCategoryTypes()
-        });
+        ctrlapp.renderAppStep(req, res, 1);
     });
     app.get('/app/add/step2', function (req, res) {
-        var appId = req.query.appId || '0';
-        res.render('app_add_step_2', {
-            title: "star", bright: "home", user: req.session.user, appId: appId
-        });
+        ctrlapp.renderAppStep(req, res, 2);
     });
 
     app.get('/app/add/step3', function (req, res) {
-        var appId = req.query.appId || 0;
-        res.render('app_add_step_3', {
-            title: "star", bright: "home", user: req.session.user, appId: appId
-        });
+        ctrlapp.renderAppStep(req, res, 3);
     });
     app.get('/app/add/step4', function (req, res) {
-        var appId = req.query.appId || 0;
-        res.render('app_add_step_4', {
-            title: "star", bright: "home", user: req.session.user, appId: appId
-        });
+        ctrlapp.renderAppStep(req, res, 4);
     });
 
     app.get('/app/add/step5', function (req, res) {
-        var appId = req.query.appId || 0;
-        res.render('app_add_step_5', {
-            title: "star", bright: "home", user: req.session.user, appId: appId
-        });
+        ctrlapp.renderAppStep(req, res, 5);
     });
 
     app.get('/app/addview', function (req, res) {
@@ -124,15 +107,10 @@ exports.guiding = function (app) {
         });
     });
 
-
+    // App详细画面
     app.get('/app/:app_id', function (req, res) {
         var app_id = req.params.app_id;
-
-
-        res.render("app_detail", {
-            app_id: app_id,
-            title: "star", bright: "home", user: req.session.user
-        });
+        ctrlapp.renderDetail(req, res, app_id);
     });
 
     // 检索结果一览

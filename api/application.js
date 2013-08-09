@@ -1,6 +1,8 @@
 var app = require("../controllers/ctrl_app.js")
     , util = lib.core.util
-    , json = lib.core.json;
+    , json = lib.core.json
+    , apputil = require("../core/apputil.js")
+    , starerrors = require("../core/starerrors.js");
 exports.updateAppStep1 = function (req_, res_) {
     var creator = req_.session.user._id;
     var appId = req_.body._id;
@@ -14,6 +16,10 @@ exports.updateAppStep1 = function (req_, res_) {
     var category = req_.body.category;
     var editstep = 1;
     app.findAppInfoById(appId, function (err, docs) {
+        // check编辑权限
+        if(!apputil.isCanEdit(docs, req_.session.user._id))
+            return json.sendError(res_, new starerrors.NoEditError);
+
         docs.name = name;
         docs.version = version;
         docs.memo = memo;
@@ -92,6 +98,10 @@ exports.createAppStep2 = function (req_, res_) {
     }
 
     app.findAppInfoById(appId, function (err, docs) {
+        // check编辑权限
+        if(!apputil.isCanEdit(docs, req_.session.user._id))
+            return json.sendError(res_, new starerrors.NoEditError);
+
         docs.update_date = new Date();
         docs.update_user = creator;
         docs.icon.big = icon_big;
@@ -132,6 +142,10 @@ exports.createAppStep3 = function (req_, res_) {
     console.log(permission_admin);
     var editstep = 3;
     app.findAppInfoById(appId, function (err, docs) {
+        // check编辑权限
+        if(!apputil.isCanEdit(docs, req_.session.user._id))
+            return json.sendError(res_, new starerrors.NoEditError);
+
         docs.permission.admin = permission_admin;
         docs.permission.download = permission_download;
         docs.permission.view = permission_view;
@@ -164,6 +178,10 @@ exports.createAppStep4 = function (req_, res_) {
     var release_note = req_.body.release_note;
     var editstep = 4;
     app.findAppInfoById(appId, function (err, docs) {
+        // check编辑权限
+        if(!apputil.isCanEdit(docs, req_.session.user._id))
+            return json.sendError(res_, new starerrors.NoEditError);
+
         docs.support = support;
         docs.notice = notice;
         docs.release_note = release_note;
@@ -189,6 +207,10 @@ exports.createAppStep5 = function (req_, res_) {
     var appId = req_.body._id;
     var editstep = 5;
     app.findAppInfoById(appId, function (err, docs) {
+        // check编辑权限
+        if(!apputil.isCanEdit(docs, req_.session.user._id))
+            return json.sendError(res_, new starerrors.NoEditError);
+
         docs.editing = 1;
         docs.status = 1;
         docs.editstep  = editstep;
@@ -225,7 +247,10 @@ exports.getAppInfo = function (req_, res_) {
         if (err) {
             return res_.send(json.errorSchema(err.code, err.message));
         } else {
-            return res_.send(json.dataSchema(result));
+            if(apputil.isCanView(result, req_.session.user._id))
+                return res_.send(json.dataSchema(result));
+            else
+                return json.send(res_, new starerrors.NoViewError); // 没有阅览权限
         }
     });
 };
