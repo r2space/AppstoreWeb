@@ -176,8 +176,8 @@
                 <$ } else { $>
                     <a href="#" style="float:left;margin-right:2px;"><button class="btn btn-small btn-success" disabled>编辑</button></a>
                 <$ } $>
-                <$ if($app.canDownload(app)) { $>
-                    <a href="/file/download.json?_id={{ app.downloadId }}&app_id={{ app._id }}" style="float:right;"><button class="btn btn-small btn-success">下载</button></a>
+                <$ if(app.downloadURL) { $>
+                    <a href="{{ _.escape(app.downloadURL) }}" style="float:right;"><button class="btn btn-small btn-success">下载</button></a>
                 <$ } else { $>
                     <a href="#" style="float:right;"><button class="btn btn-small btn-success" disabled>下载</button></a>
                 <$ } $>

@@ -59,15 +59,36 @@ exports.isCanEdit = function(app, uid) {
  * 判断是否有下载权限
  * @param app_
  */
-exports.isCanDownload = function(app, uid) {
+exports.isCanDownload = function(app_, uid) {
     // 有管理权限就有下载权限
-    if(this.isCanManage(app, uid))
+    if(this.isCanManage(app_, uid))
         return true;
 
-    if(uid && app && app.downloadId && app.permission && app.permission.download) {
-        var result = _.find(app.permission.edit, function(uid_){ return uid == uid_; } );
+    if(uid && app_ && app_.downloadId && app_.permission && app_.permission.download) {
+        var result = _.find(app_.permission.edit, function(uid_){ return uid == uid_; } );
         if(result)
             return true;
     }
     return false;
 };
+
+exports.getDownloadURL = function(req_, app_) {
+    if(!app_.downloadId)
+        return null;
+
+    if(!(req_.session && req_.session.user))
+        return null;
+
+    var uid = req_.session.user._id;
+    if(!exports.isCanDownload(app_, uid))
+        return null;
+
+    var app_id = app_._id;
+    var protocol = req_.protocol;
+    var host = req_.host;
+    var port = req_.app.get("port");
+    port = ( port == 80 || port == 443 ? '' : ':' + port );// fixed
+
+    var url_ = protocol + "://" + host + port + "/download/" + app_id + "/app.plist";
+    return "itms-services://?action=download-manifest&url=" + url_;
+}

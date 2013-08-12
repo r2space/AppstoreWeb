@@ -1,17 +1,40 @@
 var app = require("../controllers/ctrl_app.js")
+    , download = require("../controllers/ctrl_download")
     , common = lib.api.common
     , dbfile = lib.ctrl.dbfile
     , util = lib.core.util
     , json = lib.core.json;
 exports.getIpaFile = function (req_, res_, next) {
     var app_id = req_.params.app_id;
+    var creator = req_.session.user._id||0;
     app.findAppInfoById(app_id,function(err,docs){
-        dbfile.ipaFile(docs.downloadId, res_, next);
+        dbfile.ipaFile(docs.downloadId, res_, function(){
+            var data = {};
+            data.app_id = docs._id;
+            data.create_user = creator;
+            data.device = docs.require.device;
+            data.ip = getClientIp(req_);
+            download.create(data, function (err, result) {
+                return;
+            });
+            next();
+        });
     });
 
 
 };
-
+function getClientIp(req) {
+    var ipAddress;
+    var forwardedIpsStr = req.header('x-forwarded-for');
+    if (forwardedIpsStr) {
+        var forwardedIps = forwardedIpsStr.split(',');
+        ipAddress = forwardedIps[0];
+    }
+    if (!ipAddress) {
+        ipAddress = req.connection.remoteAddress;
+    }
+    return ipAddress;
+}
 exports.getplist = function (req_, res_, next) {
     var app_id = req_.params.app_id;
     app.findAppInfoById(app_id, function (err, result) {

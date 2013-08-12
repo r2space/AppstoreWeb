@@ -112,8 +112,8 @@ function rander(device, industrie) {
 
     // 下载按钮
     var download = $("#download");
-    if ($app.canDownload(star)) {
-      download.attr("href", "/file/download.json?_id=" + app_id);
+    if (star.downloadURL) {
+      download.attr("href", star.downloadURL);
     } else {
       download.hide();
     }
