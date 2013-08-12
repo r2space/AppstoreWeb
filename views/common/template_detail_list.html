@@ -68,18 +68,18 @@
 <script>
     // 初期化所有列
     DetailList.all_cols = [
-        {name: "icon", title: "图标"}
+        {name: "icon", title: "アイコン"}
         ,{name: "info", title: "App"}
-        ,{name: "os", title: "系统"}
+        ,{name: "os", title: "OS"}
         ,{name: "require", title: "要求"}
-        ,{name: "status", title: "状态"}
-        ,{name: "create_date", title: "创建日期"}
-        ,{name: "create_user", title: "创建者"}
-        ,{name: "update_date", title: "更新日期"}
+        ,{name: "status", title: "状態"}
+        ,{name: "create_date", title: "作成日時"}
+        ,{name: "create_user", title: "作成者"}
+        ,{name: "update_date", title: "更新日時"}
         ,{name: "update_user", title: "更新者"}
-        ,{name: "update_info", title: "更新信息"}
-        ,{name: "rank", title: "评分"}
-        ,{name: "downloadcount", title: "下载量"}
+        ,{name: "update_info", title: "更新情報"}
+        ,{name: "rank", title: "ランキング"}
+        ,{name: "downloadcount", title: "ダウンロード数"}
         ,{name: "option", title: "操作"}
     ];
 </script>
@@ -123,7 +123,7 @@
 <!-- 详细列表项目共通模板 -->
 <script type="text/template" id="template_detail_list_item">
 <$ if(!apps ||  apps.length == 0) { $>
-    <tr><td colspan="{{cols.length}}">没有数据</td></tr>
+    <tr><td colspan="{{cols.length}}">データーがありません</td></tr>
 <$ } else { $>
     <$ _.each(apps, function(app) { $>
     <tr>
@@ -138,10 +138,10 @@
             </a></td>
         <$ } else if(col.name == "info") { $>
             <td style="min-width:150px;">
-                <strong>名称:</strong> {{ _.escape(app.name) }}<br>
-                <strong>版本:</strong> {{ _.escape(app.version) }}<br>
-                <strong>大小:</strong> {{ $sw.string.bytesToSize(app.size) }} <br>
-                <strong>简介:</strong> {{ _.escape(app.memo) }}<br>
+                <strong>名称：</strong> {{ _.escape(app.name) }}<br>
+                <strong>バージョン：</strong> {{ _.escape(app.version) }}<br>
+                <strong>サイズ：</strong> {{ $sw.string.bytesToSize(app.size) }} <br>
+                <strong>概要：</strong> {{ _.escape(app.memo) }}<br>
             </td>
         <$ } else if(col.name == "os") { $>
             <td style="min-width:48px;">
@@ -150,36 +150,36 @@
         <$ } else if(col.name == "require") { $>
             <!-- 需求 -->
             <td style="min-width:150px;">
-                <strong>系统:</strong> {{ app.appTypeCategory ? _.escape(app.appTypeCategory.name) : "" }}<br>
-                    <strong>设备:</strong>  {{ app.device ? _.escape(app.device.name) : "" }}<br>
+                <strong>OS:</strong> {{ app.appTypeCategory ? _.escape(app.appTypeCategory.name) : "" }}<br>
+                    <strong>デバイス：</strong>  {{ app.device ? _.escape(app.device.name) : "" }}<br>
             </td>
         <$ } else if(col.name == "status") { $>
             <!-- 状态 -->
             <td nowrap>
                 <$ if(app.status == 0) { $>
-                未公开
+                未公開
                 <$ } else if(app.status == 1) { $>
-                社内公开
+                社内公開
                 <$ } else if(app.status == 2) { $>
-                社外限定公开
+                社外限定公開
                 <$ } else if(app.status == 3) { $>
-                社外任意公开
+                社外公開
                 <$ } else { $>
-                无效
+                無効
                 <$ } $>
             </td>
         <$ } else if(col.name == "option") { $>
             <td nowrap>
 
                 <$ if($app.canEdit(app)) { $>
-                    <a href="/app/add/step1?appId={{ app._id }}" style="float:left;margin-right:2px;"><button class="btn btn-small btn-success">编辑</button></a>
+                    <a href="/app/add/step1?appId={{ app._id }}" style="float:left;margin-right:2px;"><button class="btn btn-small btn-success">編集</button></a>
                 <$ } else { $>
-                    <a href="#" style="float:left;margin-right:2px;"><button class="btn btn-small btn-success" disabled>编辑</button></a>
+                    <a href="#" style="float:left;margin-right:2px;"><button class="btn btn-small btn-success" disabled>編集</button></a>
                 <$ } $>
                 <$ if(app.downloadURL) { $>
-                    <a href="{{ _.escape(app.downloadURL) }}" style="float:right;"><button class="btn btn-small btn-success">下载</button></a>
+                    <a href="{{ _.escape(app.downloadURL) }}" style="float:right;"><button class="btn btn-small btn-success">install</button></a>
                 <$ } else { $>
-                    <a href="#" style="float:right;"><button class="btn btn-small btn-success" disabled>下载</button></a>
+                    <a href="#" style="float:right;"><button class="btn btn-small btn-success" disabled>install</button></a>
                 <$ } $>
             </td>
 
@@ -193,10 +193,10 @@
             <td nowrap>  {{ _.escape(updater.name.name_zh) }} </td>
         <$ } else if(col.name == "update_info") { $>
             <td nowrap>
-                <strong>更新者:</strong> {{ _.escape(updater.name.name_zh) }}<br>
-                <strong>更新日期:</strong> {{ smart.date(app.update_date) }}<br>
-                <strong>创建者:</strong> {{ _.escape(app.creator.name.name_zh) }}<br>
-                <strong>创建日期:</strong> {{ smart.date(app.create_date) }}<br>
+                <strong>更新者：</strong> {{ _.escape(updater.name.name_zh) }}<br>
+                <strong>更新日時：</strong> {{ smart.date(app.update_date) }}<br>
+                <strong>作成者：</strong> {{ _.escape(app.creator.name.name_zh) }}<br>
+                <strong>作成日時：</strong> {{ smart.date(app.create_date) }}<br>
             </td>
         <$ } else if(col.name == "rank") { $>
             <td>  {{ app.rank? app.rank: 0 }} </td>

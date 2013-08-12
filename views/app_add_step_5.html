@@ -23,7 +23,7 @@
                 $("#pre_view").attr("href","/app/"+data._id);
                 $("#finish_add").bind('click',function(){
                     smart.dopost('/app/create/step5.json',{_id:data._id},function(msg){
-                        alert('发布成功');
+                        alert('公開しました');
                         window.location.href="/starwall";
                     });
 
@@ -87,8 +87,8 @@
                                 <label class="control-label"></label>
 
                                 <div class="controls">
-                                    <a id="pre_view" href="#" target="_blank" class="btn btn-large btn-primary">浏览</a>
-                                    <a id="finish_add" href="#" class="btn btn-large btn-success">发布</a>
+                                    <a id="pre_view" href="#" target="_blank" class="btn btn-large btn-primary">プレビュー</a>
+                                    <a id="finish_add" href="#" class="btn btn-large btn-success">公開</a>
                                 </div>
                             </div>
                         </div>

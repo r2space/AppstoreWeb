@@ -2,7 +2,7 @@
 
 <div class="span9">
     <% /* include list/home/new_list.html */ %>
-    <div class="page-header"><h3>已下载一览</h3></div>
+    <div class="page-header"><h3>インストール済み一覧</h3></div>
     <div id="list_container">
 
     </div>
@@ -15,7 +15,7 @@
         var list = DetailList.create();
         list.init($("#list_container"), {
             id_prex :  "dl_list"
-            ,str    : {"loading": "加载中........"}
+            ,str    : {"loading": "Loading........"}
             ,cols   : [ "icon", "info", "os", "require", "status", "update_info", "rank", "downloadcount", "option"]
             ,url    : "/app/downloaded/list.json"
         });
