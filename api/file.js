@@ -5,7 +5,7 @@ var app = require("../controllers/ctrl_app.js")
     , util = lib.core.util
     , json = lib.core.json
     , apputil = require("../core/apputil.js")
-    , error  = lib.core.error
+    , error = lib.core.error
     , starerrors = require("../core/starerrors.js");
 
 exports.getIpaFile = function (req_, res_, next) {
@@ -22,30 +22,29 @@ exports.getIpaFile = function (req_, res_, next) {
 //        if(!apputil.isCanDownload(docs, user_id))
 //            return starerrors.render(req_, res_, new starerrors.NoDownloadError);
 
-    var creator = user_id ||0;
-    app.findAppInfoById(app_id,function(err,docs){
-        dbfile.ipaFile(docs.downloadId, res_, function(){
-            //错误处理
-            if(err)
-                return starerrors.render(req_, res_, err);
-            //权限Check
-            if(!apputil.isCanDownload(docs, user_id))
-                return starerrors.render(req_, res_, new starerrors.NoDownloadError);
-
-            var data = {};
-            data.app_id = docs._id;
-            data.create_user = creator;
-            data.device = docs.require.device;
-            data.ip = getClientIp(req_);
-            download.create(data, function (err, result) {
-                return;
+        var creator = user_id;
+        app.findAppInfoById(app_id, function (err, docs) {
+            dbfile.ipaFile(docs.downloadId, res_, function () {
+//            //错误处理
+//            if(err)
+//                return starerrors.render(req_, res_, err);
+//            //权限Check
+//            if(!apputil.isCanDownload(docs, req_.session.user._id))
+//                return starerrors.render(req_, res_, new starerrors.NoDownloadError);
+                var data = {};
+                data.app_id = docs._id;
+                data.create_user = creator;
+                data.device = docs.require.device;
+                data.ip = getClientIp(req_);
+                download.create(data, function (err, result) {
+                    return;
+                });
+                next();
             });
-            next();
         });
     });
-
-
 };
+
 function getClientIp(req) {
     var ipAddress;
     var forwardedIpsStr = req.header('x-forwarded-for');
@@ -60,13 +59,15 @@ function getClientIp(req) {
 }
 exports.getplist = function (req_, res_, next) {
     var app_id = req_.params.app_id;
+    var user_id = req_.params.user_id;
     app.findAppInfoById(app_id, function (err, result) {
         console.log(result);
-        var url = "http://" + req_.host + ":3000/download/" + result._id + "/app.ipa";
+        var url = "http://" + req_.host + ":3000/download/" + result._id + "/" + user_id + "/app.ipa";
         var bundle_identifier = result.bundle_identifier;
         var bundle_version = result.bundle_version;
         var kind = result.kind;
         var title = result.title;
+        console.log("bundle_identifier is %s  bundle_version  is %s  title  is %s",bundle_identifier, bundle_version, title  );
         res_.setHeader('Content-Type', "text/xml");
         res_.send("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\
 <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\
@@ -85,19 +86,6 @@ exports.getplist = function (req_, res_, next) {
             + url
             + "</string>"
             + "</dict>\
-<dict>\
-<key>kind</key>\
-<string>display-image</string>\
-<key>needs-shine</key>\
-<true/>\
-<key>url</key>\
-<string>http://3g.momo.im/down/ICON.PNG</string>\
-</dict>\
-<dict>\
-<key>kind</key>\
-<string>full-size-image</string>\
-<key>url</key><string>http://3g.momo.im/down/ICON@2x.PNG</string>\
-</dict>\
 </array><key>metadata</key>\
 <dict>\
 <key>bundle-identifier</key>               \
