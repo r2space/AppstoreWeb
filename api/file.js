@@ -9,9 +9,8 @@ var app = require("../controllers/ctrl_app.js")
 
 exports.getIpaFile = function (req_, res_, next) {
     var app_id = req_.params.app_id;
-    if(!req_.session.user){
-        return res_.redirect("/login");
-    }
+    var user_id = req_.params.user_id;
+
 
     //获得APP信息
     app.findAppInfoById(app_id, function (err, docs) {
@@ -19,7 +18,7 @@ exports.getIpaFile = function (req_, res_, next) {
         if(err)
             return starerrors.render(req_, res_, err);
         //权限Check
-        if(!apputil.isCanDownload(docs, req_.session.user._id))
+        if(!apputil.isCanDownload(docs, user_id))
             return starerrors.render(req_, res_, new starerrors.NoDownloadError);
 
         dbfile.ipaFile(docs.downloadId, res_, next);
@@ -30,9 +29,10 @@ exports.getIpaFile = function (req_, res_, next) {
 
 exports.getplist = function (req_, res_, next) {
     var app_id = req_.params.app_id;
+    var user_id = req_.params.user_id;
     app.findAppInfoById(app_id, function (err, result) {
         console.log(result);
-        var url = "http://" + req_.host + ":3000/download/" + result._id + "/app.ipa";
+        var url = "http://" + req_.host + ":3000/download/" + result._id + "/"+user_id+"/app.ipa";
         var bundle_identifier = result.bundle_identifier;
         var bundle_version = result.bundle_version;
         var kind = result.kind;
@@ -71,7 +71,7 @@ exports.getplist = function (req_, res_, next) {
 </array><key>metadata</key>\
 <dict>\
 <key>bundle-identifier</key>               \
-<string>" + bundle_identifier + "123123</string>     \
+<string>" + bundle_identifier + "</string>     \
 <key>bundle-version</key>                  \
 <string>" + bundle_version + "</string>                       \
 <key>kind</key>                            \
