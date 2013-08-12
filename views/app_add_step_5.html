@@ -38,9 +38,16 @@
         $app.initialize();
     });
     function didSendStepCallback(result){
+        // 错误信息
+        if(result.error && result.error.code) {
+            $alertMsg.error(result.error.message);
+            return;
+        }
         console.log("console.log(result);");
         console.log("fsafsdfasdfdsf");
         alert('添加成功');
+
+        window.location.href = "/starwall";
 
     };
     function didSendFn(data){

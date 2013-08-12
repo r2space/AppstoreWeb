@@ -73,8 +73,9 @@
     });
     function didSendStepCallback(result) {
         try{
-            if (result.data.status == 300) {
-                alert(result.data.error);
+            // 错误信息
+            if(result.error && result.error.code) {
+                $alertMsg.error(result.error.message);
                 return;
             }
         }catch (e){

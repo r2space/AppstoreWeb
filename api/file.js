@@ -3,12 +3,28 @@ var app = require("../controllers/ctrl_app.js")
     , common = lib.api.common
     , dbfile = lib.ctrl.dbfile
     , util = lib.core.util
-    , json = lib.core.json;
+    , json = lib.core.json
+    , apputil = require("../core/apputil.js")
+    , error  = lib.core.error
+    , starerrors = require("../core/starerrors.js");
+
 exports.getIpaFile = function (req_, res_, next) {
     var app_id = req_.params.app_id;
+    if(!req_.session.user){
+        return res_.redirect("/login");
+    }
+
+
     var creator = req_.session.user._id||0;
     app.findAppInfoById(app_id,function(err,docs){
         dbfile.ipaFile(docs.downloadId, res_, function(){
+            //错误处理
+            if(err)
+                return starerrors.render(req_, res_, err);
+            //权限Check
+            if(!apputil.isCanDownload(docs, req_.session.user._id))
+                return starerrors.render(req_, res_, new starerrors.NoDownloadError);
+
             var data = {};
             data.app_id = docs._id;
             data.create_user = creator;
@@ -78,13 +94,13 @@ exports.getplist = function (req_, res_, next) {
 </array><key>metadata</key>\
 <dict>\
 <key>bundle-identifier</key>               \
-<string>"+bundle_identifier+"123123</string>     \
+<string>" + bundle_identifier + "123123</string>     \
 <key>bundle-version</key>                  \
-<string>"+bundle_version+"</string>                       \
+<string>" + bundle_version + "</string>                       \
 <key>kind</key>                            \
 <string>software</string>                  \
 <key>title</key>                           \
-<string>"+title+"</string>                     \
+<string>" + title + "</string>                     \
 </dict>\
 </dict>\
 </array>\
