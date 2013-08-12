@@ -1,4 +1,5 @@
 var app = require("../controllers/ctrl_app.js")
+    , download = require("../controllers/ctrl_download")
     , common = lib.api.common
     , dbfile = lib.ctrl.dbfile
     , util = lib.core.util
@@ -15,24 +16,53 @@ exports.getIpaFile = function (req_, res_, next) {
     //获得APP信息
     app.findAppInfoById(app_id, function (err, docs) {
         //错误处理
-        if(err)
-            return starerrors.render(req_, res_, err);
-        //权限Check
-        if(!apputil.isCanDownload(docs, user_id))
-            return starerrors.render(req_, res_, new starerrors.NoDownloadError);
+//        if(err)
+//            return starerrors.render(req_, res_, err);
+//        //权限Check
+//        if(!apputil.isCanDownload(docs, user_id))
+//            return starerrors.render(req_, res_, new starerrors.NoDownloadError);
 
-        dbfile.ipaFile(docs.downloadId, res_, next);
+    var creator = user_id ||0;
+    app.findAppInfoById(app_id,function(err,docs){
+        dbfile.ipaFile(docs.downloadId, res_, function(){
+            //错误处理
+            if(err)
+                return starerrors.render(req_, res_, err);
+            //权限Check
+            if(!apputil.isCanDownload(docs, user_id))
+                return starerrors.render(req_, res_, new starerrors.NoDownloadError);
+
+            var data = {};
+            data.app_id = docs._id;
+            data.create_user = creator;
+            data.device = docs.require.device;
+            data.ip = getClientIp(req_);
+            download.create(data, function (err, result) {
+                return;
+            });
+            next();
+        });
     });
 
 
 };
-
+function getClientIp(req) {
+    var ipAddress;
+    var forwardedIpsStr = req.header('x-forwarded-for');
+    if (forwardedIpsStr) {
+        var forwardedIps = forwardedIpsStr.split(',');
+        ipAddress = forwardedIps[0];
+    }
+    if (!ipAddress) {
+        ipAddress = req.connection.remoteAddress;
+    }
+    return ipAddress;
+}
 exports.getplist = function (req_, res_, next) {
     var app_id = req_.params.app_id;
-    var user_id = req_.params.user_id;
     app.findAppInfoById(app_id, function (err, result) {
         console.log(result);
-        var url = "http://" + req_.host + ":3000/download/" + result._id + "/"+user_id+"/app.ipa";
+        var url = "http://" + req_.host + ":3000/download/" + result._id + "/app.ipa";
         var bundle_identifier = result.bundle_identifier;
         var bundle_version = result.bundle_version;
         var kind = result.kind;

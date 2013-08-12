@@ -136,6 +136,7 @@ exports.downloadedList = function(uid_, callback_){
             cb(err, result);
         });
     };
+    tasks.push(task_getUpdater);
 
     var task_other = function(result, cb){
         async.forEach(result, function(app, cb_){

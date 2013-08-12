@@ -3,6 +3,33 @@ var app = require("../controllers/ctrl_app.js")
     , json = lib.core.json
     , apputil = require("../core/apputil.js")
     , starerrors = require("../core/starerrors.js");
+
+function setDownloadURL(req, app_info) {
+    // 现在API里有返回数据组，有返回json格式的。
+    var list;
+    if(util.isArray(app_info)) // 数组
+        list = app_info;
+    else if(app_info.items)   // json数组
+        list = app_info.items;
+    else if(app_info._doc)
+        list = [ app_info ];
+    else if(app_info.data)
+        list = [ app_info.data ];
+
+    for(var i=0; i< list.length; i++){
+        var app_ = list[i];
+        var url = apputil.getDownloadURL(req, app_);
+
+        if(app_._doc) {
+            app_._doc.downloadURL = url;
+            //app_._doc.downloadId = ""; // 移除downloadId
+        } else {
+            app_.downloadURL = url;
+            //app_.downloadId = ""; // 移除downloadId
+        }
+    }
+}
+
 exports.updateAppStep1 = function (req_, res_) {
     var creator = req_.session.user._id;
     var appId = req_.body._id;
@@ -254,10 +281,12 @@ exports.getAppInfo = function (req_, res_) {
         if (err) {
             return res_.send(json.errorSchema(err.code, err.message));
         } else {
-            if(apputil.isCanView(result, req_.session.user._id))
+            if(apputil.isCanView(result, req_.session.user._id)) {
+                setDownloadURL(req_, result);
                 return res_.send(json.dataSchema(result));
-            else
+            } else {
                 return json.send(res_, new starerrors.NoViewError); // 没有阅览权限
+            }
         }
     });
 };
@@ -269,6 +298,7 @@ exports.downloadedList = function (req_, res_) {
         if (err) {
             return res_.send(json.errorSchema(err.code, err.message));
         } else {
+            setDownloadURL(req_, result);
             return res_.send(json.dataSchema(result));
         }
     });
@@ -285,6 +315,7 @@ exports.search = function (req_, res_) {
         if (err) {
             return res_.send(json.errorSchema(err.code, err.message));
         } else {
+            setDownloadURL(req_, result);
             return res_.send(json.dataSchema(result));
         }
     });
@@ -303,11 +334,11 @@ exports.list = function (req_, res_) {
         if (err) {
             return res_.send(json.errorSchema(err.code, err.message));
         } else {
+            setDownloadURL(req_, result);
             return res_.send(json.dataSchema(result));
         }
     });
 };
-
 
 exports.getPlist = function (req_, res_) {
     console.log(req_.host);
