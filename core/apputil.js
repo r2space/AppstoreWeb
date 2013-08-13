@@ -89,6 +89,6 @@ exports.getDownloadURL = function(req_, app_) {
     var port = req_.app.get("port");
     port = ( port == 80 || port == 443 ? '' : ':' + port );// fixed
 
-    var url_ = protocol + "://" + host + port + "/download/" + app_id + "/app.plist";
+    var url_ = protocol + "://" + host + port + "/download/" + app_id + "/"+uid+"/app.plist";
     return "itms-services://?action=download-manifest&url=" + url_;
 }
