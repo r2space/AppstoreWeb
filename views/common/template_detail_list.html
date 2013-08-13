@@ -178,8 +178,6 @@
                 <$ } $>
                 <$ if(app.downloadURL) { $>
                     <a href="{{ _.escape(app.downloadURL) }}" style="float:right;"><button class="btn btn-small btn-success">install</button></a>
-                <$ if(app.downloadURL) { $>
-                    <a href="{{ _.escape(app.downloadURL) }}" style="float:right;"><button class="btn btn-small btn-success">下载</button></a>
                 <$ } else { $>
                     <a href="#" style="float:right;"><button class="btn btn-small btn-success" disabled>install</button></a>
                 <$ } $>
