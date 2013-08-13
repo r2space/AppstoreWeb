@@ -37,6 +37,7 @@ exports.getIpaFile = function (req_, res_, next) {
                 data.device = docs.require.device;
                 data.ip = getClientIp(req_);
                 download.create(data, function (err, result) {
+
                     return;
                 });
                 next();
