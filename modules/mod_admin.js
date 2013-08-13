@@ -117,8 +117,8 @@ exports.csvImportRow = function(exe_user, row, callback) {
 
     // Check timezone
     if(u.timezone) {
-        if(u.timezone != "GMT+08:00" && u.timezone != "GMT+08:00" && u.timezone != "GMT+08:00") {
-            callback(new Error('时区格式不正确，正确格式如"GMT+08:00"'));
+        if(u.timezone != "GMT+08:00" && u.timezone != "GMT+09:00" && u.timezone != "GMT-05:00") {
+            callback(new Error('时区格式不正确，目前支持的时区格式,中国"GMT+08:00", 日本"GMT+09:00", 美国"GMT-05:00"'));
             return;
         }
     }else {
