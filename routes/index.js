@@ -144,7 +144,7 @@ exports.guiding = function (app) {
             ,apptypes: categorory.getAppTypes()
         });
     });
-    app.get('/ios/plist/:app_id/cross.plist', application.getPlist);
+    app.get('/ios/plist/:app_id/:user_id/cross.plist', application.getPlist);
 
     app.get('/download/:app_id/app.html', function(req, res){
         var app_id = req.params.app_id;
@@ -152,8 +152,8 @@ exports.guiding = function (app) {
         console.log(host)
         res.render("download_ios",{title:'fdfd',app_id:app_id,host:host});
     });
-    app.get('/download/:app_id/app.plist',file.getplist);
-    app.get('/download/:app_id/app.ipa',file.getIpaFile);
+    app.get('/download/:app_id/:user_id/app.plist',file.getplist);
+    app.get('/download/:app_id/:user_id/app.ipa',file.getIpaFile);
 
     app.get('*', function (req, res) {
         res.send("404");
