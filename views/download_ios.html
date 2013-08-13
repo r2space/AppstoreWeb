@@ -10,13 +10,13 @@
 
 <div id="qrcodeCanvas"></div>
 <BR>
-<a id="btnInstallApp" style="font-size: 44px" href="itms-services://?action=download-manifest&url=http://<%=host%>:3000/download/<%=app_id%>/51ee1d39a5b05dc15c000007/app.plist">
+<a id="btnInstallApp" style="font-size: 44px" href="itms-services://?action=download-manifest&url=http://<%=host%>:9000/download/<%=app_id%>/<%=user_id%>/app.plist">
     cross
 </a>
 <script type="text/javascript">
     (function(){
         jQuery('#qrcodeCanvas').qrcode({
-            text	: "http://<%=host%>:3000/download/<%=app_id%>/app.html"
+            text	: "http://<%=host%>:9000/download/<%=app_id%>/app.html"
         });
     })();
 </script>

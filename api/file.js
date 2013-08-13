@@ -62,7 +62,7 @@ exports.getplist = function (req_, res_, next) {
     var user_id = req_.params.user_id;
     app.findAppInfoById(app_id, function (err, result) {
         console.log(result);
-        var url = "http://" + req_.host + ":3000/download/" + result._id + "/" + user_id + "/app.ipa";
+        var url = "http://" + req_.host + ":9000/download/" + result._id + "/" + user_id + "/app.ipa";
         var bundle_identifier = result.bundle_identifier;
         var bundle_version = result.bundle_version;
         var kind = result.kind;

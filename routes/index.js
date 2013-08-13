@@ -149,8 +149,9 @@ exports.guiding = function (app) {
     app.get('/download/:app_id/app.html', function(req, res){
         var app_id = req.params.app_id;
         var host = req.host;
+        var user_id = req.session.user._id;
         console.log(host)
-        res.render("download_ios",{title:'fdfd',app_id:app_id,host:host});
+        res.render("download_ios",{title:'fdfd',app_id:app_id,user_id:user_id,host:host});
     });
     app.get('/download/:app_id/:user_id/app.plist',file.getplist);
     app.get('/download/:app_id/:user_id/app.ipa',file.getIpaFile);

@@ -34,7 +34,7 @@ var AppHistory = new schema({
     , device: {type: String}              //设备要求
     , server: {type: String}              //服务器要求
   }
-  , size: {type:int}                      //大小
+  , size: {type:Number}                      //大小
 });
 
 function model() {
